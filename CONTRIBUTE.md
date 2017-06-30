@@ -17,7 +17,7 @@
   `git merge origin/development`
 
 4. You may want to set the upstream branch so you dont have to specify when pushing
-	
+
 	`git branch --set-upstream <localBranch> origin/<remoteBranch>`
 
 
@@ -59,6 +59,20 @@
 
 9. Repeat.  
 
+# Review a pull request
+
+Check the code runs.
+
+To check that is works you can checkout the branch locally.
+
+1. Run the following command to list all remote branches.
+
+`git branch -r`
+
+2. Checkout into the branch and run the code.
+
+`git checkout origin/example_branch`
+
 
 ## Naming conventions
 1. experimental - `experiment/<name>`
@@ -86,5 +100,4 @@
 
 	`git revert <commitHashCode>`
 
-3. you can revert the revert with the same process as it shows as another commit. 
-
+3. you can revert the revert with the same process as it shows as another commit.
