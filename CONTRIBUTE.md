@@ -36,12 +36,6 @@
 ## Preparing for a merge
 1. Before submitting a pull request, pull development and merge into your branch - you may need to solve conflicts.
 
-	`git checkout development`
-
-	`git pull`
-
-	`git checkout <myNewFeature>`
-
 	`git merge development`
 
 2. When you are done push your branch to origin
