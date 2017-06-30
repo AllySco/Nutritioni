@@ -1,0 +1,29 @@
+{
+  "name": "day_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eoghanscrowley/Nutritioni.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eoghanscrowley/Nutritioni/issues"
+  },
+  "homepage": "https://github.com/eoghanscrowley/Nutritioni#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.29"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2",
+    "webpack": "^3.0.0"
+  }
+}
