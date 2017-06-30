@@ -1,8 +1,9 @@
-
+var Canvas = require('./canvas.js')
 
 var UI = function() {
 
-console.log("please stop laughing")
+	new Canvas();
+	console.log("please stop laughing")
 
 }
 
