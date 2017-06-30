@@ -1,1 +1,0 @@
-Are you crushing it?
