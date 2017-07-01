@@ -8,9 +8,7 @@ main {
 	display: flex;
 	flex-flow: column;
 	align-content: center;
-	
 }
-
 
 canvas {
 	border: 1px solid black;
