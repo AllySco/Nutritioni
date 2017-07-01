@@ -7,5 +7,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("client/build"));
 // app.use(require('./controllers/index.js'))
 app.listen( 3001, function(){
-	console.log("Nutritioni running on:", this.address().host);
+	console.log("Nutritioni running on:", this.address().port);
 });
