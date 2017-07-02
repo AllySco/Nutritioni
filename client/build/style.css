@@ -1,20 +1,25 @@
-/**{
-	margin: block;
-	padding: 0;
-	box-sizing: border-box;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  background-color: black;
 }
 
 main {
-	display: flex;
-	flex-flow: column;
-	align-content: center;
+  display: flex;
+  flex-flow: column;
+  align-content: center;
 }
 
 canvas {
-	border: 1px solid black;
-	margin: 0 auto;
+  border: 1px solid black;
+  margin: 0 auto;
 }
-*/
+
 
 .bgimg-1, .bgimg-2, .bgimg-3 {
   position: relative;
@@ -27,8 +32,11 @@ canvas {
 }
 
 .bgimg-1 {
-    background-image: url('./images/image1.jpg');
-    min-height: 100%;
+  background-image: url('./images/image1.jpg');
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bgimg-2 {
@@ -41,101 +49,78 @@ canvas {
   min-height: 100%;
 }
 
+h1 {
+  height: 1.75em;
+  line-height: 1.75em;
+  font-size: 4em;
+  padding: 0 10px;
+  background-color: #292828;
+  letter-spacing: 10px;
+  font-family: Helvetica, sans-serif;
+  border-radius: 18px;
+  color: white;
+}
+
 .text-box-body-map {
   height:100px;
   background-color:#292828;
   font-size:36px;
 }
 
+.flex-container-main-header{
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
 .flex-container-body-map {
-    display: -webkit-flex;
-    display: flex;
-    width: 100%;
-    height: 250px;
-    background-color: #292828;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 250px;
+  background-color: #292828;
 }
 
 .flex-box-header {
-    background-color: #292828 ;
-    width: 100%;
-    height: 100px;
-    margin: 10px;
+  background-color: #292828 ;
+  width: 100%;
+  height: 100px;
+  margin: 10px;
 }
 
-.flex-item {
-    background-color: #292828 ;
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-}
-
-
-
-.caption {
-    position: relative;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    text-align: center;
-    color: #ffffff;
-}
-
-.box {
-    width: 100%;
-    color: #ffffff;
-}
-
-.caption span.burger {
+.flex-container-main-header i.burger {
   content:url('./images/black burger icon.png');
   height: 110px;
 }
 
-.caption h1.border {
-    display: inline-block;
-    background-color: #292828;
-    border-radius: 18px;
-    padding-top: 18px;
-    padding-right: 18px;
-    padding-bottom: 18px;
-    padding-left: 18px;
-    font-size: 25px;
-    letter-spacing: 10px;
-    font: 400 45px/2 "Helvetica", sans-serif;
-}
+
 
 .flex-box-header {
-    display: inline-block;
-    background-color: #292828;
-    border-radius: 18px;
-    top: 0 %;
-    padding-top: 18px;
-    padding-right: 18px;
-    padding-bottom: 18px;
-    padding-left: 18px;
-    font-size: 25px;
-    letter-spacing: 10px;
-    font: 400 45px/2 "Helvetica", sans-serif;
-    color: white;
+  display: inline-block;
+  background-color: #292828;
+  border-radius: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+  font-family: Helvetica, sans-serif;
+  color: white;
 }
 
-
-
-body, html {
-    height: 100%;
-    background-color: black;
+i {
+  height: 6em;
 }
+
 
 .parallax {
-    /* The image used */
-    background-image: url('./images/image1.jpg');
-    /* Full height */
-    height: 100%; 
+  /* The image used */
+  background-image: url('./images/image1.jpg');
+  /* Full height */
+  height: 100%; 
 
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>
 
