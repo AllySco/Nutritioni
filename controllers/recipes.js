@@ -30,8 +30,15 @@ recipeRouter.get("/:id", function(req, res) {
   query.find(req.params.id, function(recipe) {
     res.json(recipe);
     req.params.id
-  })
-})
+  });
+});
+
+// DELETE 
+recipeRouter.delete("/:id/delete", function(req, res) {
+  query.delete(req.params.id, function(recipe) {
+    res.json(recipe);
+  });
+});
 
 
 
