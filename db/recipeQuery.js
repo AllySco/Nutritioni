@@ -33,7 +33,10 @@ RecipeQuery.prototype = {
   find: function(recipeID, callback) {
     
     var objectID = new ObjectID(recipeID);
-    console.log(objectID.id);
+    // for(var key in objectID) {
+    //   console.log(key)
+    // }
+    // console.log(objectID.getTimestamp());
     MongoClient.connect(this.url, function(err,db){
       if(err) return;
       var collection = db.collection("recipes");
@@ -41,9 +44,10 @@ RecipeQuery.prototype = {
         if (err) return;
         callback(docs);
       });
-
     })
   }
+
+  
 }
 
 module.exports = RecipeQuery;
