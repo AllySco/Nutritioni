@@ -1,5 +1,7 @@
 use nutritioni;
 
+db.recipes.drop();
+
 db.recipes.insert([
 {
   title: "omelette",
