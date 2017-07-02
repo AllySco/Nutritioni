@@ -6,7 +6,7 @@ var Recipe = require('../client/src/models/recipe');
 var RecipeQuery = require('../db/recipeQuery');
 var query = new RecipeQuery();
 
-// index
+// INDEX
 recipeRouter.get('/', function(req, res) {
 	query.all(function(recipes) {
 		res.json(recipes);

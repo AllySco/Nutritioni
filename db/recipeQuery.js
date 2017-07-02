@@ -61,6 +61,25 @@ RecipeQuery.prototype = {
       });
       db.close();
     });
+  },
+
+  update: function(recipeID, updatedRecipe, callback) {
+    var objectID = new ObjectID(recipeID);
+    MongoClient.connect(this.url, function(err, db) {
+      if (err) return err;
+      var collection = db.collection('recipes');
+      collection.updateOne({_id: objectID}, {
+        $set: {
+          "title": updatedRecipe.title,
+          "ingredients": updatedRecipe.ingredients,
+          "nutritionalInformation": updatedRecipe.nutritionalInformation
+        },
+        $currentDate: { "lastModified": true }
+      }, function(err, results) {
+        if (err) return err;
+        callback(results);
+      })
+    })
   }
 }
 
