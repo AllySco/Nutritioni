@@ -29,8 +29,14 @@ recipeRouter.post('/', function(req, res) {
 recipeRouter.get("/:id", function(req, res) {
   query.find(req.params.id, function(recipe) {
     res.json(recipe);
-    req.params.id
   });
+});
+
+// FIND BY NAME
+recipeRouter.get('/title/:title', function(req, res) {
+  query.findByTitle(req.params.title, function(recipe) {
+    res.json(recipe);
+  })
 });
 
 // DELETE 
@@ -50,7 +56,9 @@ recipeRouter.put('/:id', function(req, res) {
   query.update(req.params.id, updatedRecipe, function(recipe) {
     res.json(recipe);
   });
-})
+});
+
+
 
 
 

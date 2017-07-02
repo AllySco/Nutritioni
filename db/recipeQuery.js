@@ -78,7 +78,7 @@ RecipeQuery.prototype = {
         callback(docs);
       });
       db.close();
-    })
+    });
   },
 
   findByTitle: function(title, callback) {
