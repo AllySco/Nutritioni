@@ -1,3 +1,5 @@
+var PieChart = require('../views/pie-chart');
+
 var RecipeRequest = function() {
 	this.url = 'https://api.edamam.com/api/nutrition-details?app_id=3e9c23fc&app_key=b933c7dff6662a955efd389261d28d44'
 }
@@ -16,7 +18,14 @@ RecipeRequest.prototype = {
 		if (this.request.status !== 200) return;
 		var jsonResponse = this.request.responseText;
 		var responseData = JSON.parse(jsonResponse);
-		console.log(responseData);
+		var nutrients = responseData.totalNutrients;
+		var chartData = [
+			{ name: nutrients.CHOCDF.label, y: nutrients.CHOCDF.quantity, color: 'red' },
+			{ name: nutrients.FAT.label, y: nutrients.FAT.quantity, color: 'green' },
+			{ name: nutrients.PROCNT.label, y: nutrients.PROCNT.quantity, color: 'blue' }
+		];
+		new PieChart('Nutrition Info', 'Nutrients', chartData);
+		console.log(chartData);
 	}
 }
 
