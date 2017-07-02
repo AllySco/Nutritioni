@@ -1,3 +1,4 @@
+
 var PieChart = require('../views/pie-chart');
 
 var RecipeRequest = function() {
@@ -18,6 +19,7 @@ RecipeRequest.prototype = {
 		if (this.request.status !== 200) return;
 		var jsonResponse = this.request.responseText;
 		var responseData = JSON.parse(jsonResponse);
+
 		var nutrients = responseData.totalNutrients;
 		var chartData = [
 			{ name: nutrients.CHOCDF.label, y: nutrients.CHOCDF.quantity, color: 'red' },
