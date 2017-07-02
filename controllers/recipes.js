@@ -22,9 +22,16 @@ recipeRouter.post('/', function(req, res) {
   });
   query.add(newRecipe, function(allRecipes) {
     res.json(allRecipes);
+  });
+});
+
+// SHOW
+recipeRouter.get("/:id", function(req, res) {
+  query.find(req.params.id, function(recipe) {
+    res.json(recipe);
+    req.params.id
   })
 })
-
 
 
 

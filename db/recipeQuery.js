@@ -31,8 +31,9 @@ RecipeQuery.prototype = {
   },
 
   find: function(recipeID, callback) {
-    var buffer = ObjectID.generate(recipeID);
-    var objectID = new ObjectID(buffer)
+    
+    var objectID = new ObjectID(recipeID);
+    console.log(objectID.id);
     MongoClient.connect(this.url, function(err,db){
       if(err) return;
       var collection = db.collection("recipes");
