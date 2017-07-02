@@ -23,12 +23,10 @@ RecipeForm.prototype = {
     }
     var request = new RecipeRequest();
     request.makePostRequest(data);
-    var inputs = document.querySelectorAll('input[type=text]');
-    for (var i = 0; i < inputs.length; i++) {
-      inputs[i].value = "";
-    }
-
-    console.log(inputs);
+    // var inputs = document.querySelectorAll('input[type=text]');      /// Clears Input boxes
+    // for (var i = 0; i < inputs.length; i++) {                         /// will add a button later
+    //   inputs[i].value = "";
+    // }
   },
   createForm: function() {
     var form = document.createElement('form');
