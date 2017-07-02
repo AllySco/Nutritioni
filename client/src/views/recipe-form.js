@@ -3,7 +3,10 @@ var RecipeRequest = require('../edamam_api/recipe-request.js');
 var RecipeForm = function() {
   var main = document.querySelector('main');
   this.form = this.createForm();
+  var chartContainer = document.createElement('div');
+  chartContainer.id = 'pie-chart';
   main.appendChild(this.form);
+  main.appendChild(chartContainer);
   this.form.addEventListener('submit', this.handleSubmit.bind(this));
 }
 
