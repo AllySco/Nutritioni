@@ -37,8 +37,8 @@ canvas {
   height: 80px;
 }
 
-.caption span.border {
-
+.caption h1.border {
+    display: inline-block;
     background-color: #292828;
     border-radius: 18px;
     color: #ffffff;
