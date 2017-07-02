@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var ObjectID = require('mongodb')
+var ObjectID = require('mongodb').ObjectID;
 
 
 var RecipeQuery = function() {
@@ -27,6 +27,20 @@ RecipeQuery.prototype = {
         if (err) return; 
           callback(docs);
       })
+    })
+  },
+
+  find: function(recipeID, callback) {
+    var buffer = ObjectID.generate(recipeID);
+    var objectID = new ObjectID(buffer)
+    MongoClient.connect(this.url, function(err,db){
+      if(err) return;
+      var collection = db.collection("recipes");
+      collection.find({_id: objectID}).toArray(function(err, docs) {
+        if (err) return;
+        callback(docs);
+      });
+
     })
   }
 }
