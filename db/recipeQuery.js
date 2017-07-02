@@ -25,13 +25,14 @@ RecipeQuery.prototype = {
       collection.insert(recipeToAdd);
       collection.find().toArray(function(err, docs) {
         if (err) return; 
-          callback(docs);
-      })
+        callback(docs);
+      });
+      db.close();
     })
   },
 
   find: function(recipeID, callback) {
-    
+
     var objectID = new ObjectID(recipeID);
     // for(var key in objectID) {
     //   console.log(key)
@@ -44,10 +45,23 @@ RecipeQuery.prototype = {
         if (err) return;
         callback(docs);
       });
-    })
-  }
+      db.close();
+    });
+  },
 
-  
+  delete: function(recipeID, callback) {
+    var objectID = new ObjectID(recipeID);
+    MongoClient.connect(this.url, function(err,db) {
+      if(err) return;
+      var collection = db.collection("recipes");
+      collection.deleteOne({_id: objectID})
+      collection.find().toArray(function(err, docs) {
+        if (err) return;
+        callback(docs);
+      });
+      db.close();
+    });
+  }
 }
 
 module.exports = RecipeQuery;
