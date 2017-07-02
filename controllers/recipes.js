@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var recipeRouter = express.Router();
 
-var RecipeQuery = require('../db/recipeQuery.js');
+var Recipe = require('../client/src/models/recipe');
+var RecipeQuery = require('../db/recipeQuery');
 var query = new RecipeQuery();
 
 // index
@@ -14,12 +15,12 @@ recipeRouter.get('/', function(req, res) {
 
 // NEW
 recipeRouter.post('/', function(req, res) {
-  var newRecipe = { 
+  var newRecipe = new Recipe({ 
     title: req.body.title,
     ingredients: req.body.ingredients,
     nutritionalInformation: req.body.nutritionalInformation
-  }
-  query.add( newRecipe, function(allRecipes) {
+  });
+  query.add(newRecipe, function(allRecipes) {
     res.json(allRecipes);
   })
 })
