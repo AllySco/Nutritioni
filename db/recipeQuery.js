@@ -2,7 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 
 
 var RecipeQuery = function() {
-  this.url = 'mongod://localhost:27017/nutritioni';
+  this.url = 'mongodb://localhost:27017/nutritioni';
 }
 
 RecipeQuery.prototype = {
