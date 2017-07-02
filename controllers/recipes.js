@@ -40,6 +40,18 @@ recipeRouter.delete("/:id/delete", function(req, res) {
   });
 });
 
+// UPDATE
+recipeRouter.put('/:id', function(req, res) {
+  var updatedRecipe = new Recipe({
+    title: req.body.title,
+    ingredients: req.body.ingredients,
+    nutritionalInformation: req.body.nutritionalInformation
+  });
+  query.update(req.params.id, updatedRecipe, function(recipe) {
+    res.json(recipe);
+  });
+})
+
 
 
 module.exports = recipeRouter;

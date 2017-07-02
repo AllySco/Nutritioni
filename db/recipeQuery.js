@@ -76,9 +76,13 @@ RecipeQuery.prototype = {
         },
         $currentDate: { "lastModified": true }
       }, function(err, results) {
-        if (err) return err;
-        callback(results);
-      })
+        if (err) return;
+      });
+      collection.find().toArray(function(err, docs) {
+        if (err) return;
+        callback(docs);
+      });
+      db.close();
     })
   }
 }
