@@ -1,4 +1,4 @@
-*{
+/**{
 	margin: block;
 	padding: 0;
 	box-sizing: border-box;
@@ -14,3 +14,53 @@ canvas {
 	border: 1px solid black;
 	margin: 0 auto;
 }
+*/
+
+.bgimg-1 {
+    background-image: url('./images/image1.jpg');
+    min-height: 100%;
+}
+
+.caption {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #6d2525;
+}
+
+.caption span.border {
+    background-color: #111;
+    color: #ffffff;
+    padding-top: 18px;
+    padding-right: 18px;
+    padding-bottom: 18px;
+    padding-left: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+    font: 400 45px/2 "Helvetica", sans-serif;
+}
+
+
+
+body, html {
+    height: 100%;
+    background-color: black;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url('./images/image1.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+</style>
+
