@@ -13,21 +13,21 @@ RecipeDatabaseHelper.prototype = {
     request.send();
   },
 
-  makePostRequest:  function(recipeData) {
+  makePostRequest:  function(recipeData, callback) {
     var jsonString = JSON.stringify(recipeData);
     var request = this.request = new XMLHttpRequest();
     request.open('POST', this.url);
     request.setRequestHeader('Content-Type', 'application/json');
-    request.addEventListener('load', this.handleResponse.bind(this));
+    request.addEventListener('load', callback());
     request.send(jsonString);
     }
 
-  makeDeleteRequest: function(title) {
+  makeDeleteRequest: function(title, callback) {
     var jsonString = JSON.stringify(recipeData);
     var request = this.request = new XMLHttpRequest();
     request.open("DELETE", this.url + "/title/" + title + "/delete"  ) 
     request.setRequestHeader('Content-Type', 'application/json');
-    request.addEventListener('load', this.handleResponse.bind(this));
+    request.addEventListener('load', callback());
 
     }
   }
