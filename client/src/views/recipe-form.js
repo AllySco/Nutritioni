@@ -82,7 +82,7 @@ RecipeForm.prototype = {
     clearButton.innerText = 'Clear Data';
     clearButton.type = 'button';
     container.appendChild(clearButton);
-    clearButton.addEventListener('click', this.handleAddClearDataClick);
+    clearButton.addEventListener('click', this.handleClearDataClick);
   },
   handleClearDataClick: function() {
     var inputs = document.querySelectorAll('input[type=text]');
