@@ -74,6 +74,7 @@ RecipeForm.prototype = {
   handleAddIngredientClick: function() {
     var input = document.createElement('input');
     input.type = "text"
+    input.id = "additional"
     var container = document.querySelector('.ingredients');
     container.insertBefore(input, container.children[container.children.length -1]);
   },
@@ -89,7 +90,12 @@ RecipeForm.prototype = {
     for (var i = 0; i < inputs.length; i++) {
       inputs[i].value = "";
     }
+    var additional = document.querySelectorAll('input[id=additional]');
+    for (var i = 0; i < additional.length; i++){
+      additional[i].remove();
+    }
   }
 }
+
 
 module.exports = RecipeForm;
