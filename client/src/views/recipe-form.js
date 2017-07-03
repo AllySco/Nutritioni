@@ -8,9 +8,19 @@ var RecipeForm = function() {
   main.appendChild(this.form);
   main.appendChild(chartContainer);
   this.form.addEventListener('submit', this.handleSubmit.bind(this));
+
+  var url = 'http://localhost:3001/api/recipes'
+  var request = new XMLHttpRequest();
+  request.open("GET", url)
+  request.addEventListener('load', function() {
+    this.handleDropdown(request.responseText);
+  }.bind(this))
+  request.send();
 }
 
+
 RecipeForm.prototype = {
+
   handleSubmit: function(event) {
     event.preventDefault();
     var ingredientInputs = document.querySelectorAll('.ingredients input');
@@ -123,11 +133,48 @@ RecipeForm.prototype = {
     var pieChart = document.getElementById('pie-chart');
     pieChart.innerText = "";
   },
-  createRecipeDropDown: function() {
-    var select = document.createElement('select');
-    var option = document.createElement('option');
-    
 
+  createRecipeDropdown: function() {
+    var selectTag = document.createElement('select');
+    var select = document.querySelector("select");
+    var option = document.createElement('option');
+    option.text = "Recipes"
+    selectTag.options.add(option);
+
+    option.disable = true;
+    option.selected = true;
+
+    selectTag.addEventListener("change", function(event){
+      var value = event.target.selectedOptions[0].value;
+      var recipe = this.findRecipeByTitle(value, recipesData);
+    }.bind(this))
+    var main = document.querySelector("main");
+    main.appendChild(selectTag);
+  },
+
+  populateRecipeDropdown: function(recipesData) {
+    var select = document.querySelector('select')
+    console.log(select);
+    for ( recipe of recipesData) {
+      var option = document.createElement("option")
+      option.value = recipe.title;
+      option.text = recipe.title;
+      select.options.add(option);
+    }
+  },
+
+  handleDropdown: function(recipesData) {
+    var recipes = JSON.parse(recipesData);
+    this.createRecipeDropdown(recipes);
+    this.populateRecipeDropdown(recipes);
+  },
+
+  findRecipeByTitle: function(value, recipesData) {
+    for (recipe of recipesData) {
+      if (recipe.title == value) {
+        return recipe;
+      }
+    }
   }
 }
 
