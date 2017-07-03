@@ -21,7 +21,6 @@ var RecipeForm = function() {
   request.send();
 }
 
-
 RecipeForm.prototype = {
 
   handleSubmit: function(event) {
@@ -99,13 +98,6 @@ RecipeForm.prototype = {
     plusButton.addEventListener('click', this.handleAddIngredientClick);
   },
 
-  handleAddIngredientClick: function() {
-    var input = document.createElement('input');
-    input.type = "text"
-    input.id = "additional"
-    var container = document.querySelector('.ingredients');
-    container.insertBefore(input, container.children[container.children.length -1]);
-  },
 
   addClearDataButton: function() {
     var clearButton = document.createElement('button');
@@ -119,6 +111,7 @@ RecipeForm.prototype = {
     var deleteRecipeButton = document.createElement('button');
     deleteRecipeButton.innerText = 'Delete Recipe';
     deleteRecipeButton.type = 'button';
+    deleteRecipeButton.id = 'delete-button'
     deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick);
     return deleteRecipeButton;
   },
@@ -127,7 +120,16 @@ RecipeForm.prototype = {
     var updateButton = document.createElement('button');
     updateButton.innerText = 'Update Recipe';
     updateButton.type = 'submit';
+    updateButton.id = 'update-button';
     return updateButton;
+  },
+
+  handleAddIngredientClick: function() {
+    var input = document.createElement('input');
+    input.type = "text"
+    input.id = "additional"
+    var container = document.querySelector('.ingredients');
+    container.insertBefore(input, container.children[container.children.length -1]);
   },
 
   handleClearDataClick: function() {
@@ -202,10 +204,15 @@ RecipeForm.prototype = {
         }
       }
     }
+    var updateButton = document.querySelector('#update-button')
+    if (updateButton) updateButton.remove();
     var update = this.addUpdateRecipeButton();
     main.appendChild(update);
-    var deleteButton = this.addDeleteRecipeButton();
-    main.appendChild(deleteButton);
+
+    var deleteButton = document.querySelector('#delete-button');
+    if (deleteButton) deleteButton.remove();
+    var deleteRecipe = this.addDeleteRecipeButton();
+    main.appendChild(deleteRecipe);
   }
 
 
