@@ -122,6 +122,12 @@ RecipeForm.prototype = {
     }
     var pieChart = document.getElementById('pie-chart');
     pieChart.innerText = "";
+  },
+  createRecipeDropDown: function() {
+    var select = document.createElement('select');
+    var option = document.createElement('option');
+    
+
   }
 }
 
