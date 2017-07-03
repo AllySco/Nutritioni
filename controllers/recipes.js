@@ -15,7 +15,7 @@ recipeRouter.get('/', function(req, res) {
 
 // NEW
 recipeRouter.post('/', function(req, res) {
-  var newRecipe = new Recipe({ 
+  var newRecipe = new Recipe({
     title: req.body.title,
     ingredients: req.body.ingredients,
     nutritionalInformation: req.body.nutritionalInformation
@@ -39,7 +39,15 @@ recipeRouter.get('/title/:title', function(req, res) {
   })
 });
 
-// DELETE 
+// FIND BY INGREDIENT
+recipeRouter.get('/ingredient/:ingredient', function(req, res) {
+  query.findByIngredient(req.params.ingredient, function(recipe) {
+    res.json(recipe);
+  })
+});
+
+
+// DELETE
 recipeRouter.delete("/:id/delete", function(req, res) {
   query.delete(req.params.id, function(recipe) {
     res.json(recipe);

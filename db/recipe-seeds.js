@@ -2,6 +2,8 @@ use nutritioni;
 
 db.recipes.drop();
 
+db.recipes.createIndex( { ingredients: "text" } )
+
 db.recipes.insert([
   {
     title: "omelette",
@@ -32,4 +34,3 @@ db.recipes.insert([
     }
   }
 ]);
-
