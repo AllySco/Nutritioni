@@ -10,7 +10,12 @@ var ColumnChart = function(title, data, categories) {
     series: data,
     xAxis: {
       categories: categories
-    }
+    },
+    yAxis: {
+            labels: {
+                format: '{value} mg'
+            }
+        },
   });
 }
 
