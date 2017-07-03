@@ -94,6 +94,8 @@ RecipeForm.prototype = {
     for (var i = 0; i < additional.length; i++){
       additional[i].remove();
     }
+    var pieChart = document.getElementById('pie-chart');
+    pieChart.innerText = "";
   }
 }
 
