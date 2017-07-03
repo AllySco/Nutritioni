@@ -6,6 +6,7 @@ var UI = function() {
 	// new Canvas();
 	// new RecipeForm();
 	new LandingPage();
+
 }
 
 UI.prototype = {
