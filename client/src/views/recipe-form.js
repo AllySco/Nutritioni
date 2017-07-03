@@ -4,11 +4,13 @@ var RecipeForm = function() {
 
   var main = document.createElement('main');
   this.form = this.createForm();
-  var chartContainer = document.createElement('div');
-  chartContainer.id = 'pie-chart';
+  var pieChartContainer = document.createElement('div');
+  var columnChartContainer = document.createElement('div')
+  pieChartContainer.id = 'pie-chart';
+  columnChartContainer.id = 'column-chart';
   main.appendChild(this.form);
-  main.appendChild(chartContainer);
-
+  main.appendChild(pieChartContainer);
+  main.appendChild(columnChartContainer);
   document.body.appendChild(main);
   this.form.addEventListener('submit', this.handleSubmit.bind(this));
 
