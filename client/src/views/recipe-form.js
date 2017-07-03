@@ -2,6 +2,8 @@ var RecipeRequest = require('../edamam_api/recipe-request.js');
 
 var RecipeForm = function() {
 
+  this.selectedRecipe = null;
+
   var main = document.createElement('main');
   this.form = this.createForm();
   var pieChartContainer = document.createElement('div');
@@ -115,7 +117,7 @@ RecipeForm.prototype = {
     deleteRecipeButton.innerText = 'Delete Recipe';
     deleteRecipeButton.type = 'button';
     deleteRecipeButton.id = 'delete-button'
-    deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick);
+    deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick.bind(this));
     return deleteRecipeButton;
   },
 
@@ -171,6 +173,7 @@ RecipeForm.prototype = {
       var value = event.target.selectedOptions[0].value;
       var recipe = this.findRecipeByTitle(value);
       this.displayRecipe(value);
+      this.selectedRecipe = recipe;
     }.bind(this))
     var main = document.querySelector("main");
     main.appendChild(selectTag);
@@ -178,8 +181,8 @@ RecipeForm.prototype = {
 
   populateRecipeDropdown: function(recipesData) {
     var select = document.querySelector('select')
-    console.log(select);
-    for ( recipe of this.recipesData) {
+    console.log(this.recipesData);
+    for (var recipe of this.recipesData) {
       var option = document.createElement("option")
       option.value = recipe.title;
       option.text = recipe.title;
@@ -192,8 +195,23 @@ RecipeForm.prototype = {
     this.populateRecipeDropdown(this.recipesData);
   },
 
+  handleDeleteRecipeClick: function() {
+    var url = "http://localhost:3001/api/recipes/title/" + this.selectedRecipe.title + "/delete";
+    var request = new XMLHttpRequest();
+    request.open("DELETE", url);
+    request.addEventListener('load', function(){
+      this.recipesData = JSON.parse(request.responseText);
+      console.log(this.recipesData);
+      var removeSelect = document.querySelector('select');
+      console.log(removeSelect);
+      removeSelect.remove();
+      this.handleDropdown(this.recipesData);
+    }.bind(this))
+      request.send();
+  },
+
   findRecipeByTitle: function(value) {
-    for (recipe of this.recipesData) {
+    for (var recipe of this.recipesData) {
       if (recipe.title == value) {
         return recipe;
       }
@@ -206,9 +224,9 @@ RecipeForm.prototype = {
     var ul = document.createElement('ul')
     var main = document.querySelector('main');
     main.appendChild(ul)
-    for (recipe of this.recipesData) {
+    for (var recipe of this.recipesData) {
       if (recipe.title == value) {
-        for (ingredient of recipe.ingredients) {
+        for (var ingredient of recipe.ingredients) {
           console.log(ingredient)
           var li = document.createElement('li')
           li.innerText = ingredient;
