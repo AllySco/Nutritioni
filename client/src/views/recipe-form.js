@@ -3,6 +3,7 @@ var RecipeRequest = require('../edamam_api/recipe-request.js');
 var RecipeForm = function() {
 
   this.selectedRecipe = null;
+  this.newRecipeData = null;
 
   var main = document.createElement('main');
   this.form = this.createForm();
@@ -28,6 +29,23 @@ var RecipeForm = function() {
 
 RecipeForm.prototype = {
 
+  handleSaveRecipeClick: function() {
+    console.log("save clicked")
+    var url = "http://localhost:3001/api/recipes";
+    var request = new XMLHttpRequest();
+    request.open("POST", url);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.addEventListener('load', this.handleSave);
+    console.log(this.newRecipeData);
+    var jsonString = JSON.stringify(this.newRecipeData);
+    console.log(jsonString);
+    request.send(jsonString);
+  },
+
+  handleSave: function() {
+    console.log("handleSave")
+  },
+
   handleSubmit: function(event) {
     event.preventDefault();
     var ingredientInputs = document.querySelectorAll('.ingredients input');
@@ -41,6 +59,9 @@ RecipeForm.prototype = {
       title: this.form['title'].value,
       ingr: ingredients
     }
+    this.newRecipeData = data;
+    console.log(this.newRecipeData)
+    this.newRecipeData.nutritionalInformation = [];
     var request = new RecipeRequest();
     request.makePostRequest(data);
   },
@@ -89,9 +110,10 @@ RecipeForm.prototype = {
   },
 
   addSaveRecipeButton: function() {
-    var saveButton = document.createElement('input');
-    saveButton.type = 'submit';
-    saveButton.value = 'Save Recipe';
+    var saveButton = document.createElement('button');
+    saveButton.type = 'button';
+    saveButton.innerText = 'Save Recipe';
+    saveButton.addEventListener('click', this.handleSaveRecipeClick.bind(this));
     return saveButton;
   },
 
@@ -102,7 +124,6 @@ RecipeForm.prototype = {
     container.appendChild(plusButton);
     plusButton.addEventListener('click', this.handleAddIngredientClick);
   },
-
 
   addClearDataButton: function() {
     var clearButton = document.createElement('button');
@@ -121,13 +142,14 @@ RecipeForm.prototype = {
     return deleteRecipeButton;
   },
 
-  addUpdateRecipeButton: function() {
-    var updateButton = document.createElement('button');
-    updateButton.innerText = 'Update Recipe';
-    updateButton.type = 'submit';
-    updateButton.id = 'update-button';
-    return updateButton;
-  },
+  // addUpdateRecipeButton: function() {
+  //   var updateButton = document.createElement('button');
+  //   updateButton.innerText = 'Update Recipe';
+  //   updateButton.type = 'submit';
+  //   updateButton.id = 'update-button';
+  //   updateButton.addEventListener('click', this.handleUpdateRecipeClick.bind(this));
+  //   return updateButton;
+  // },
 
   handleAddIngredientClick: function() {
     var input = document.createElement('input');
@@ -210,6 +232,17 @@ RecipeForm.prototype = {
       request.send();
   },
 
+
+  // handleUpdateRecipeClick: function() {
+  //   var url = "http://localhost:3001/api/recipes/" + this.selectedRecipe.id;
+  //   var request = new XMLHttpRequest();
+  //   request.open("POST", url);
+  //   request.addEventListener('load', function(){
+  //     this.recipesData = JSON.parse(request.responseText);
+  //     console.log(this.recipesData);
+  //   })
+  // },
+
   findRecipeByTitle: function(value) {
     for (var recipe of this.recipesData) {
       if (recipe.title == value) {
@@ -234,17 +267,16 @@ RecipeForm.prototype = {
         }
       }
     }
-    var updateButton = document.querySelector('#update-button')
-    if (updateButton) updateButton.remove();
-    var update = this.addUpdateRecipeButton();
-    main.appendChild(update);
-
     var deleteButton = document.querySelector('#delete-button');
     if (deleteButton) deleteButton.remove();
     var deleteRecipe = this.addDeleteRecipeButton();
     main.appendChild(deleteRecipe);
-  }
 
+    // var updateButton = document.querySelector('#update-button')
+    // if (updateButton) updateButton.remove();
+    // var update = this.addUpdateRecipeButton();
+    // main.appendChild(update);
+  }
 
 }
 
