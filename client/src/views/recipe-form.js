@@ -119,6 +119,10 @@ RecipeForm.prototype = {
     return deleteRecipeButton;
   },
 
+  handleDeleteRecipeClick: function() {
+
+  }, 
+
   addUpdateRecipeButton: function() {
     var updateButton = document.createElement('button');
     updateButton.innerText = 'Update Recipe';
