@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha client/src/models/specs",
     "start": "nodemon server.js",
-    "build": "cd client && webpack -w"
+    "build": "cd client && webpack -w",
+    "seeds": "mongo < db/recipe-seeds.js && mongo < db/store-seeds.js"
+
   },
   "repository": {
     "type": "git",
