@@ -32,12 +32,7 @@ RecipeQuery.prototype = {
   },
 
   find: function(recipeID, callback) {
-
     var objectID = new ObjectID(recipeID);
-    // for(var key in objectID) {
-    //   console.log(key)
-    // }
-    // console.log(objectID.getTimestamp());
     MongoClient.connect(this.url, function(err,db){
       if(err) return;
       var collection = db.collection("recipes");
@@ -76,10 +71,26 @@ RecipeQuery.prototype = {
         },
         $currentDate: { "lastModified": true }
       }, function(err, results) {
-        if (err) return err;
-        callback(results);
-      })
-    })
+        if (err) return;
+      });
+      collection.find().toArray(function(err, docs) {
+        if (err) return;
+        callback(docs);
+      });
+      db.close();
+    });
+  },
+
+  findByTitle: function(title, callback) {
+    MongoClient.connect(this.url, function(err,db){
+      if(err) return;
+      var collection = db.collection("recipes");
+      collection.find({ title: title }).toArray(function(err, docs) {
+        if (err) return;
+        callback(docs);
+      });
+      db.close();
+    });
   }
 }
 

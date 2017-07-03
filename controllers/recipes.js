@@ -29,8 +29,14 @@ recipeRouter.post('/', function(req, res) {
 recipeRouter.get("/:id", function(req, res) {
   query.find(req.params.id, function(recipe) {
     res.json(recipe);
-    req.params.id
   });
+});
+
+// FIND BY NAME
+recipeRouter.get('/title/:title', function(req, res) {
+  query.findByTitle(req.params.title, function(recipe) {
+    res.json(recipe);
+  })
 });
 
 // DELETE 
@@ -39,6 +45,20 @@ recipeRouter.delete("/:id/delete", function(req, res) {
     res.json(recipe);
   });
 });
+
+// UPDATE
+recipeRouter.put('/:id', function(req, res) {
+  var updatedRecipe = new Recipe({
+    title: req.body.title,
+    ingredients: req.body.ingredients,
+    nutritionalInformation: req.body.nutritionalInformation
+  });
+  query.update(req.params.id, updatedRecipe, function(recipe) {
+    res.json(recipe);
+  });
+});
+
+
 
 
 
