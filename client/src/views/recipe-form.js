@@ -143,6 +143,12 @@ RecipeForm.prototype = {
     }
     var pieChart = document.getElementById('pie-chart');
     pieChart.innerText = "";
+
+    var select = document.querySelector('select');
+    select.value = 'Recipes'
+    var ul = document.querySelector('ul');
+    ul.innerText = "";
+    
   },
 
   createRecipeDropdown: function() {
