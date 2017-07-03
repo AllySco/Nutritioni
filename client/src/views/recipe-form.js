@@ -27,7 +27,7 @@ RecipeForm.prototype = {
     var request = new RecipeRequest();
     request.makePostRequest(data);
   },
-  
+
   createForm: function() {
     var form = document.createElement('form');
     form.id = 'recipe-form';
@@ -38,6 +38,7 @@ RecipeForm.prototype = {
     var submit = this.createSubmitButton();
     var save = this.addSaveRecipeButton();
     var clear = this.addClearDataButton();
+    var update = this.addUpdateRecipeButton();
     this.addIngredientButton(ingredients);
 
     form.appendChild(title);
@@ -45,6 +46,7 @@ RecipeForm.prototype = {
     form.appendChild(submit);
     form.appendChild(clear);
     form.appendChild(save);
+    form.appendChild(update);
     return form;
   },
 
@@ -72,10 +74,10 @@ RecipeForm.prototype = {
   },
 
   addSaveRecipeButton: function() {
-    var save = document.createElement('input');
-    save.type = 'submit';
-    save.value = 'Save Recipe';
-    return save;
+    var saveButton = document.createElement('input');
+    saveButton.type = 'submit';
+    saveButton.value = 'Save Recipe';
+    return saveButton;
   },
 
   addIngredientButton: function(container) {
@@ -99,6 +101,14 @@ RecipeForm.prototype = {
     clearButton.innerText = 'Clear Data';
     clearButton.type = 'button';
     clearButton.addEventListener('click', this.handleClearDataClick);
+    return clearButton;
+  },
+
+  addUpdateRecipeButton: function() {
+    var updateButton = document.createElement('button');
+    updateButton.innerText = 'Update Recipe';
+    updateButton.type = 'submit';
+    return updateButton;
   },
 
   handleClearDataClick: function() {
