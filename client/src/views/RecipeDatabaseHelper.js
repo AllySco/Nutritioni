@@ -16,7 +16,7 @@ RecipeDatabaseHelper.prototype = {
   makePostRequest:  function(recipeData, callback) {
     var jsonString = JSON.stringify(recipeData);
     var request = this.request = new XMLHttpRequest();
-    request.open('POST', this.url);
+    request.open('POST', this.url + recipeData.id);
     request.setRequestHeader('Content-Type', 'application/json');
     request.addEventListener('load', callback());
     request.send(jsonString);
