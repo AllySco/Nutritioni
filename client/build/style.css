@@ -18,6 +18,10 @@ canvas {
   margin: 0 auto;
 }
 
+li {
+  color: white;
+}
+
 
 .bgimg-1, .bgimg-2, .bgimg-3 {
   position: relative;
