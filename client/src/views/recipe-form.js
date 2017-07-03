@@ -27,6 +27,7 @@ RecipeForm.prototype = {
     var request = new RecipeRequest();
     request.makePostRequest(data);
   },
+  
   createForm: function() {
     var form = document.createElement('form');
     form.id = 'recipe-form';
@@ -35,14 +36,18 @@ RecipeForm.prototype = {
     var title = this.createInput('title');
     var ingredients = this.createInput('ingredients');
     var submit = this.createSubmitButton();
+    var save = this.addSaveRecipeButton();
+    var clear = this.addClearDataButton();
     this.addIngredientButton(ingredients);
-    this.addClearDataButton(ingredients);
 
     form.appendChild(title);
     form.appendChild(ingredients);
     form.appendChild(submit);
+    form.appendChild(clear);
+    form.appendChild(save);
     return form;
   },
+
   createInput: function(name) {
     var container = document.createElement('div');
     container.classList.add(name);
@@ -58,12 +63,21 @@ RecipeForm.prototype = {
     container.appendChild(input);
     return container;
   },
+
   createSubmitButton: function() {
     var submit = document.createElement('input');
     submit.type = 'submit';
     submit.value = 'Analyse Recipe';
     return submit;
   },
+
+  addSaveRecipeButton: function() {
+    var save = document.createElement('input');
+    save.type = 'submit';
+    save.value = 'Save Recipe';
+    return save;
+  },
+
   addIngredientButton: function(container) {
     var plusButton = document.createElement('button');
     plusButton.innerText = '+';
@@ -71,6 +85,7 @@ RecipeForm.prototype = {
     container.appendChild(plusButton);
     plusButton.addEventListener('click', this.handleAddIngredientClick);
   },
+
   handleAddIngredientClick: function() {
     var input = document.createElement('input');
     input.type = "text"
@@ -78,13 +93,14 @@ RecipeForm.prototype = {
     var container = document.querySelector('.ingredients');
     container.insertBefore(input, container.children[container.children.length -1]);
   },
-  addClearDataButton: function(container) {
+
+  addClearDataButton: function() {
     var clearButton = document.createElement('button');
     clearButton.innerText = 'Clear Data';
     clearButton.type = 'button';
-    container.appendChild(clearButton);
     clearButton.addEventListener('click', this.handleClearDataClick);
   },
+
   handleClearDataClick: function() {
     var inputs = document.querySelectorAll('input[type=text]');
     for (var i = 0; i < inputs.length; i++) {
