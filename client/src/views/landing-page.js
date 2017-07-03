@@ -1,4 +1,5 @@
 var LandingPage = function() {
+  
 	var main = document.createElement('main');
 
 	var bgImg1 = document.createElement('div');
@@ -50,6 +51,7 @@ var LandingPage = function() {
 	// document.body.appendChild(flexBodyMap2);
 	// document.body.appendChild(bgImg3);
 
+
 	document.body.appendChild(main);
 }
 
@@ -59,21 +61,3 @@ LandingPage.prototype = {
 
 module.exports = LandingPage;
 
-// <div class="bgimg-1">
-//   <div class=flex-container-main-header>
-//     <h1 class="top-border">NUTRITIONi</h1>
-//     <i class="burger"></i>
-//   </div>
-// </div>
-// <div class="flex-container-body-map">
-//   <div class="flex-box-header">YOUR BODY AND FOOD</div>
-//   <p>click to know more!</p>
-// </div>
-// <div class="bgimg-2"></div>
-// <div class="flex-container-body-map">
-//   <div class="flex-box-header">WHATS IN YOUR FOOD</div>
-//   <p>click here to find out!</p>
-// </div>
-// <div class="bgimg-3">
-
-// </div>

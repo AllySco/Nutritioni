@@ -8,7 +8,8 @@ var RecipeForm = function() {
   chartContainer.id = 'pie-chart';
   main.appendChild(this.form);
   main.appendChild(chartContainer);
-  document.body.appendChild(main)
+
+  document.body.appendChild(main);
   this.form.addEventListener('submit', this.handleSubmit.bind(this));
 
   var url = 'http://localhost:3001/api/recipes'
