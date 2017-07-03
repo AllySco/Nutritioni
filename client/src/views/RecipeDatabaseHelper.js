@@ -1,27 +1,25 @@
 var RecipeDatabaseHelper = function() {
   this.url = 'http://localhost:3001/api/recipes'
-
-
 }
 
-RequestHelper.prototype = {
+RecipeDatabaseHelper.prototype = {
 
- populateDropdown: function() {
-    var url = 'https://restcountries.eu/rest/v1';
-    var request = new XMLHttpRequest();
-    request.open("GET", url);
-    request.addEventListener('load', function () {
-      if (request.status === 200) {
-        var jsonString = request.responseText;
-        var countries = JSON.parse(jsonString);
-        this.countries = countries;
-        this.onUpdate(countries);
-      }
-    }.bind(this));
+  makeGetRequest: function() {
+    var request = new XMLHttpRequest()
+    request.open("GET", url)
+    request.addEventListener('load', function() {
+      this.recipesDAta = JSON.parse(request.responseText)
+      this.handleDropdown(request.responseText);
+    }.bind(this))
     request.send();
-  },
+  } 
 
- }
-
-
-}
+  makePostRequest:  function(recipeData) {
+    var jsonString = JSON.stringify(recipeData);
+    var request = this.request = new XMLHttpRequest();
+    request.open('POST', this.url);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.addEventListener('load', this.handleResponse.bind(this));
+    request.send(jsonString);
+    }
+  }
