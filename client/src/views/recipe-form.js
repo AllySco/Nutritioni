@@ -1,49 +1,49 @@
-var RecipeRequest = require('../edamam_api/recipe-request.js');
+var RecipeRequest = require('../apis/recipe-request.js');
 
-var RecipeForm = function() {
+var RecipeAnalyser = function() {
 
   this.selectedRecipe = null;
   this.newRecipeData = null;
-
-  var main = document.createElement('main');
-  this.form = this.createForm();
-  var pieChartContainer = document.createElement('div');
-  var columnChartContainer = document.createElement('div')
-  pieChartContainer.id = 'pie-chart';
-  columnChartContainer.id = 'column-chart';
-  main.appendChild(this.form);
-  main.appendChild(pieChartContainer);
-  main.appendChild(columnChartContainer);
-  document.body.appendChild(main);
-  this.form.addEventListener('submit', this.handleSubmit.bind(this));
-
-  var url = 'http://localhost:3001/api/recipes'
-  var request = new XMLHttpRequest();
-  request.open("GET", url)
-  request.addEventListener('load', function() {
-    this.recipesData = JSON.parse(request.responseText)
-    this.handleDropdown(request.responseText);
-  }.bind(this))
-  request.send();
+  this.render();
+  
 }
 
 RecipeForm.prototype = {
 
+  render: function() {
+    var main = document.createElement('main');
+    this.form = this.createForm();
+    var pieChartContainer = document.createElement('div');
+    var columnChartContainer = document.createElement('div');
+    pieChartContainer.id = 'pie-chart';
+    columnChartContainer.id = 'column-chart';
+    main.appendChild(this.form);
+    main.appendChild(pieChartContainer);
+    main.appendChild(columnChartContainer);
+    document.body.appendChild(main);
+    this.form.addEventListener('submit', this.handleSubmit.bind(this));
+
+    var url = 'http://localhost:3001/api/recipes';
+    var request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.addEventListener('load', function() {
+      this.recipesData = JSON.parse(request.responseText);
+      this.handleDropdown(request.responseText);
+    }.bind(this));
+    request.send();
+  },
+
   handleSaveRecipeClick: function() {
-    console.log("save clicked")
     var url = "http://localhost:3001/api/recipes";
     var request = new XMLHttpRequest();
     request.open("POST", url);
     request.setRequestHeader('Content-Type', 'application/json');
     request.addEventListener('load', this.handleSave);
-    console.log(this.newRecipeData);
     var jsonString = JSON.stringify(this.newRecipeData);
-    console.log(jsonString);
     request.send(jsonString);
   },
 
   handleSave: function() {
-    console.log("handleSave")
   },
 
   handleSubmit: function(event) {
@@ -54,13 +54,11 @@ RecipeForm.prototype = {
       var ingredient = ingredientInputs[i].value;
       if (ingredient !== "") ingredients.push(ingredient);
     }
-    console.log("ingredients mapped", ingredients);
     var data = {
       title: this.form['title'].value,
       ingr: ingredients
     }
     this.newRecipeData = data;
-    console.log(this.newRecipeData)
     this.newRecipeData.nutritionalInformation = [];
     var request = new RecipeRequest();
     request.makePostRequest(data);
@@ -92,7 +90,7 @@ RecipeForm.prototype = {
     var label = document.createElement('label');
     label.setAttribute('for', name);
     label.innerText = name.replace(/\b\w/g, function(l) {
-      return l.toUpperCase()
+      return l.toUpperCase();
     });
     var input = document.createElement('input');
     input.id = name;
@@ -137,7 +135,7 @@ RecipeForm.prototype = {
     var deleteRecipeButton = document.createElement('button');
     deleteRecipeButton.innerText = 'Delete Recipe';
     deleteRecipeButton.type = 'button';
-    deleteRecipeButton.id = 'delete-button'
+    deleteRecipeButton.id = 'delete-button';
     deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick.bind(this));
     return deleteRecipeButton;
   },
@@ -153,8 +151,8 @@ RecipeForm.prototype = {
 
   handleAddIngredientClick: function() {
     var input = document.createElement('input');
-    input.type = "text"
-    input.id = "additional"
+    input.type = "text";
+    input.id = "additional";
     var container = document.querySelector('.ingredients');
     container.insertBefore(input, container.children[container.children.length -1]);
   },
@@ -175,7 +173,7 @@ RecipeForm.prototype = {
     columnChart.innerText = "";
 
     var select = document.querySelector('select');
-    select.value = 'Recipes'
+    select.value = 'Recipes';
     var ul = document.querySelector('ul');
     ul.innerText = "";
     
@@ -185,7 +183,7 @@ RecipeForm.prototype = {
     var selectTag = document.createElement('select');
     var select = document.querySelector("select");
     var option = document.createElement('option');
-    option.text = "Recipes"
+    option.text = "Recipes";
     selectTag.options.add(option);
 
     option.disable = true;
@@ -196,16 +194,15 @@ RecipeForm.prototype = {
       var recipe = this.findRecipeByTitle(value);
       this.displayRecipe(value);
       this.selectedRecipe = recipe;
-    }.bind(this))
+    }.bind(this));
     var main = document.querySelector("main");
     main.insertBefore(selectTag, main.childNodes[2]);
   },
 
   populateRecipeDropdown: function(recipesData) {
-    var select = document.querySelector('select')
-    console.log(this.recipesData);
+    var select = document.querySelector('select');
     for (var recipe of this.recipesData) {
-      var option = document.createElement("option")
+      var option = document.createElement("option");
       option.value = recipe.title;
       option.text = recipe.title;
       select.options.add(option);
@@ -221,14 +218,14 @@ RecipeForm.prototype = {
     var url = "http://localhost:3001/api/recipes/title/" + this.selectedRecipe.title + "/delete";
     var request = new XMLHttpRequest();
     request.open("DELETE", url);
-    request.addEventListener('load', function(){
+    request.addEventListener('load', function() {
       this.recipesData = JSON.parse(request.responseText);
       console.log(this.recipesData);
       var removeSelect = document.querySelector('select');
       console.log(removeSelect);
       removeSelect.remove();
       this.handleDropdown(this.recipesData);
-    }.bind(this))
+    }.bind(this));
       request.send();
   },
 
@@ -245,9 +242,7 @@ RecipeForm.prototype = {
 
   findRecipeByTitle: function(value) {
     for (var recipe of this.recipesData) {
-      if (recipe.title == value) {
-        return recipe;
-      }
+      if (recipe.title == value) return recipe;
     }
   },
 
@@ -260,10 +255,9 @@ RecipeForm.prototype = {
     for (var recipe of this.recipesData) {
       if (recipe.title == value) {
         for (var ingredient of recipe.ingredients) {
-          console.log(ingredient)
-          var li = document.createElement('li')
+          var li = document.createElement('li');
           li.innerText = ingredient;
-          ul.appendChild(li)
+          ul.appendChild(li);
         }
       }
     }

@@ -1,6 +1,5 @@
-
-var PieChart = require('../views/pie-chart');
-var ColumnChart = require('../views/column-chart')
+var PieChart = require('../charts/pie-chart');
+var ColumnChart = require('../charts/column-chart')
 
 var RecipeRequest = function() {
 	this.url = 'https://api.edamam.com/api/nutrition-details?app_id=3e9c23fc&app_key=b933c7dff6662a955efd389261d28d44'

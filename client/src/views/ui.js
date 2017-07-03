@@ -1,6 +1,6 @@
-var Canvas = require('./canvas');
+var Canvas = require('../components/canvas');
 
-var Navigation = require('./navigation');
+var Navigation = require('../components/navigation');
 var RecipeForm = require('./recipe-form');
 var LandingPage = require('./landing-page');
 var FoodJourney = require('./food-journey');
