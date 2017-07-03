@@ -9,6 +9,35 @@ body, html {
   background-color: black;
 }
 
+header {
+	height: 100px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background-color: blue;
+	align-items: center;
+	padding: 0 20px;
+}
+
+header h1 {
+
+}
+header ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-around;
+	width: 500px;
+}
+
+header li {
+	list-style: none;
+}
+
+header li:hover {
+	background-color: red;
+	cursor: pointer;
+}
+
 main {
   height: 100%;
 }
@@ -16,6 +45,14 @@ main {
 canvas {
   border: 1px solid black;
   margin: 0 auto;
+}
+
+li {
+  color: white;
+}
+
+form {
+  color: white;
 }
 
 
@@ -71,6 +108,7 @@ h1 {
   width: 80%;
 }
 
+
 .flex-container-body-map {
   display: -webkit-flex;
   display: flex;
@@ -121,4 +159,3 @@ i {
   background-size: cover;
 }
 </style>
-

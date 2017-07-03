@@ -8,7 +8,8 @@ var RecipeForm = function() {
   chartContainer.id = 'pie-chart';
   main.appendChild(this.form);
   main.appendChild(chartContainer);
-  document.body.appendChild(main)
+
+  document.body.appendChild(main);
   this.form.addEventListener('submit', this.handleSubmit.bind(this));
 
   var url = 'http://localhost:3001/api/recipes'
@@ -20,7 +21,6 @@ var RecipeForm = function() {
   }.bind(this))
   request.send();
 }
-
 
 RecipeForm.prototype = {
 
@@ -51,7 +51,6 @@ RecipeForm.prototype = {
     var submit = this.createSubmitButton();
     var save = this.addSaveRecipeButton();
     var clear = this.addClearDataButton();
-    var update = this.addUpdateRecipeButton();
     this.addIngredientButton(ingredients);
 
     form.appendChild(title);
@@ -59,7 +58,6 @@ RecipeForm.prototype = {
     form.appendChild(submit);
     form.appendChild(clear);
     form.appendChild(save);
-    form.appendChild(update);
     return form;
   },
 
@@ -101,13 +99,6 @@ RecipeForm.prototype = {
     plusButton.addEventListener('click', this.handleAddIngredientClick);
   },
 
-  handleAddIngredientClick: function() {
-    var input = document.createElement('input');
-    input.type = "text"
-    input.id = "additional"
-    var container = document.querySelector('.ingredients');
-    container.insertBefore(input, container.children[container.children.length -1]);
-  },
 
   addClearDataButton: function() {
     var clearButton = document.createElement('button');
@@ -117,11 +108,29 @@ RecipeForm.prototype = {
     return clearButton;
   },
 
+  addDeleteRecipeButton: function() {
+    var deleteRecipeButton = document.createElement('button');
+    deleteRecipeButton.innerText = 'Delete Recipe';
+    deleteRecipeButton.type = 'button';
+    deleteRecipeButton.id = 'delete-button'
+    deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick);
+    return deleteRecipeButton;
+  },
+
   addUpdateRecipeButton: function() {
     var updateButton = document.createElement('button');
     updateButton.innerText = 'Update Recipe';
     updateButton.type = 'submit';
+    updateButton.id = 'update-button';
     return updateButton;
+  },
+
+  handleAddIngredientClick: function() {
+    var input = document.createElement('input');
+    input.type = "text"
+    input.id = "additional"
+    var container = document.querySelector('.ingredients');
+    container.insertBefore(input, container.children[container.children.length -1]);
   },
 
   handleClearDataClick: function() {
@@ -135,6 +144,12 @@ RecipeForm.prototype = {
     }
     var pieChart = document.getElementById('pie-chart');
     pieChart.innerText = "";
+
+    var select = document.querySelector('select');
+    select.value = 'Recipes'
+    var ul = document.querySelector('ul');
+    ul.innerText = "";
+    
   },
 
   createRecipeDropdown: function() {
@@ -196,7 +211,18 @@ RecipeForm.prototype = {
         }
       }
     }
+    var updateButton = document.querySelector('#update-button')
+    if (updateButton) updateButton.remove();
+    var update = this.addUpdateRecipeButton();
+    main.appendChild(update);
+
+    var deleteButton = document.querySelector('#delete-button');
+    if (deleteButton) deleteButton.remove();
+    var deleteRecipe = this.addDeleteRecipeButton();
+    main.appendChild(deleteRecipe);
   }
+
+
 }
 
 
