@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,9 +10,7 @@ body, html {
 }
 
 main {
-  display: flex;
-  flex-flow: column;
-  align-content: center;
+  height: 100%;
 }
 
 canvas {
