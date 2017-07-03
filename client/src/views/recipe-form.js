@@ -176,7 +176,7 @@ RecipeForm.prototype = {
       this.selectedRecipe = recipe;
     }.bind(this))
     var main = document.querySelector("main");
-    main.appendChild(selectTag);
+    main.insertBefore(selectTag, main.childNodes[2]);
   },
 
   populateRecipeDropdown: function(recipesData) {
