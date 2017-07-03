@@ -12,7 +12,7 @@ RecipeDatabaseHelper.prototype = {
       this.handleDropdown(request.responseText);
     }.bind(this))
     request.send();
-  } 
+  },
 
   makePostRequest:  function(recipeData) {
     var jsonString = JSON.stringify(recipeData);
