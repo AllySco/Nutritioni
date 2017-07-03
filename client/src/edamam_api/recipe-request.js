@@ -24,23 +24,34 @@ RecipeRequest.prototype = {
 
 		var nutrients = responseData.totalNutrients;
 		console.log("nutrients line 26", nutrients)
-		var columnChartData = [
-			{name: nutrients.CA.label, y: nutrients.CA.quantity, color: 'red'},
-			{name: nutrients.FE.label, y: nutrients.FE.quantity, color: 'blue'},
-			{name: nutrients.K.label, y: nutrients.K.quantity, color: 'orange'},
-			{name: nutrients.MG.label, y: nutrients.MG.quantity, color: 'purple'},
-			{name: nutrients.P.label, y: nutrients.P.quantity, color: 'brown'},
-			{name: nutrients.TOCPHA.label, y: nutrients.TOCPHA.quantity, color: 'yellow'},
-			{name: nutrients.ZN.label, y: nutrients.ZN.quantity, color: 'black'},
-			];
-			
+		var NutrientData = [{ 
+				name: "vitamins",
+				data: [
+			{y: nutrients.CA.quantity , color: 'red'},
+			{y: nutrients.FE.quantity, color: 'blue'},
+			{y: nutrients.K.quantity, color: 'orange'},
+			{y: nutrients.MG.quantity, color: 'purple'},
+			{y: nutrients.P.quantity, color: 'brown'},
+			{y: nutrients.TOCPHA.quantity, color: 'yellow'},
+			{y: nutrients.ZN.quantity, color: 'black'},
+			]
+		}];
+			console.log("line 36", NutrientData)
+
+			var NutrientLabels = [ "Calcium", 
+			"Iron", "Potassium", "Magnesium", "Potassium", "Vitamin E", "Zinc"]
+
+
+		console.log("line 47", NutrientLabels);		
+
 		var pieChartData = [
 			{ name: nutrients.CHOCDF.label, y: nutrients.CHOCDF.quantity, color: 'red' },
 			{ name: nutrients.FAT.label, y: nutrients.FAT.quantity, color: 'green' },
 			{ name: nutrients.PROCNT.label, y: nutrients.PROCNT.quantity, color: 'blue' }
 		];
+
 		new PieChart('Nutrition Info', 'Nutrients', pieChartData);
-		new ColumnChart('Nutritional Info', 'Nutrients', columnChartData )
+		new ColumnChart('Vitamin Info', NutrientData, NutrientLabels);
 	}
 }
 
