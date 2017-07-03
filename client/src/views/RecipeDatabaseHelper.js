@@ -4,13 +4,12 @@ var RecipeDatabaseHelper = function() {
 
 RecipeDatabaseHelper.prototype = {
 
-  makeGetRequest: function() {
+  makeGetRequest: function(callback) {
     var request = new XMLHttpRequest()
     request.open("GET", url)
     request.addEventListener('load', function() {
-      this.recipesDAta = JSON.parse(request.responseText)
-      this.handleDropdown(request.responseText);
-    }.bind(this))
+      callback(request.responseText);
+    }) 
     request.send();
   },
 
@@ -21,5 +20,14 @@ RecipeDatabaseHelper.prototype = {
     request.setRequestHeader('Content-Type', 'application/json');
     request.addEventListener('load', this.handleResponse.bind(this));
     request.send(jsonString);
+    }
+
+  makeDeleteRequest: function(title) {
+    var jsonString = JSON.stringify(recipeData);
+    var request = this.request = new XMLHttpRequest();
+    request.open("DELETE", this.url + "/title/" + title + "/delete"  ) 
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.addEventListener('load', this.handleResponse.bind(this));
+
     }
   }
