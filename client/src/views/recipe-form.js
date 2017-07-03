@@ -147,6 +147,9 @@ RecipeForm.prototype = {
     var pieChart = document.getElementById('pie-chart');
     pieChart.innerText = "";
 
+    var columnChart = document.getElementById('column-chart');
+    columnChart.innerText = "";
+
     var select = document.querySelector('select');
     select.value = 'Recipes'
     var ul = document.querySelector('ul');
