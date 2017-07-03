@@ -59,5 +59,5 @@ LandingPage.prototype = {
 
 }
 
-
 module.exports = LandingPage;
+
