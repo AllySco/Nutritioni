@@ -15,7 +15,13 @@ header {
 }
 
 header h1 {
-	
+
+}
+header ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-around;
+	width: 500px;
 }
 
 header li {

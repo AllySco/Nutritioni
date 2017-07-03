@@ -14,6 +14,7 @@ Navigation.prototype = {
 		var banner = document.createElement('h1');
 		banner.innerHTML = 'NUTRITIONi';
 		banner.addEventListener('click', function() {
+			document.querySelector('main').remove();
 			new LandingPage();
 		});
 		container.appendChild(banner);
@@ -25,19 +26,24 @@ Navigation.prototype = {
 		var ul = document.createElement('ul');
 		var recipeAnalyserLink = this.createNavItem('Recipe Analyser');
 		recipeAnalyserLink.addEventListener('click', function() {
+			document.querySelector('main').remove();
 			new RecipeForm();
 		});
 		var foodStoriesLink = this.createNavItem('Food Journey');
 		foodStoriesLink.addEventListener('click', function() {
+			document.querySelector('main').remove();
 			new FoodJourney();
 		});
 		var storeLocatorLink = this.createNavItem('Store Locator');
-		foodStoriesLink.addEventListener('click', function() {
+		storeLocatorLink.addEventListener('click', function() {
+			document.querySelector('main').remove();
 			new StoreLocator();
 		});
 
 		
 		ul.appendChild(recipeAnalyserLink);
+		ul.appendChild(foodStoriesLink);
+		ul.appendChild(storeLocatorLink);
 		nav.appendChild(ul);
 		return nav;
 	},
