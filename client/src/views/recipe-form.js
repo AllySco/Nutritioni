@@ -36,7 +36,7 @@ RecipeForm.prototype = {
     var ingredients = this.createInput('ingredients');
     var submit = this.createSubmitButton();
     this.addIngredientButton(ingredients);
-    this.addClearDataButton(form);
+    this.addClearDataButton(ingredients);
 
     form.appendChild(title);
     form.appendChild(ingredients);
