@@ -1,12 +1,14 @@
 var RecipeRequest = require('../edamam_api/recipe-request.js');
 
 var RecipeForm = function() {
-  var main = document.querySelector('main');
+
+  var main = document.createElement('main');
   this.form = this.createForm();
   var chartContainer = document.createElement('div');
   chartContainer.id = 'pie-chart';
   main.appendChild(this.form);
   main.appendChild(chartContainer);
+  document.body.appendChild(main)
   this.form.addEventListener('submit', this.handleSubmit.bind(this));
 
   var url = 'http://localhost:3001/api/recipes'
@@ -179,16 +181,18 @@ RecipeForm.prototype = {
   },
 
   displayRecipe: function(value) {
+    var ul = document.querySelector('ul')
+    if (ul) ul.remove();
+    var ul = document.createElement('ul')
+    var main = document.querySelector('main');
+    main.appendChild(ul)
     for (recipe of this.recipesData) {
       if (recipe.title == value) {
-        var ul = document.createElement('ul')
-        var main = document.querySelector('main');
-        main.appendChild(ul)
         for (ingredient of recipe.ingredients) {
           console.log(ingredient)
           var li = document.createElement('li')
           li.innerText = ingredient;
-            ul.appendChild(li)
+          ul.appendChild(li)
         }
       }
     }

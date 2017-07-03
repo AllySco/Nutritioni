@@ -4,8 +4,8 @@ var LandingPage = require('./landing-page');
 
 var UI = function() {
 	// new Canvas();
-	// new RecipeForm();
-	new LandingPage();
+	 new RecipeForm();
+	// new LandingPage();
 
 }
 
