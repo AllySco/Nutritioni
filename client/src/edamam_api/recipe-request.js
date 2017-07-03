@@ -39,7 +39,7 @@ RecipeRequest.prototype = {
 			console.log("line 36", NutrientData)
 
 			var NutrientLabels = [ "Calcium", 
-			"Iron", "Potassium", "Magnesium", "Potassium", "Vitamin E", "Zinc"]
+			"Iron", "Potassium", "Magnesium", "Phosphorus", "Vitamin E", "Zinc"]
 
 
 		console.log("line 47", NutrientLabels);		
