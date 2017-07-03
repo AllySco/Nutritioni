@@ -13,6 +13,7 @@ var RecipeForm = function() {
   var request = new XMLHttpRequest();
   request.open("GET", url)
   request.addEventListener('load', function() {
+    this.recipesData = JSON.parse(request.responseText)
     this.handleDropdown(request.responseText);
   }.bind(this))
   request.send();
@@ -146,7 +147,8 @@ RecipeForm.prototype = {
 
     selectTag.addEventListener("change", function(event){
       var value = event.target.selectedOptions[0].value;
-      var recipe = this.findRecipeByTitle(value, recipesData);
+      var recipe = this.findRecipeByTitle(value);
+      this.displayRecipe(value);
     }.bind(this))
     var main = document.querySelector("main");
     main.appendChild(selectTag);
@@ -155,7 +157,7 @@ RecipeForm.prototype = {
   populateRecipeDropdown: function(recipesData) {
     var select = document.querySelector('select')
     console.log(select);
-    for ( recipe of recipesData) {
+    for ( recipe of this.recipesData) {
       var option = document.createElement("option")
       option.value = recipe.title;
       option.text = recipe.title;
@@ -164,15 +166,30 @@ RecipeForm.prototype = {
   },
 
   handleDropdown: function(recipesData) {
-    var recipes = JSON.parse(recipesData);
-    this.createRecipeDropdown(recipes);
-    this.populateRecipeDropdown(recipes);
+    this.createRecipeDropdown(this.recipesData);
+    this.populateRecipeDropdown(this.recipesData);
   },
 
-  findRecipeByTitle: function(value, recipesData) {
-    for (recipe of recipesData) {
+  findRecipeByTitle: function(value) {
+    for (recipe of this.recipesData) {
       if (recipe.title == value) {
         return recipe;
+      }
+    }
+  },
+
+  displayRecipe: function(value) {
+    for (recipe of this.recipesData) {
+      if (recipe.title == value) {
+        var ul = document.createElement('ul')
+        var main = document.querySelector('main');
+        main.appendChild(ul)
+        for (ingredient of recipe.ingredients) {
+          console.log(ingredient)
+          var li = document.createElement('li')
+          li.innerText = ingredient;
+            ul.appendChild(li)
+        }
       }
     }
   }
