@@ -24,7 +24,7 @@ RecipeQuery.prototype = {
       var collection = db.collection("recipes");
       collection.insert(recipeToAdd);
       collection.find().toArray(function(err, docs) {
-        if (err) return; 
+        if (err) return;
         callback(docs);
       });
       db.close();
@@ -91,7 +91,20 @@ RecipeQuery.prototype = {
       });
       db.close();
     });
+  },
+
+  findByIngredient: function(ingredient, callback) {
+    MongoClient.connect(this.url, function(err,db){
+      if(err) return;
+      var collection = db.collection("recipes");
+      collection.find( { $text: { $search: ingredient } } ).toArray(function(err, docs) {
+        if (err) return;
+        callback(docs);
+      });
+      db.close();
+    });
   }
+
 }
 
 module.exports = RecipeQuery;
