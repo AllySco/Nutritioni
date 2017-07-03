@@ -1,25 +1,21 @@
-var RecipeRequest = require('../apis/recipe-request.js');
+var RecipeRequest = require('../apis/recipe-analysis-request.js');
 
 var RecipeAnalyser = function() {
-
   this.selectedRecipe = null;
   this.newRecipeData = null;
-  this.render();
-  
+  this.render(); 
 }
 
-RecipeForm.prototype = {
+RecipeAnalyser.prototype = {
 
   render: function() {
     var main = document.createElement('main');
     this.form = this.createForm();
-    var pieChartContainer = document.createElement('div');
-    var columnChartContainer = document.createElement('div');
-    pieChartContainer.id = 'pie-chart';
-    columnChartContainer.id = 'column-chart';
+    this.pieChartContainer = this.createChartContainer('pie-chart');
+    this.columnChartContainer = this.createChartContainer('column-chart');
     main.appendChild(this.form);
-    main.appendChild(pieChartContainer);
-    main.appendChild(columnChartContainer);
+    main.appendChild(this.pieChartContainer);
+    main.appendChild(this.columnChartContainer);
     document.body.appendChild(main);
     this.form.addEventListener('submit', this.handleSubmit.bind(this));
 
@@ -33,7 +29,115 @@ RecipeForm.prototype = {
     request.send();
   },
 
-  handleSaveRecipeClick: function() {
+
+  // UI COMPONENTS
+
+  createChartContainer: function(chartId) {
+    var chartContainer = document.createElement('div');
+    chartContainer.id = chartId;
+    return chartContainer;
+  },
+
+  createForm: function() {
+    var form = document.createElement('form');
+    form.id = 'recipe-form';
+    form.method = 'post';
+    form.action = '/';
+    var title = this.createInput('title');
+    var ingredients = this.createInput('ingredients');
+    var submit = this.createSubmitButton();
+    var save = this.createSaveButton();
+    var clear = this.createClearButton();
+    this.createExtraIngredientButton(ingredients);
+
+    form.appendChild(title);
+    form.appendChild(ingredients);
+    form.appendChild(submit);
+    form.appendChild(clear);
+    form.appendChild(save);
+    return form;
+  },
+
+  createRecipeDropdown: function() {
+    var select = document.createElement('select');
+
+    var option = document.createElement('option');
+    option.text = "Recipes";
+    option.disable = true;
+    option.selected = true;
+
+    select.options.add(option);
+
+    select.addEventListener("change", function(event){
+      var value = event.target.selectedOptions[0].value;
+      var recipe = this.findRecipeByTitle(value);
+      this.displayRecipe(value);
+      this.selectedRecipe = recipe;
+    }.bind(this));
+    var main = document.querySelector("main");
+    main.insertBefore(selectTag, main.childNodes[2]);
+  },
+
+  createInput: function(name) {
+    var container = document.createElement('div');
+    container.classList.add(name);
+    var label = document.createElement('label');
+    label.setAttribute('for', name);
+    label.innerText = name.replace(/\b\w/g, function(l) {
+      return l.toUpperCase();
+    });
+    var input = document.createElement('input');
+    input.id = name;
+    input.type = "text";
+    container.appendChild(label);
+    container.appendChild(input);
+    return container;
+  },
+
+  createExtraIngredientButton: function(container) {
+    var plusButton = document.createElement('button');
+    plusButton.innerText = '+';
+    plusButton.type = "button";
+    container.appendChild(plusButton);
+    plusButton.addEventListener('click', this.handleAddIngredientClick);
+  },
+
+  createClearButton: function() {
+    var clearButton = document.createElement('button');
+    clearButton.innerText = 'Clear Data';
+    clearButton.type = 'button';
+    clearButton.addEventListener('click', this.handleClearDataClick);
+    return clearButton;
+  },
+
+  createSaveButton: function() {
+    var saveButton = document.createElement('button');
+    saveButton.type = 'button';
+    saveButton.innerText = 'Save Recipe';
+    saveButton.addEventListener('click', this.handleSaveClick.bind(this));
+    return saveButton;
+  },
+
+  createDeleteButton: function() {
+    var deleteRecipeButton = document.createElement('button');
+    deleteRecipeButton.innerText = 'Delete Recipe';
+    deleteRecipeButton.type = 'button';
+    deleteRecipeButton.id = 'delete-button';
+    deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick.bind(this));
+    return deleteRecipeButton;
+  },
+
+  createSubmitButton: function() {
+    var submit = document.createElement('input');
+    submit.type = 'submit';
+    submit.value = 'Analyse Recipe';
+    return submit;
+  },
+
+
+  // EVENT HANDLERS
+
+  handleSaveClick: function() {
     var url = "http://localhost:3001/api/recipes";
     var request = new XMLHttpRequest();
     request.open("POST", url);
@@ -64,91 +168,6 @@ RecipeForm.prototype = {
     request.makePostRequest(data);
   },
 
-  createForm: function() {
-    var form = document.createElement('form');
-    form.id = 'recipe-form';
-    form.method = 'post';
-    form.action = '/';
-    var title = this.createInput('title');
-    var ingredients = this.createInput('ingredients');
-    var submit = this.createSubmitButton();
-    var save = this.addSaveRecipeButton();
-    var clear = this.addClearDataButton();
-    this.addIngredientButton(ingredients);
-
-    form.appendChild(title);
-    form.appendChild(ingredients);
-    form.appendChild(submit);
-    form.appendChild(clear);
-    form.appendChild(save);
-    return form;
-  },
-
-  createInput: function(name) {
-    var container = document.createElement('div');
-    container.classList.add(name);
-    var label = document.createElement('label');
-    label.setAttribute('for', name);
-    label.innerText = name.replace(/\b\w/g, function(l) {
-      return l.toUpperCase();
-    });
-    var input = document.createElement('input');
-    input.id = name;
-    input.type = "text";
-    container.appendChild(label);
-    container.appendChild(input);
-    return container;
-  },
-
-  createSubmitButton: function() {
-    var submit = document.createElement('input');
-    submit.type = 'submit';
-    submit.value = 'Analyse Recipe';
-    return submit;
-  },
-
-  addSaveRecipeButton: function() {
-    var saveButton = document.createElement('button');
-    saveButton.type = 'button';
-    saveButton.innerText = 'Save Recipe';
-    saveButton.addEventListener('click', this.handleSaveRecipeClick.bind(this));
-    return saveButton;
-  },
-
-  addIngredientButton: function(container) {
-    var plusButton = document.createElement('button');
-    plusButton.innerText = '+';
-    plusButton.type = "button";
-    container.appendChild(plusButton);
-    plusButton.addEventListener('click', this.handleAddIngredientClick);
-  },
-
-  addClearDataButton: function() {
-    var clearButton = document.createElement('button');
-    clearButton.innerText = 'Clear Data';
-    clearButton.type = 'button';
-    clearButton.addEventListener('click', this.handleClearDataClick);
-    return clearButton;
-  },
-
-  addDeleteRecipeButton: function() {
-    var deleteRecipeButton = document.createElement('button');
-    deleteRecipeButton.innerText = 'Delete Recipe';
-    deleteRecipeButton.type = 'button';
-    deleteRecipeButton.id = 'delete-button';
-    deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick.bind(this));
-    return deleteRecipeButton;
-  },
-
-  // addUpdateRecipeButton: function() {
-  //   var updateButton = document.createElement('button');
-  //   updateButton.innerText = 'Update Recipe';
-  //   updateButton.type = 'submit';
-  //   updateButton.id = 'update-button';
-  //   updateButton.addEventListener('click', this.handleUpdateRecipeClick.bind(this));
-  //   return updateButton;
-  // },
-
   handleAddIngredientClick: function() {
     var input = document.createElement('input');
     input.type = "text";
@@ -175,28 +194,7 @@ RecipeForm.prototype = {
     var select = document.querySelector('select');
     select.value = 'Recipes';
     var ul = document.querySelector('ul');
-    ul.innerText = "";
-    
-  },
-
-  createRecipeDropdown: function() {
-    var selectTag = document.createElement('select');
-    var select = document.querySelector("select");
-    var option = document.createElement('option');
-    option.text = "Recipes";
-    selectTag.options.add(option);
-
-    option.disable = true;
-    option.selected = true;
-
-    selectTag.addEventListener("change", function(event){
-      var value = event.target.selectedOptions[0].value;
-      var recipe = this.findRecipeByTitle(value);
-      this.displayRecipe(value);
-      this.selectedRecipe = recipe;
-    }.bind(this));
-    var main = document.querySelector("main");
-    main.insertBefore(selectTag, main.childNodes[2]);
+    ul.innerText = "";   
   },
 
   populateRecipeDropdown: function(recipesData) {
@@ -229,17 +227,6 @@ RecipeForm.prototype = {
       request.send();
   },
 
-
-  // handleUpdateRecipeClick: function() {
-  //   var url = "http://localhost:3001/api/recipes/" + this.selectedRecipe.id;
-  //   var request = new XMLHttpRequest();
-  //   request.open("POST", url);
-  //   request.addEventListener('load', function(){
-  //     this.recipesData = JSON.parse(request.responseText);
-  //     console.log(this.recipesData);
-  //   })
-  // },
-
   findRecipeByTitle: function(value) {
     for (var recipe of this.recipesData) {
       if (recipe.title == value) return recipe;
@@ -266,13 +253,9 @@ RecipeForm.prototype = {
     var deleteRecipe = this.addDeleteRecipeButton();
     main.appendChild(deleteRecipe);
 
-    // var updateButton = document.querySelector('#update-button')
-    // if (updateButton) updateButton.remove();
-    // var update = this.addUpdateRecipeButton();
-    // main.appendChild(update);
   }
 
 }
 
 
-module.exports = RecipeForm;
+module.exports = RecipeAnalyser;
