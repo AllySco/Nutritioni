@@ -14,5 +14,7 @@ var ColumnChart = function(title, data, catergories) {
     }
   });
 }
+
 ColumnChart.prototype = {}
 module.exports = ColumnChart;
+
