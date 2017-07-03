@@ -50,8 +50,10 @@ RecipeRequest.prototype = {
 			{ name: nutrients.PROCNT.label, y: nutrients.PROCNT.quantity, color: 'blue' }
 		];
 
+
 		new PieChart('Nutrition Info', 'Nutrients', pieChartData);
 		new ColumnChart('Vitamin Info', NutrientData, NutrientLabels);
+
 	}
 }
 
