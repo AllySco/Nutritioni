@@ -26,10 +26,6 @@ RecipeForm.prototype = {
     }
     var request = new RecipeRequest();
     request.makePostRequest(data);
-    // var inputs = document.querySelectorAll('input[type=text]');      /// Clears Input boxes
-    // for (var i = 0; i < inputs.length; i++) {                         /// will add a button later
-    //   inputs[i].value = "";
-    // }
   },
   createForm: function() {
     var form = document.createElement('form');
@@ -40,6 +36,7 @@ RecipeForm.prototype = {
     var ingredients = this.createInput('ingredients');
     var submit = this.createSubmitButton();
     this.addIngredientButton(ingredients);
+    this.addClearDataButton(form);
 
     form.appendChild(title);
     form.appendChild(ingredients);
@@ -79,6 +76,19 @@ RecipeForm.prototype = {
     input.type = "text"
     var container = document.querySelector('.ingredients');
     container.insertBefore(input, container.children[container.children.length -1]);
+  },
+  addClearDataButton: function(container) {
+    var clearButton = document.createElement('button');
+    clearButton.innerText = 'Clear Data';
+    clearButton.type = 'button';
+    container.appendChild(clearButton);
+    clearButton.addEventListener('click', this.handleAddClearDataClick);
+  },
+  handleClearDataClick: function() {
+    var inputs = document.querySelectorAll('input[type=text]');
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = "";
+    }
   }
 }
 

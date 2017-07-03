@@ -26,7 +26,7 @@ RecipeRequest.prototype = {
 			{ name: nutrients.FAT.label, y: nutrients.FAT.quantity, color: 'green' },
 			{ name: nutrients.PROCNT.label, y: nutrients.PROCNT.quantity, color: 'blue' }
 		];
-		new PieChart('Nutrition Info', 'Nutrients', chartData);
+		new PieChart('Nutrition Info', '(g)', chartData);
 		console.log(chartData);
 	}
 }
