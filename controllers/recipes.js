@@ -54,6 +54,15 @@ recipeRouter.delete("/:id/delete", function(req, res) {
   });
 });
 
+// DELETE By Name
+
+recipeRouter.delete("/title/:title/delete", function(req, res) {
+  query.deleteByTitle(req.params.title, function(recipe) {
+    res.json(recipe);
+  });
+});
+
+
 // UPDATE
 recipeRouter.put('/:id', function(req, res) {
   var updatedRecipe = new Recipe({

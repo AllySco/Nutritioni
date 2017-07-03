@@ -103,7 +103,20 @@ RecipeQuery.prototype = {
       });
       db.close();
     });
-  }
+  },
+
+  deleteByTitle: function(title, callback) {
+    MongoClient.connect(this.url, function(err,db){
+      if(err) return;
+      var collection = db.collection("recipes");
+      collection.deleteOne({ title: title })
+      collection.find().toArray(function(err, docs) {
+        if (err) return;
+        callback(docs);
+      }) 
+      db.close();
+    });
+  },
 
 }
 
