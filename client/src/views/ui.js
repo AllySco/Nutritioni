@@ -9,8 +9,8 @@ var StoreLocator = require('./store-locator');
 
 var UI = function() {
 	// new Canvas();
-	 new RecipeForm();
-	// new LandingPage();
+	 // new RecipeForm();
+	new LandingPage();
 
 
 }
