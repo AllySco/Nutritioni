@@ -5,12 +5,13 @@ var Navigation = require('./navigation');
 var UI = function() {
 
 	// new Canvas();
-	// new RecipeForm();
 	new Navigation();
+	// new RecipeForm();
+	new LandingPage();
+
 }
 
 UI.prototype = {
-	
 }
 
 module.exports = UI;
