@@ -1,16 +1,124 @@
-*{
-	margin: block;
-	padding: 0;
-	box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  background-color: black;
 }
 
 main {
-	display: flex;
-	flex-flow: column;
-	align-content: center;
+  height: 100%;
 }
 
 canvas {
-	border: 1px solid black;
-	margin: 0 auto;
+  border: 1px solid black;
+  margin: 0 auto;
 }
+
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.bgimg-1 {
+  background-image: url('./images/image1.jpg');
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bgimg-2 {
+  background-image: url('./images/image2.jpg');
+  min-height: 100%;
+}
+
+.bgimg-3 {
+  background-image: url('./images/image3.jpg');
+  min-height: 100%;
+}
+
+h1 {
+  height: 1.75em;
+  line-height: 1.75em;
+  font-size: 4em;
+  padding: 0 10px;
+  background-color: #292828;
+  letter-spacing: 10px;
+  font-family: Helvetica, sans-serif;
+  border-radius: 18px;
+  color: white;
+}
+
+.text-box-body-map {
+  height:100px;
+  background-color:#292828;
+  font-size:36px;
+}
+
+.flex-container-main-header{
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.flex-container-body-map {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 250px;
+  background-color: #292828;
+}
+
+.flex-box-header {
+  background-color: #292828 ;
+  width: 100%;
+  height: 100px;
+  margin: 10px;
+}
+
+.flex-container-main-header i.burger {
+  content:url('./images/black burger icon.png');
+  height: 110px;
+}
+
+
+
+.flex-box-header {
+  display: inline-block;
+  background-color: #292828;
+  border-radius: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+  font-family: Helvetica, sans-serif;
+  color: white;
+}
+
+i {
+  height: 6em;
+}
+
+
+.parallax {
+  /* The image used */
+  background-image: url('./images/image1.jpg');
+  /* Full height */
+  height: 100%; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+
