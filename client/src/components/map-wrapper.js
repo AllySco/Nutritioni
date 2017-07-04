@@ -38,7 +38,7 @@ MapWrapper.prototype = {
     var marker = this.addMarker(storeCoords);
     marker.addListener('click', function() {
       var infoWindow = new google.maps.InfoWindow({
-        context: storeTitle
+        content: storeTitle
       });
       infoWindow.open(this.googleMap, marker);
     });
