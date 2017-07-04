@@ -2,6 +2,9 @@ var RecipeRequest = require('../edamam_api/recipe-request.js');
 
 var RecipeForm = function() {
 
+  this.selectedRecipe = null;
+  this.newRecipeData = null;
+
   var main = document.createElement('main');
   this.form = this.createForm();
   var pieChartContainer = document.createElement('div');
@@ -26,6 +29,23 @@ var RecipeForm = function() {
 
 RecipeForm.prototype = {
 
+  handleSaveRecipeClick: function() {
+    console.log("save clicked")
+    var url = "http://localhost:3001/api/recipes";
+    var request = new XMLHttpRequest();
+    request.open("POST", url);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.addEventListener('load', this.handleSave);
+    console.log(this.newRecipeData);
+    var jsonString = JSON.stringify(this.newRecipeData);
+    console.log(jsonString);
+    request.send(jsonString);
+  },
+
+  handleSave: function() {
+    console.log("handleSave")
+  },
+
   handleSubmit: function(event) {
     event.preventDefault();
     var ingredientInputs = document.querySelectorAll('.ingredients input');
@@ -39,6 +59,9 @@ RecipeForm.prototype = {
       title: this.form['title'].value,
       ingr: ingredients
     }
+    this.newRecipeData = data;
+    console.log(this.newRecipeData)
+    this.newRecipeData.nutritionalInformation = [];
     var request = new RecipeRequest();
     request.makePostRequest(data);
   },
@@ -87,9 +110,10 @@ RecipeForm.prototype = {
   },
 
   addSaveRecipeButton: function() {
-    var saveButton = document.createElement('input');
-    saveButton.type = 'submit';
-    saveButton.value = 'Save Recipe';
+    var saveButton = document.createElement('button');
+    saveButton.type = 'button';
+    saveButton.innerText = 'Save Recipe';
+    saveButton.addEventListener('click', this.handleSaveRecipeClick.bind(this));
     return saveButton;
   },
 
@@ -100,7 +124,6 @@ RecipeForm.prototype = {
     container.appendChild(plusButton);
     plusButton.addEventListener('click', this.handleAddIngredientClick);
   },
-
 
   addClearDataButton: function() {
     var clearButton = document.createElement('button');
@@ -115,21 +138,11 @@ RecipeForm.prototype = {
     deleteRecipeButton.innerText = 'Delete Recipe';
     deleteRecipeButton.type = 'button';
     deleteRecipeButton.id = 'delete-button'
-    deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick);
+    deleteRecipeButton.addEventListener('click', this.handleDeleteRecipeClick.bind(this));
     return deleteRecipeButton;
   },
 
-  handleDeleteRecipeClick: function() {
 
-  }, 
-
-  addUpdateRecipeButton: function() {
-    var updateButton = document.createElement('button');
-    updateButton.innerText = 'Update Recipe';
-    updateButton.type = 'submit';
-    updateButton.id = 'update-button';
-    return updateButton;
-  },
 
   handleAddIngredientClick: function() {
     var input = document.createElement('input');
@@ -175,15 +188,16 @@ RecipeForm.prototype = {
       var value = event.target.selectedOptions[0].value;
       var recipe = this.findRecipeByTitle(value);
       this.displayRecipe(value);
+      this.selectedRecipe = recipe;
     }.bind(this))
     var main = document.querySelector("main");
-    main.appendChild(selectTag);
+    main.insertBefore(selectTag, main.childNodes[2]);
   },
 
   populateRecipeDropdown: function(recipesData) {
     var select = document.querySelector('select')
-    console.log(select);
-    for ( recipe of this.recipesData) {
+    console.log(this.recipesData);
+    for (var recipe of this.recipesData) {
       var option = document.createElement("option")
       option.value = recipe.title;
       option.text = recipe.title;
@@ -196,8 +210,34 @@ RecipeForm.prototype = {
     this.populateRecipeDropdown(this.recipesData);
   },
 
+  handleDeleteRecipeClick: function() {
+    var url = "http://localhost:3001/api/recipes/title/" + this.selectedRecipe.title + "/delete";
+    var request = new XMLHttpRequest();
+    request.open("DELETE", url);
+    request.addEventListener('load', function(){
+      this.recipesData = JSON.parse(request.responseText);
+      console.log(this.recipesData);
+      var removeSelect = document.querySelector('select');
+      console.log(removeSelect);
+      removeSelect.remove();
+      this.handleDropdown(this.recipesData);
+    }.bind(this))
+      request.send();
+  },
+
+
+  // handleUpdateRecipeClick: function() {
+  //   var url = "http://localhost:3001/api/recipes/" + this.selectedRecipe.id;
+  //   var request = new XMLHttpRequest();
+  //   request.open("POST", url);
+  //   request.addEventListener('load', function(){
+  //     this.recipesData = JSON.parse(request.responseText);
+  //     console.log(this.recipesData);
+  //   })
+  // },
+
   findRecipeByTitle: function(value) {
-    for (recipe of this.recipesData) {
+    for (var recipe of this.recipesData) {
       if (recipe.title == value) {
         return recipe;
       }
@@ -210,9 +250,9 @@ RecipeForm.prototype = {
     var ul = document.createElement('ul')
     var main = document.querySelector('main');
     main.appendChild(ul)
-    for (recipe of this.recipesData) {
+    for (var recipe of this.recipesData) {
       if (recipe.title == value) {
-        for (ingredient of recipe.ingredients) {
+        for (var ingredient of recipe.ingredients) {
           console.log(ingredient)
           var li = document.createElement('li')
           li.innerText = ingredient;
@@ -220,17 +260,16 @@ RecipeForm.prototype = {
         }
       }
     }
-    var updateButton = document.querySelector('#update-button')
-    if (updateButton) updateButton.remove();
-    var update = this.addUpdateRecipeButton();
-    main.appendChild(update);
-
     var deleteButton = document.querySelector('#delete-button');
     if (deleteButton) deleteButton.remove();
     var deleteRecipe = this.addDeleteRecipeButton();
     main.appendChild(deleteRecipe);
-  }
 
+    // var updateButton = document.querySelector('#update-button')
+    // if (updateButton) updateButton.remove();
+    // var update = this.addUpdateRecipeButton();
+    // main.appendChild(update);
+  }
 
 }
 
