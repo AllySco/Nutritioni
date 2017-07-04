@@ -14,8 +14,7 @@ UI.prototype = {
 		// new Navigation();
 		 // new RecipeAnalyser();
 		// new LandingPage();
-		var storeLocator = new StoreLocator();
-    storeLocator.populateMap();
+		new StoreLocator();
 	}
 }
 
