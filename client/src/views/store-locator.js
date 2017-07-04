@@ -14,7 +14,7 @@ var StoreLocator = function() {
 }
 StoreLocator.prototype = {
     render: function() {
-        
+
         var h1 = document.createElement('h1')
         h1.innerHTML = "THIS IS THE STORE LOCATOR PAGE";
         var main = document.createElement('main');
@@ -34,16 +34,29 @@ StoreLocator.prototype = {
     },
 
     populateMap: function(){
-        console.log("populateMap")
         var storeLocatorRequest = new StoreLocatorRequest()
         storeLocatorRequest.makeGetRequest(function(responseData){
             var stores = JSON.parse(responseData);
             // console.log(stores)
             for (store of stores) {
-                this.map.addMarker(store.coords)
+                this.map.addInfoWindows(store.coords, store.title)
             }
         }.bind(this))
     }
+
+
+    // addInfoWindow: function(coords, text) {
+    //   var marker = this.addMarker(coords);
+    //   marker.addListener('click', function() {
+    //     var infoWindow = new google.maps.InfoWindow({
+    //       content: text
+    //     });
+    //     infoWindow.open(this.map, marker); 
+    //   });
+    // },
+
+
 }
 module.exports = StoreLocator;
+
 

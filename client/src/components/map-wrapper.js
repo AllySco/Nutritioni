@@ -4,6 +4,7 @@ var MapWrapper = function(location, coords, zoom) {
     center: coords,
     zoom: zoom
   });
+  this.marker = null;
 }
 
 MapWrapper.prototype = {
@@ -12,15 +13,17 @@ MapWrapper.prototype = {
       position: coords,
       map: this.googleMap
     })
+    console.log("this is the map marker", marker)
+    return marker
   },
   addClickEvent: function() {
     this.googleMap.addListener('click', function(event) {
       var coords = { lat: event.latLng.lat(), lng: event.latLng.lng()}
       this.addMarker(coords)
     }.bind(this));
-   },
+  },
 
-   geolocate: function() {
+  geolocate: function() {
     console.log("geolocation", navigator.geolocation)
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log("callback from geo", position)
@@ -29,7 +32,17 @@ MapWrapper.prototype = {
       this.googleMap.setCenter(center);
       this.addMarker(center);
     }.bind(this));
-   }
+  },
+
+  addInfoWindows: function(storeCoords, storeTitle) {
+    var marker = this.addMarker(storeCoords);
+    marker.addListener('click', function() {
+      var infoWindow = new google.maps.InfoWindow({
+        context: storeTitle
+      });
+      infoWindow.open(this.googleMap, marker);
+    });
+  }
 }
 
 module.exports = MapWrapper;
