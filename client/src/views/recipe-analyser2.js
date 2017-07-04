@@ -127,6 +127,9 @@ RecipeAnalyser.prototype = {
 
     var input = this.createTitleInput();
 
+    titleFormSection.appendChild(label);
+    titleFormSection.appendChild(input);
+
     return titleFormSection;
   },
 
