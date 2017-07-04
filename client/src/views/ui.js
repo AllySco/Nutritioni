@@ -1,6 +1,6 @@
 var Canvas = require('../components/canvas');
 var Navigation = require('../components/navigation');
-var RecipeForm = require('./recipe-form');
+var RecipeAnalyser = require('./recipe-analyser');
 var LandingPage = require('./landing-page');
 var FoodJourney = require('./food-journey');
 var StoreLocator = require('./store-locator');
@@ -12,8 +12,9 @@ var UI = function() {
 UI.prototype = {
 	render: function() {
 		// new Navigation();
-		 new RecipeForm();
+		 // new RecipeAnalyser();
 		// new LandingPage();
+		new StoreLocator();
 	}
 }
 

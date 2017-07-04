@@ -1,4 +1,4 @@
-var RecipeForm = require('../views/recipe-form');
+var RecipeAnalyser = require('../views/recipe-analyser');
 var LandingPage = require('../views/landing-page');
 var FoodJourney = require('../views/food-journey');
 var StoreLocator = require('../views/store-locator');
@@ -59,7 +59,7 @@ Navigation.prototype = {
 	},
 	navigateToRecipeAnalyser: function() {
 		document.querySelector('main').remove();
-		new RecipeForm();
+		new RecipeAnalyser();
 	}
 }
 
