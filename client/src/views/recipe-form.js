@@ -1,23 +1,38 @@
 var RecipeRequest = require('../apis/recipe-analysis-request.js');
 
 var RecipeAnalyser = function() {
+
+  // state holders
   this.selectedRecipe = null;
   this.newRecipeData = null;
+
+  // we will watch these for events
+  this.analyseRecipeButton = null;
+  this.saveRecipeButton = null;
+  this.clearFormButton = null;
+  this.savedRecipesSelect = null;
+
+
+  // create ui
   this.render(); 
+  this.setEventListeners();
 }
 
 RecipeAnalyser.prototype = {
 
   render: function() {
     var main = document.createElement('main');
+    main.id = 'recipe-analyser';
+
     this.form = this.createForm();
     this.pieChartContainer = this.createChartContainer('pie-chart');
     this.columnChartContainer = this.createChartContainer('column-chart');
+
     main.appendChild(this.form);
     main.appendChild(this.pieChartContainer);
     main.appendChild(this.columnChartContainer);
     document.body.appendChild(main);
-    this.form.addEventListener('submit', this.handleSubmit.bind(this));
+    
 
     var url = 'http://localhost:3001/api/recipes';
     var request = new XMLHttpRequest();
@@ -28,6 +43,7 @@ RecipeAnalyser.prototype = {
     }.bind(this));
     request.send();
   },
+
 
 
   // UI COMPONENTS
@@ -45,16 +61,16 @@ RecipeAnalyser.prototype = {
     form.action = '/';
     var title = this.createInput('title');
     var ingredients = this.createInput('ingredients');
-    var submit = this.createSubmitButton();
-    var save = this.createSaveButton();
-    var clear = this.createClearButton();
+    this.analyseRecipeButton = this.createSubmitButton();
+    this.saveRecipeButton = this.createSaveButton();
+    this.clearFormButton = this.createClearButton();
     this.createExtraIngredientButton(ingredients);
 
     form.appendChild(title);
     form.appendChild(ingredients);
-    form.appendChild(submit);
-    form.appendChild(clear);
-    form.appendChild(save);
+    form.appendChild(this.analyseRecipeButton);
+    form.appendChild(this.clearFormButton);
+    form.appendChild(this.saveRecipeButton);
     return form;
   },
 
@@ -75,7 +91,7 @@ RecipeAnalyser.prototype = {
       this.selectedRecipe = recipe;
     }.bind(this));
     var main = document.querySelector("main");
-    main.insertBefore(selectTag, main.childNodes[2]);
+    main.insertBefore(select, main.childNodes[2]);
   },
 
   createInput: function(name) {
@@ -99,7 +115,7 @@ RecipeAnalyser.prototype = {
     plusButton.innerText = '+';
     plusButton.type = "button";
     container.appendChild(plusButton);
-    plusButton.addEventListener('click', this.handleAddIngredientClick);
+    plusButton.addEventListener('click', this.handleCreateExtraIngredientButton);
   },
 
   createClearButton: function() {
@@ -135,7 +151,13 @@ RecipeAnalyser.prototype = {
   },
 
 
+
+
   // EVENT HANDLERS
+
+  setEventListeners: function() {
+    this.form.addEventListener('submit', this.handleSubmit.bind(this));
+  },
 
   handleSaveClick: function() {
     var url = "http://localhost:3001/api/recipes";
@@ -168,16 +190,16 @@ RecipeAnalyser.prototype = {
     request.makePostRequest(data);
   },
 
-  handleAddIngredientClick: function() {
+  handleAddExtraIngredientInputClick: function() {
     var input = document.createElement('input');
     input.type = "text";
-    input.id = "additional";
+    input.classList.add("extra-ingredient");
     var container = document.querySelector('.ingredients');
     container.insertBefore(input, container.children[container.children.length -1]);
   },
 
   handleClearDataClick: function() {
-    var inputs = document.querySelectorAll('input[type=text]');
+    var inputs = document.querySelectorAll('.extra-ingredient');
     for (var i = 0; i < inputs.length; i++) {
       inputs[i].value = "";
     }
@@ -227,9 +249,9 @@ RecipeAnalyser.prototype = {
       request.send();
   },
 
-  findRecipeByTitle: function(value) {
+  findRecipeByTitle: function(title) {
     for (var recipe of this.recipesData) {
-      if (recipe.title == value) return recipe;
+      if (recipe.title == title) return recipe;
     }
   },
 
@@ -254,6 +276,14 @@ RecipeAnalyser.prototype = {
     main.appendChild(deleteRecipe);
 
   }
+
+
+  // callbacks
+
+
+
+  // helper functions
+
 
 }
 
