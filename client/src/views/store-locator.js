@@ -7,7 +7,6 @@ var StoreLocator = function() {
 
     // ui components to be watching for events
     this.map = null;
-
     // ui instantiation
     this.render();
     this.populateMap();
@@ -15,6 +14,7 @@ var StoreLocator = function() {
 }
 StoreLocator.prototype = {
     render: function() {
+        
         var h1 = document.createElement('h1')
         h1.innerHTML = "THIS IS THE STORE LOCATOR PAGE";
         var main = document.createElement('main');
@@ -42,7 +42,6 @@ StoreLocator.prototype = {
             for (store of stores) {
                 this.map.addMarker(store.coords)
             }
-
         }.bind(this))
     }
 }
