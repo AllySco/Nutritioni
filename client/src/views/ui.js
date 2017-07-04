@@ -14,6 +14,7 @@ var UI = function() {
 	new StoreLocator();
 
 
+
 }
 
 UI.prototype = {

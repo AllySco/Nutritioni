@@ -15,11 +15,13 @@ recipeRouter.get('/', function(req, res) {
 
 // NEW
 recipeRouter.post('/', function(req, res) {
+  console.log("save route hit")
   var newRecipe = new Recipe({
     title: req.body.title,
     ingredients: req.body.ingredients,
     nutritionalInformation: req.body.nutritionalInformation
   });
+  console.log("newRecipe", newRecipe)
   query.add(newRecipe, function(allRecipes) {
     res.json(allRecipes);
   });
@@ -53,6 +55,15 @@ recipeRouter.delete("/:id/delete", function(req, res) {
     res.json(recipe);
   });
 });
+
+// DELETE By Name
+
+recipeRouter.delete("/title/:title/delete", function(req, res) {
+  query.deleteByTitle(req.params.title, function(recipe) {
+    res.json(recipe);
+  });
+});
+
 
 // UPDATE
 recipeRouter.put('/:id', function(req, res) {
