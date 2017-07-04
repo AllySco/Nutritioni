@@ -207,8 +207,23 @@ div#chart-containers {
   align-content: center;
 }
 
-div#pie-chart {
+div#list-and-pie-container {
   width: 100%;
+  display: flex;
+  flex-wrap: row;
+  justify-content: space-around;
+  align-content: center;
+}
+
+div#ingredients-list-container {
+  width: 48%;
+  height: 245px;
+  background-color: var(--container-colors);
+  border-radius: var(--border-radius);
+}
+
+div#pie-chart {
+  width: 48%;
   height: 245px;
   background-color: var(--container-colors);
   border-radius: var(--border-radius);
