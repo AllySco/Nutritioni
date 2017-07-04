@@ -6,6 +6,7 @@ var MapWrapper = function(location, coords, zoom) {
     zoom: zoom
   });
   this.marker = null;
+  this.center;
 }
 
 MapWrapper.prototype = {
@@ -15,7 +16,6 @@ MapWrapper.prototype = {
       map: this.googleMap,
       icon: this.iconBase + markerType
     })
-    console.log("this is the map marker", marker)
     return marker
   },
 
@@ -29,23 +29,40 @@ MapWrapper.prototype = {
   geolocate: function() {
     console.log("geolocation", navigator.geolocation)
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("callback from geo", position)
-      var center = {lat: position.coords.latitude, lng: position.coords.longitude};
-      console.log(center)
-      this.googleMap.setCenter(center);
-      this.addMarker(center, 'purple.png');
+      this.center = {lat: position.coords.latitude, lng: position.coords.longitude};
+      console.log("our current location", this.center)
+      this.googleMap.setCenter(this.center);
+      this.addMarker(this.center, 'purple.png');
     }.bind(this));
   },
 
-  addInfoWindows: function(storeCoords, storeTitle) {
+  estimateDistanceRequest: function(storeCoords, callback) {
+    var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + this.center.lat + "," + this.center.lng + "8&destinations=" + storeCoords + "&&mode=walking&key=AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ" 
+    var request = new XMLHttpRequest()
+    request.open("GET", url)
+    request.addEventListener('load', function() {
+      callback(request.responseText);
+    })
+    request.send();
+  },
+
+  addInfoWindows: function(storeCoords, storeTitle ) {
     var marker = this.addMarker(storeCoords, "restaurant.png");
     marker.addListener('click', function() {
+      console.log('this this', this)
+      this.estimateDistanceRequest(storeCoords, this.estimateTime)
       var infoWindow = new google.maps.InfoWindow({
         content: storeTitle
       });
       infoWindow.open(this.googleMap, marker);
-    });
+    }.bind(this));
+  },
+
+  estimateTime: function(responseText) {
+    console.log(responseText);
   }
 }
 
 module.exports = MapWrapper;
+// api key AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ 
+// current location = 55.9468738, lng: -3.2016112999999997

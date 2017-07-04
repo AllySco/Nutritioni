@@ -1,0 +1,4 @@
+https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=55.9468738,-3.20161129999999978&destinations=55.954276,-3.197960&&mode=bicycling&key=AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ 
+
+https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins={lat - long }8&destinations= {lat- long }&&mode=walking&key=AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ 
+
