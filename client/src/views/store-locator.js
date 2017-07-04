@@ -15,7 +15,7 @@ var StoreLocator = function() {
     console.log(this.map);
 }
 StoreLocator.prototype = {
-   
+
     render: function() {
         console.log("made it to render")
         var main = document.createElement('main');
@@ -31,11 +31,11 @@ StoreLocator.prototype = {
         mapContainer.id = "map";
         mapContainer.width = 1000;
         mapContainer.height = 1000;
+        var coords = { lat: 55.954276, lng: -3.197960};
+        var zoom = 15;      
         this.map = new MapWrapper(mapContainer, coords, zoom);
+        this.map.geolocate();
         return mapContainer
-
-     
-        // this.map.geolocate();
 
     },
 
