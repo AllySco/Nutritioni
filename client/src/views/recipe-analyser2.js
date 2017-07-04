@@ -6,6 +6,7 @@
 // 4. Helper mothods
 
 var RecipeRequest = require('../apis/recipe-analysis-request.js');
+var SavedRecipesRequest = require('../apis/saved-recipes-request');
 
 var RecipeAnalyser = function() {
   // state holders
@@ -21,8 +22,8 @@ var RecipeAnalyser = function() {
 
   // create ui
   this.render();
-  // this.initializeDropdown();
-  // this.setEventListeners();
+  this.retrieveSavedRecipes();
+  this.setEventListeners();
 
 }
 
@@ -81,11 +82,11 @@ RecipeAnalyser.prototype = {
   createMainContent: function() {
     var mainContentContainer = this.createDiv('main-content');
 
-    var form = this.createForm();
+    this.form = this.createForm();
 
     var chartContainers = this.createChartContainers();
 
-    mainContentContainer.appendChild(form);
+    mainContentContainer.appendChild(this.form);
     mainContentContainer.appendChild(chartContainers);
 
     return mainContentContainer;
@@ -170,6 +171,7 @@ RecipeAnalyser.prototype = {
     var label = document.createElement('label');
     label.setAttribute('for', 'ingredients');
     label.innerText = 'Ingredients:';
+
     return label;
   },
 
@@ -256,15 +258,28 @@ RecipeAnalyser.prototype = {
     return div;
   },
 
+  createInitialDropdownOption: function() {
+    var option = document.createElement('option');
+    option.text = "Recipes";
+    option.disable = true;
+    option.selected = true;
+
+    return option;
+  },
+
 
 
   // EVENT HANDLERS
   setEventListeners: function() {
     this.form.addEventListener('submit', this.handleSubmit.bind(this));
-    this.addExtraIngredientButton.addEventListener('click', this.)
-    // this.saveRecipeButton = null;
-    // this.clearFormButton = null;
-    // this.savedRecipesSelect = null;
+
+    this.addExtraIngredientButton.addEventListener('click', this.handleAddExtraIngredientInputClick);
+
+    this.saveRecipeButton.addEventListener('click', this.handleSaveClick);
+
+    this.clearFormButton.addEventListener('click', this.handleClearDataClick.bind(this));
+
+    this.savedRecipesSelect.addEventListener('change', this.handleDropdown)
   },
 
   handleSubmit: function(event) {
@@ -290,6 +305,32 @@ RecipeAnalyser.prototype = {
     container.insertBefore(input, container.children[container.children.length -1]);
   },
 
+  handleSaveClick: function() {
+    var url = "http://localhost:3001/api/recipes";
+    var request = new XMLHttpRequest();
+    request.open("POST", url);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.addEventListener('load', this.saveCallback);
+    var jsonString = JSON.stringify(this.newRecipeData);
+    request.send(jsonString);
+  },
+
+  handleClearDataClick: function() {
+
+    this.clearAllInputBoxes();
+
+    this.clearExtraIngredientBoxes();
+
+    this.clearCharts();
+
+    this.clearRecipeInformation();   
+  },
+
+  handleDropdown: function() {
+
+  },
+
+
 
 
   // HELPER FUNCTIONS
@@ -303,7 +344,66 @@ RecipeAnalyser.prototype = {
       if (ingredient !== "") ingredients.push(ingredient);
     }
     return ingredients;
+  },
+
+  clearCharts: function() {
+    var pieChart = document.getElementById('pie-chart');
+    pieChart.innerText = "";
+
+    var columnChart = document.getElementById('column-chart');
+    columnChart.innerText = "";
+  },
+
+  clearAllInputBoxes: function() {
+    var inputs = document.querySelectorAll('#ingredient-inputs input');
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = "";
+    }
+  },
+
+  clearExtraIngredientBoxes: function() {
+    var additional = document.querySelectorAll('.extra-ingredient');
+    for (var i = 0; i < additional.length; i++){
+      additional[i].remove();
+    }
+  },
+
+  clearRecipeInformation: function() {
+    var select = document.querySelector('select');
+    select.value = 'Recipes';
+    var ul = document.querySelector('ul');
+    ul.innerText = "";  
+  },
+
+  populateRecipeDropdown: function(recipesData) {
+    var select = document.querySelector('select');
+
+    var initialOption = this.createInitialDropdownOption();
+    select.options.add(initialOption);
+    for (var recipe of recipesData) {
+      var option = document.createElement("option");
+      option.value = recipe.title;
+      option.text = recipe.title;
+      select.options.add(option);
+    }
+  },
+
+  retrieveSavedRecipes: function() {
+    var request = new SavedRecipesRequest();
+    this.currentRequest = request.makeGetRequest(this.savedRecipesCallback.bind(this));
+  },
+
+  
+
+
+
+  // CALLBACKS
+  savedRecipesCallback: function() {
+    var recipesData = JSON.parse(this.currentRequest.responseText);
+    this.populateRecipeDropdown(recipesData);
   }
+
+  
 
 }
 
