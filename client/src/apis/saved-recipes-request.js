@@ -4,12 +4,13 @@ var SavedRecipesRequest = function() {
 
 SavedRecipesRequest.prototype = {
   makeGetRequest: function(callback) {
-    var request = new XMLHttpRequest()
-    request.open("GET", url)
+    var request = new XMLHttpRequest();
+    request.open("GET", this.url)
     request.addEventListener('load', function() {
       callback(request.responseText);
     }) 
     request.send();
+    return request;
   },
   makePostRequest:  function(recipeData, callback) {
     var jsonString = JSON.stringify(recipeData);
@@ -18,7 +19,7 @@ SavedRecipesRequest.prototype = {
     request.setRequestHeader('Content-Type', 'application/json');
     request.addEventListener('load', callback());
     request.send(jsonString);
-    }
+    },
   makeDeleteRequest: function(title, callback) {
     var jsonString = JSON.stringify(recipeData);
     var request = this.request = new XMLHttpRequest();

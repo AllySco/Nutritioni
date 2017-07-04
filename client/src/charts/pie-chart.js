@@ -4,10 +4,14 @@ var PieChart = function(title, dataLabel, data) {
 		chart: {
 			type: 'pie',
 			renderTo: container,
-			animation: false
+			animation: false,
+			backgroundColor:'transparent'
 		},
 		title: {
-			text: title
+			text: title,
+			style: {
+			  color: '#fff5ee' 
+			}
 		},
 		series: [
 			{

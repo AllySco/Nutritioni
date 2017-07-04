@@ -6,13 +6,15 @@ var RecipeRequest = function() {
 }
 
 RecipeRequest.prototype = {
-	makePostRequest: function(recipeData) {
+	makePostRequest: function(recipeData, callback) {
 		var jsonString = JSON.stringify(recipeData);
 		console.log("json string", jsonString);
 		var request = this.request = new XMLHttpRequest();
 		request.open('POST', this.url);
 		request.setRequestHeader('Content-Type', 'application/json');
-		request.addEventListener('load', this.handleResponse.bind(this));
+		request.addEventListener('load', function() {
+			callback(request.responseText);
+		});
 		request.send(jsonString);
 	},
 	handleResponse: function() {
