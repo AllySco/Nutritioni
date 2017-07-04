@@ -16,7 +16,7 @@ var PieChart = function(title, dataLabel, data) {
 		series: [
 			{
 				name: dataLabel,
-				data: data
+				data: data,
 			}
 		]
 	});
