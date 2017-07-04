@@ -1,6 +1,6 @@
 var Canvas = require('../components/canvas');
 var Navigation = require('../components/navigation');
-var RecipeAnalyser = require('./recipe-analyser');
+var RecipeAnalyser = require('./recipe-analyser2');
 var LandingPage = require('./landing-page');
 var FoodJourney = require('./food-journey');
 var StoreLocator = require('./store-locator');
