@@ -13,7 +13,8 @@ var RecipeAnalyser = function() {
   this.newRecipeData = null;
 
   // we will watch these for events
-  this.analyseRecipeButton = null;
+  this.form = null;
+  this.addExtraIngredientButton = null;
   this.saveRecipeButton = null;
   this.clearFormButton = null;
   this.savedRecipesSelect = null;
@@ -50,10 +51,10 @@ RecipeAnalyser.prototype = {
 
     var label = this.createDropdownLabel();
 
-    var select = this.createSelect();
+    this.savedRecipesSelect = this.createSelect();
 
     dropdownContainer.appendChild(label);
-    dropdownContainer.appendChild(select);
+    dropdownContainer.appendChild(this.savedRecipesSelect);
     container.appendChild(dropdownContainer);
 
     return container;
@@ -177,10 +178,10 @@ RecipeAnalyser.prototype = {
 
     var input = this.createInitialIngredientInput();
 
-    var button = this.createAddExtraIngredientButton();
+    this.addExtraIngredientButton = this.createAddExtraIngredientButton();
 
     container.appendChild(input);
-    container.appendChild(button);
+    container.appendChild(this.addExtraIngredientButton);
 
     return container;
   },
@@ -208,13 +209,13 @@ RecipeAnalyser.prototype = {
 
     var input = this.createAnalyseRecipeButton();
 
-    var clearButton = this.createButton('Clear Data');
+    this.clearFormButton = this.createButton('Clear Data');
 
-    var saveButton = this.createButton('Save Recipe');
+    this.saveRecipeButton = this.createButton('Save Recipe');
 
     container.appendChild(input);
-    container.appendChild(clearButton);
-    container.appendChild(saveButton);
+    container.appendChild(this.clearFormButton);
+    container.appendChild(this.saveRecipeButton);
 
     return container;
   },
@@ -253,6 +254,55 @@ RecipeAnalyser.prototype = {
     div.id = id;
 
     return div;
+  },
+
+
+
+  // EVENT HANDLERS
+  setEventListeners: function() {
+    this.form.addEventListener('submit', this.handleSubmit.bind(this));
+    this.addExtraIngredientButton.addEventListener('click', this.)
+    // this.saveRecipeButton = null;
+    // this.clearFormButton = null;
+    // this.savedRecipesSelect = null;
+  },
+
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var ingredients = this.getIngredientsFromInputs();
+
+    var data = {
+      title: this.form['title'].value,
+      ingr: ingredients
+    }
+    this.newRecipeData = data;
+    this.newRecipeData.nutritionalInformation = [];
+    var request = new RecipeRequest();
+    request.makePostRequest(data);
+  },
+
+  handleAddExtraIngredientInputClick: function() {
+    var input = document.createElement('input');
+    input.type = "text";
+    input.classList.add("input-textbox");
+    input.classList.add("extra-ingredient");
+    var container = document.querySelector('#ingredient-inputs');
+    container.insertBefore(input, container.children[container.children.length -1]);
+  },
+
+
+
+  // HELPER FUNCTIONS
+
+  getIngredientsFromInputs: function() {
+    var ingredientInputs = document.querySelectorAll('#ingredient-inputs input');
+    var ingredients = [];
+
+    for (var i = 0; i < ingredientInputs.length; i++) {
+      var ingredient = ingredientInputs[i].value;
+      if (ingredient !== "") ingredients.push(ingredient);
+    }
+    return ingredients;
   }
 
 }
