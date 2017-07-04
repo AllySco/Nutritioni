@@ -26,7 +26,6 @@ StoreLocator.prototype = {
         var zoom = 15
         this.map = new MapWrapper(mapContainer, coords, zoom);
         this.map.geolocate();
-        this.map.addMarker(coords,);
         // this.map.addClickEvent();
         main.appendChild(h1);
         document.body.appendChild(main);
