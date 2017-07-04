@@ -1,4 +1,5 @@
 var ColumnChart = function(title, data, categories) {
+
   var container = document.querySelector("#column-chart");
   var chart = new Highcharts.Chart({
     chart: {
@@ -6,10 +7,18 @@ var ColumnChart = function(title, data, categories) {
       renderTo: container,
       backgroundColor:'transparent'
     },
-    title: { text: title},
+    title: { 
+      text: title,
+      style: {
+        color: '#fff5ee' 
+      }
+    },
     series: data,
     xAxis: {
       categories: categories
+    },
+    legend: {
+      enabled: false
     },
     yAxis: {
             labels: {

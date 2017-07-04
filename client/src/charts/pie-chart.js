@@ -8,7 +8,10 @@ var PieChart = function(title, dataLabel, data) {
 			backgroundColor:'transparent'
 		},
 		title: {
-			text: title
+			text: title,
+			style: {
+			  color: '#fff5ee' 
+			}
 		},
 		series: [
 			{
