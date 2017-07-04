@@ -24,8 +24,13 @@ StoreLocator.prototype = {
     populateMap: function(){
         console.log("populateMap")
         var storeLocatorRequest = new StoreLocatorRequest()
-        storeLocatorRequest.makeGetRequest(function(stores){
-            console.log("Stores", stores)
+        storeLocatorRequest.makeGetRequest(function(responseData){
+            var stores = JSON.parse(responseData);
+            console.log(stores)
+            for (store of stores) {
+                console.log( store.title)
+            }
+
         }.bind(this))
     }
 }

@@ -1,7 +1,7 @@
-var MapWrapper = function(location, cords, zoom) {
+var MapWrapper = function(location, coords, zoom) {
   var container = location;
   this.googleMap = new google.maps.Map(container, {
-    center: cords,
+    center: coords,
     zoom: zoom
   });
 }
