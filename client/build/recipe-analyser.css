@@ -119,6 +119,11 @@ label {
 div#ingredient-inputs {
   display: flex;
   flex-flex: row;
+  flex-wrap: wrap;
+}
+
+div#ingredient-inputs input {
+  margin-bottom: 5px;
 }
 
 

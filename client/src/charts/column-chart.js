@@ -3,7 +3,8 @@ var ColumnChart = function(title, data, categories) {
   var chart = new Highcharts.Chart({
     chart: {
       type: 'column',
-      renderTo: container
+      renderTo: container,
+      backgroundColor:'transparent'
     },
     title: { text: title},
     series: data,

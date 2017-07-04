@@ -5,8 +5,10 @@
 // 3. Callbacks
 // 4. Helper mothods
 
-var RecipeRequest = require('../apis/recipe-analysis-request.js');
+var RecipeAnalysisRequest = require('../apis/recipe-analysis-request.js');
 var SavedRecipesRequest = require('../apis/saved-recipes-request');
+var PieChart = require('../charts/pie-chart');
+var ColumnChart = require('../charts/column-chart');
 
 var RecipeAnalyser = function() {
   // state holders
@@ -292,8 +294,8 @@ RecipeAnalyser.prototype = {
     }
     this.newRecipeData = data;
     this.newRecipeData.nutritionalInformation = [];
-    var request = new RecipeRequest();
-    request.makePostRequest(data);
+    var request = new RecipeAnalysisRequest();
+    request.makePostRequest(data, this.analyseRecipeCallback);
   },
 
   handleAddExtraIngredientInputClick: function() {
@@ -395,12 +397,58 @@ RecipeAnalyser.prototype = {
 
   
 
+  
+
 
 
   // CALLBACKS
   savedRecipesCallback: function() {
     var recipesData = JSON.parse(this.currentRequest.responseText);
     this.populateRecipeDropdown(recipesData);
+  },
+
+  analyseRecipeCallback: function(jsonResponse) {
+    var responseData = JSON.parse(jsonResponse);
+
+    var nutrients = responseData.totalNutrients;
+    var NutrientData = [{ 
+      name: "vitamins",
+      data: [
+        { y: nutrients.CA.quantity , color: 'red' },
+        { y: nutrients.FE.quantity, color: 'blue' },
+        { y: nutrients.K.quantity, color: 'orange' },
+        { y: nutrients.MG.quantity, color: 'purple' },
+        { y: nutrients.P.quantity, color: 'brown' },
+        { y: nutrients.TOCPHA.quantity, color: 'yellow' },
+        { y: nutrients.ZN.quantity, color: 'black' },
+      ]
+    }];
+
+    var NutrientLabels = [ "Calcium", "Iron", "Potassium", "Magnesium", "Phosphorous", "Vitamin E", "Zinc"];
+
+    var pieChartData = [
+      { 
+        name: nutrients.CHOCDF.label,
+        y: nutrients.CHOCDF.quantity,
+        color: 'red'
+      },
+      { 
+        name: nutrients.FAT.label,
+        y: nutrients.FAT.quantity,
+        color: 'green'
+      },
+      { 
+        name: nutrients.PROCNT.label,
+        y: nutrients.PROCNT.quantity,
+        color: 'blue'
+      }
+    ];
+
+
+    new PieChart('Nutrition Info', 'Nutrients', pieChartData);
+    new ColumnChart('Vitamin Info', NutrientData, NutrientLabels);
+
+    
   }
 
   
