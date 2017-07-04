@@ -7,9 +7,9 @@ var MapWrapper = function(location, cords, zoom) {
 }
 
 MapWrapper.prototype = {
-  addMarker: function (cords) {
+  addMarker: function (coords) {
     var marker = new google.maps.Marker({
-      position: cords,
+      position: coords,
       map: this.googleMap
     })
   },
@@ -21,12 +21,15 @@ MapWrapper.prototype = {
    },
 
    geolocate: function() {
-    navigator.geolocation.getCurrrentPosition(function(position) {
+    console.log("geolocation", navigator.geolocation)
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("callback from geo", position)
       var center = {lat: position.coords.latitude, lng: position.coords.longitude};
+      console.log(center)
       this.googleMap.setCenter(center);
       this.addMarker(center);
     }.bind(this));
-   };
+   }
 }
 
 module.exports = MapWrapper;

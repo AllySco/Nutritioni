@@ -11,6 +11,7 @@ var StoreLocator = function() {
     var coords = {lat:51, lng: 5}
     var zoom = 10;
     var mainMap = new MapWrapper(mapContainer, coords, zoom);
+    mainMap.geolocate();
     mainMap.addMarker(coords);
     mainMap.addClickEvent();
     main.appendChild(h1);
