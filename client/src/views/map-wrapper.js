@@ -1,15 +1,16 @@
-var MapWrapper = function(location, cords, zoom) {
+var MapWrapper = function(location, coords, zoom) {
   var container = location;
   this.googleMap = new google.maps.Map(container, {
-    center: cords,
+    center: coords,
     zoom: zoom
   });
+  this.markers = [];
 }
 
 MapWrapper.prototype = {
-  addMarker: function (cords) {
+  addMarker: function (coords) {
     var marker = new google.maps.Marker({
-      position: cords,
+      position: coords,
       map: this.googleMap
     })
   },
@@ -21,3 +22,5 @@ MapWrapper.prototype = {
 
    }
 }
+
+module.exports = MapWrapper;
