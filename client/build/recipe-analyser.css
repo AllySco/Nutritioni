@@ -220,3 +220,8 @@ div#column-chart {
   background-color: var(--container-colors);
   border-radius: var(--border-radius);
 }
+
+.column-chart-y-axis, .column-chart-x-axis {
+  fill: var(--font-color);
+  stroke: var(--font-color);
+}
