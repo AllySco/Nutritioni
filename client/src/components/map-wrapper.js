@@ -36,33 +36,38 @@ MapWrapper.prototype = {
     }.bind(this));
   },
 
-  estimateDistanceRequest: function(storeCoords, callback) {
+  estimateDistanceRequest: function(storeCoords, callback, marker, storeTitle) {
     // console.log("this lat", this.center.lat);
     // console.log("storeCoords", storeCoords.lat);
     var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + this.center.lat + "," + this.center.lng + "8&destinations=" + storeCoords.lat + "," + storeCoords.lng + "&&mode=walking&key=AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ" 
-    console.log("the url", url)
-    var request = new XMLHttpRequest()
-    request.open("GET", url)
+    console.log("this inside estimateDistanceRequest", this)
+    var request = new XMLHttpRequest();
+    request.open("GET", url);
     request.addEventListener('load', function() {
-      callback(request.responseText);
-    })
+      callback(request.responseText, marker, storeTitle);
+    });
     request.send();
   },
 
   addInfoWindows: function(storeCoords, storeTitle ) {
+    storeTitle = storeTitle;
     var marker = this.addMarker(storeCoords, "restaurant.png");
     marker.addListener('click', function() {
+
       console.log('this this', this)
-      this.estimateDistanceRequest(storeCoords, this.estimateTime)
-      var infoWindow = new google.maps.InfoWindow({
-        content: storeTitle
-      });
-      infoWindow.open(this.googleMap, marker);
+      this.estimateDistanceRequest(storeCoords, this.estimateTime.bind(this), marker, storeTitle);
     }.bind(this));
   },
 
-  estimateTime: function(responseText) {
-    console.log("made it to estimateTime!", responseText);
+  estimateTime: function(responseText, marker, storeTitle) {
+    var estimates = JSON.parse(responseText)
+    var distance =  estimates.rows[0].elements[0].distance.text
+    var duration = estimates.rows[0].elements[0].duration.text
+    console.log(this);
+    var infoWindow = new google.maps.InfoWindow({
+      content: '<p>' + storeTitle + '</p><p> ETA: ' + duration +'</p><p> Distance: ' + distance + '</p>' 
+    });
+    infoWindow.open(this.googleMap, marker);
   }
 }
 

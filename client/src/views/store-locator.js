@@ -9,7 +9,7 @@ var StoreLocator = function() {
     this.map = null;
     // ui instantiation
     this.render();
-    
+
     this.populateMap();
     console.log(this.map);
 }
@@ -39,7 +39,7 @@ StoreLocator.prototype = {
             var stores = JSON.parse(responseData);
             // console.log(stores)
             for (store of stores) {
-                this.map.addInfoWindows(store.coords, store.title, )
+                this.map.addInfoWindows(store.coords, store.title )
             }
         }.bind(this))
     }
