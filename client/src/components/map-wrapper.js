@@ -18,8 +18,15 @@ MapWrapper.prototype = {
       var coords = { lat: event.latLng.lat(), lng: event.latLng.lng()}
       this.addMarker(coords)
     }.bind(this));
+   },
 
-   }
+   geolocate: function() {
+    navigator.geolocation.getCurrrentPosition(function(position) {
+      var center = {lat: position.coords.latitude, lng: position.coords.longitude};
+      this.googleMap.setCenter(center);
+      this.addMarker(center);
+    }.bind(this));
+   };
 }
 
 module.exports = MapWrapper;
