@@ -243,11 +243,17 @@ RecipeAnalyser.prototype = {
   createChartContainers: function() {
     var container = this.createDiv('chart-containers');
 
+    var listAndPieContainer = this.createDiv('list-and-pie-container')
+
+    var ingredientsListContainer = this.createDiv('ingredients-list-container');
+
     var pieChartContainer = this.createDiv('pie-chart');
 
     var columnChartContainer = this.createDiv('column-chart');
 
-    container.appendChild(pieChartContainer);
+    container.appendChild(listAndPieContainer)
+    listAndPieContainer.appendChild(ingredientsListContainer);
+    listAndPieContainer.appendChild(pieChartContainer);
     container.appendChild(columnChartContainer);
 
     return container;
