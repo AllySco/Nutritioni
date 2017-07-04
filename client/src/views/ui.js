@@ -12,9 +12,9 @@ var UI = function() {
 UI.prototype = {
 	render: function() {
 		// new Navigation();
-		 // new RecipeAnalyser();
+		 new RecipeAnalyser();
 		// new LandingPage();
-		new StoreLocator();
+		// new StoreLocator();
 	}
 }
 
