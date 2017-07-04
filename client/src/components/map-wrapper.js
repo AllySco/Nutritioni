@@ -1,5 +1,6 @@
 var MapWrapper = function(location, coords, zoom) {
   var container = location;
+  this.iconBase = 'https://maps.google.com/mapfiles/ms/icons/'
   this.googleMap = new google.maps.Map(container, {
     center: coords,
     zoom: zoom
@@ -8,20 +9,22 @@ var MapWrapper = function(location, coords, zoom) {
 }
 
 MapWrapper.prototype = {
-  addMarker: function (coords) {
+  addMarker: function (coords, markerType) {
     var marker = new google.maps.Marker({
       position: coords,
-      map: this.googleMap
+      map: this.googleMap,
+      icon: this.iconBase + markerType
     })
     console.log("this is the map marker", marker)
     return marker
   },
-  addClickEvent: function() {
-    this.googleMap.addListener('click', function(event) {
-      var coords = { lat: event.latLng.lat(), lng: event.latLng.lng()}
-      this.addMarker(coords)
-    }.bind(this));
-  },
+
+  // addClickEvent: function() {
+  //   this.googleMap.addListener('click', function(event) {
+  //     var coords = { lat: event.latLng.lat(), lng: event.latLng.lng()}
+  //     this.addMarker(coords)
+  //   }.bind(this));
+  // },
 
   geolocate: function() {
     console.log("geolocation", navigator.geolocation)
@@ -30,12 +33,12 @@ MapWrapper.prototype = {
       var center = {lat: position.coords.latitude, lng: position.coords.longitude};
       console.log(center)
       this.googleMap.setCenter(center);
-      this.addMarker(center);
+      this.addMarker(center, 'purple.png');
     }.bind(this));
   },
 
   addInfoWindows: function(storeCoords, storeTitle) {
-    var marker = this.addMarker(storeCoords);
+    var marker = this.addMarker(storeCoords, "restaurant.png");
     marker.addListener('click', function() {
       var infoWindow = new google.maps.InfoWindow({
         content: storeTitle

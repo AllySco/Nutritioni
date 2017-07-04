@@ -20,14 +20,14 @@ StoreLocator.prototype = {
         var main = document.createElement('main');
         var mapContainer = document.createElement('div');
         mapContainer.id = "map";
-        mapContainer.width = 500;
-        mapContainer.height = 500;
+        mapContainer.width = 1000;
+        mapContainer.height = 1000;
         var coords = {lat:55, lng: -3}
         var zoom = 15
         this.map = new MapWrapper(mapContainer, coords, zoom);
         this.map.geolocate();
-        this.map.addMarker(coords);
-        this.map.addClickEvent();
+        this.map.addMarker(coords,);
+        // this.map.addClickEvent();
         main.appendChild(h1);
         document.body.appendChild(main);
         main.appendChild(mapContainer);
