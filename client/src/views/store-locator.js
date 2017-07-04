@@ -1,4 +1,6 @@
 var MapWrapper = require('../components/map-wrapper.js');
+var StoreLocatorRequest = require('../apis/store-locator-request.js')
+
 
 var StoreLocator = function() {
     var h1 = document.createElement('h1')
@@ -19,5 +21,15 @@ var StoreLocator = function() {
     main.appendChild(mapContainer);
 }
 StoreLocator.prototype = {
+    populateMap: function(){
+        console.log("populateMap")
+        var storeLocatorRequest = new StoreLocatorRequest()
+        storeLocatorRequest.makeGetRequest(function(stores){
+            console.log("Stores", stores)
+        }.bind(this))
+    }
 }
 module.exports = StoreLocator;
+
+
+// write a render function to tidy

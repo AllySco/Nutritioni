@@ -8,7 +8,7 @@ StoreLocatorRequest.prototype = {
 
   makeGetRequest: function(callback) {
     var request = new XMLHttpRequest()
-    request.open("GET", url)
+    request.open("GET", this.url)
     request.addEventListener('load', function() {
       callback(request.responseText);
     })
@@ -17,19 +17,4 @@ StoreLocatorRequest.prototype = {
 
 }
 
-
-
-
-
-
-
-
-
-makeGetRequest: function(callback) {
-  var request = new XMLHttpRequest()
-  request.open("GET", url)
-  request.addEventListener('load', function() {
-    callback(request.responseText);
-  }) 
-  request.send();
-},
+module.exports = StoreLocatorRequest;
