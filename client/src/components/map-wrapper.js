@@ -37,7 +37,10 @@ MapWrapper.prototype = {
   },
 
   estimateDistanceRequest: function(storeCoords, callback) {
-    var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + this.center.lat + "," + this.center.lng + "8&destinations=" + storeCoords + "&&mode=walking&key=AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ" 
+    // console.log("this lat", this.center.lat);
+    // console.log("storeCoords", storeCoords.lat);
+    var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + this.center.lat + "," + this.center.lng + "8&destinations=" + storeCoords.lat + "," + storeCoords.lng + "&&mode=walking&key=AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ" 
+    console.log("the url", url)
     var request = new XMLHttpRequest()
     request.open("GET", url)
     request.addEventListener('load', function() {
@@ -59,7 +62,7 @@ MapWrapper.prototype = {
   },
 
   estimateTime: function(responseText) {
-    console.log(responseText);
+    console.log("made it to estimateTime!", responseText);
   }
 }
 
