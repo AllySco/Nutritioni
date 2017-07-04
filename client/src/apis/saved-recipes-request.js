@@ -11,6 +11,7 @@ SavedRecipesRequest.prototype = {
     }) 
     request.send();
   },
+
   makePostRequest:  function(recipeData, callback) {
     var jsonString = JSON.stringify(recipeData);
     var request = this.request = new XMLHttpRequest();
@@ -18,7 +19,8 @@ SavedRecipesRequest.prototype = {
     request.setRequestHeader('Content-Type', 'application/json');
     request.addEventListener('load', callback());
     request.send(jsonString);
-    }
+    },
+
   makeDeleteRequest: function(title, callback) {
     var jsonString = JSON.stringify(recipeData);
     var request = this.request = new XMLHttpRequest();

@@ -8,8 +8,8 @@ var StoreLocator = function() {
     mapContainer.id = "map";
     mapContainer.width = 500;
     mapContainer.height = 500;
-    var coords = {lat:51, lng: 5}
-    var zoom = 10;
+    var coords = {lat:55, lng: -3}
+    var zoom = 15;
     var mainMap = new MapWrapper(mapContainer, coords, zoom);
     mainMap.geolocate();
     mainMap.addMarker(coords);
