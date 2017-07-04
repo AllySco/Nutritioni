@@ -1,4 +1,3 @@
-
 var ColumnChart = function(title, data, categories) {
   var container = document.querySelector("#column-chart");
   var chart = new Highcharts.Chart({

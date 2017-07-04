@@ -15,11 +15,13 @@ recipeRouter.get('/', function(req, res) {
 
 // NEW
 recipeRouter.post('/', function(req, res) {
+  console.log("save route hit")
   var newRecipe = new Recipe({
     title: req.body.title,
     ingredients: req.body.ingredients,
     nutritionalInformation: req.body.nutritionalInformation
   });
+  console.log("newRecipe", newRecipe)
   query.add(newRecipe, function(allRecipes) {
     res.json(allRecipes);
   });
