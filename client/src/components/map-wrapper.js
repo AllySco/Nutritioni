@@ -72,5 +72,4 @@ MapWrapper.prototype = {
 }
 
 module.exports = MapWrapper;
-// api key AIzaSyB5tNvq_E_YHSLc_6_Zi_ruLFTdiCrnitQ 
-// current location = 55.9468738, lng: -3.2016112999999997
+

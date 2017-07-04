@@ -1,6 +1,8 @@
 var MapWrapper = require('../components/map-wrapper.js');
 var StoreLocatorRequest = require('../apis/store-locator-request.js')
 
+// make a make map container methof
+
 
 var StoreLocator = function() {
     // state holders
@@ -9,28 +11,32 @@ var StoreLocator = function() {
     this.map = null;
     // ui instantiation
     this.render();
-
     this.populateMap();
     console.log(this.map);
 }
 StoreLocator.prototype = {
+   
     render: function() {
-
-        var h1 = document.createElement('h1')
-        h1.innerHTML = "THIS IS THE STORE LOCATOR PAGE";
+        console.log("made it to render")
         var main = document.createElement('main');
+        var createMapContainer = this.createMapContainer()
+        main.appendChild(createMapContainer);
+        
+        document.body.appendChild(main);
+    },
+
+    createMapContainer: function() {
+        console.log("made it to createMapContainer")
         var mapContainer = document.createElement('div');
         mapContainer.id = "map";
         mapContainer.width = 1000;
         mapContainer.height = 1000;
-        var coords = {lat:55, lng: -3}
-        var zoom = 15
         this.map = new MapWrapper(mapContainer, coords, zoom);
-        this.map.geolocate();
-        // this.map.addClickEvent();
-        main.appendChild(h1);
-        document.body.appendChild(main);
-        main.appendChild(mapContainer);
+        return mapContainer
+
+     
+        // this.map.geolocate();
+
     },
 
     populateMap: function(){
