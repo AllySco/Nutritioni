@@ -104,7 +104,9 @@ createProteinJourneyButton: function() {
   var proteinButton = document.createElement('button')
   proteinButton.id = "button"
   proteinButton.innerText = "PROTEIN"
-  addEventListener('click', this.populateTextBoxProtein.bind(this)) 
+  proteinButton.onclick = function () {
+    this.populateTextBoxProtein()
+  }.bind(this)
   return proteinButton
 },
 
@@ -112,6 +114,9 @@ createCarbsJourneyButton: function () {
   var carbsButton = document.createElement('button')
   carbsButton.id = "button"
   carbsButton.innerText = "CARBS"
+  carbsButton.onclick = function () {
+     console.log("carbs clicked") 
+    }
   return carbsButton
 },
 
@@ -119,15 +124,32 @@ createFatsJourneyButton: function () {
   var fatsButton = document.createElement('button')
   fatsButton.id = "button"
   fatsButton.innerText = "FATS"
+  fatsButton.onclick = function () {
+   console.log("fats clicked") 
+  }
   return fatsButton
 },
 
 // Event Listener methods
+setEventListeners: function() {
+
+},
+
+
+// EVENT DRIVEN ACTIONS
 
 populateTextBoxProtein: function() {
-console.log("hi")
+console.log("hi protein")
 
-}
+},
+
+populateTextBoxFat: function() {
+  console.log("hi fat")
+},
+
+populateTextBoxCarbs: function() {
+  console.log("hi carbs")
+},
 }
 
 module.exports = FoodJourney;
