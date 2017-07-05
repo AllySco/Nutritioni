@@ -20,12 +20,16 @@ LandingPage.prototype = {
 
 		var bodyAndFood = this.createPageInfo('body-and-food', 'YOUR BODY AND FOOD', 'Click to know more!');
 		var bodyBackground = this.createBackground('body-background');
+			bodyBackground.id = 'body-background';
 
 		var recipeAnalyser = this.createPageInfo('recipe-analyser', 'WHAT\'S IN YOUR FOOD', 'Click here to find out!');
+
 		var analyserBackground = this.createBackground('analyser-background');
+		analyserBackground.id = 'analyser-background';
 
 		var storeLocator = this.createPageInfo('store-locator', 'ORGANIC FOOD STORE LOCATOR', 'Find great food near you!');	
 		var storeBackground = this.createBackground('store-background');
+		storeBackground.id = 'store-background';
 
 		main.appendChild(jumbotron);
 		main.appendChild(bodyAndFood);
@@ -95,11 +99,10 @@ LandingPage.prototype = {
 	},
 
 	createBackground: function(id) {
-		var bodyBackground = document.createElement('div');
-		bodyBackground.id = 'body-background';
-		bodyBackground.classList.add('background-image');
+		var background = document.createElement('div');
+		background.classList.add('background-image');
 
-		return bodyBackground;
+		return background;
 	},
 
 	addNavigationLinks: function() {
