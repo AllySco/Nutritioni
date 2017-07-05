@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Spinnaker|Hind+Guntur');
+
+:root {
+  --container-colors: rgba(41, 40, 40, 0.9);
+  --border-radius: 18px;
+  --saved-recipe-container-height: 90px;
+  --font-color: #fff5ee;
+}
+
+main#recipe-analyser {
+  font-family: Spinnaker;
+  width: 100%;
+  height: 100vh;
+  padding: 20px 5%;
+  background-color: red;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  background-image: url('./images/image2.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+
+
+/*saved-recipe select styling*/
+main#recipe-analyser div#saved-recipes {
+  width: 100%;
+  height: var(--saved-recipe-container-height);
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--container-colors);
+  border-radius: var(--border-radius);
+}
+
+main#recipe-analyser div#dropdown-container {
+  width: 320px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main#recipe-analyser div#saved-recipes label {
+  width: 38%;
+  height: var(--saved-recipe-container-height);
+  line-height: var(--saved-recipe-container-height);
+}
+
+main#recipe-analyser div#saved-recipes select#saved-recipes-dropdown {
+  width: 62%;
+  height: 30px;
+  font-size: 0.8em;
+  display: flex;
+  font-family: Spinnaker;
+  border: none;
+  background-color: var(--font-color);
+}
+
+main#recipe-analyser div#saved-recipes select#saved-recipes-dropdown:focus {
+  outline: none;
+}
+
+main#recipe-analyser div#saved-recipes select#saved-recipes-dropdown:hover {
+  cursor: pointer;
+}
+
+main#recipe-analyser div#saved-recipes select#saved-recipes-dropdown option {
+  font-family: Spinnaker;
+}
+
+
+main#recipe-analyser div#main-content {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+
+
+/*form styling*/
+main#recipe-analyser form {
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  padding: 20px;
+  width: 35%;
+  height: 500px;
+  background-color: var(--container-colors);
+}
+
+div#form-input-lines {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  padding: 0px;
+}
+
+div#buttons-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  padding: 0px;
+}
+
+div.form-section {
+  display: flex;
+  flex-flow: column;
+}
+
+label {
+  width: 100%;
+  height: 30px;
+  color: var(--font-color);
+}
+
+div#ingredient-inputs {
+  display: flex;
+  flex-flex: row;
+  flex-wrap: wrap;
+}
+
+div#ingredient-inputs input {
+  margin-bottom: 5px;
+}
+
+
+main#recipe-analyser form input[type=submit],
+main#recipe-analyser form button[type=button] {
+  font-family: Spinnaker;
+  width: 32%;
+  height: 50px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 0;
+  font-size: 0.9em;
+  background-color: var(--font-color); 
+}
+
+main#recipe-analyser form input[type=submit]:focus,
+main#recipe-analyser form button[type=button]:focus {
+  outline: none;
+}
+
+main#recipe-analyser form input[type=submit]:hover,
+main#recipe-analyser form button[type=button]:hover {
+  cursor: pointer;
+}
+
+
+
+main#recipe-analyser form input[type=submit] {
+  white-space: normal;
+}
+
+
+
+div#main-content form div.form-section button#add-extra-ingredient {
+  width: 15%;
+  margin-left: 5px;
+  height: 30px;
+  font-size: 1.5em;
+  line-height: 30px;
+}
+
+main#recipe-analyser input.input-textbox {
+  width: 75%;
+  height: 30px;
+  border-radius: 6px;
+  border: 0;
+  padding: 0 10px;
+  font-size: 0.8em;
+  background-color: var(--font-color);
+}
+
+main#recipe-analyser input.input-textbox:focus {
+  outline: none;
+}
+
+main#recipe-analyser div.title {
+  margin-bottom: 10px;
+}
+
+
+main#recipe-analyser div.title input#title {
+
+}
+
+main#recipe-analyser div.ingredients {
+
+}
+
+main#recipe-analyser div.ingredients input#ingredients {
+  
+}
+
+
+
+/*styling for charts*/
+div#chart-containers {
+  width: 60%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-content: center;
+}
+
+div#list-and-pie-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: row;
+  justify-content: space-around;
+  align-content: center;
+}
+
+div#ingredients-list-container {
+  width: 48%;
+  height: 245px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--container-colors);
+  color: var(--font-color);
+  border-radius: var(--border-radius);
+  font-family: 'Hind Guntur';
+  padding: 20px;
+  
+}
+
+div#recipe-wrapper {
+  display: flex;
+  flex-flow: column;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+#list-title {
+  font-size: 1.5em;
+  line-height: 1em; 
+}
+
+ul {
+  list-style: none;
+}
+
+ul li#list-items { 
+  font-size: 0.8em;
+}
+
+
+div#pie-chart {
+  width: 48%;
+  height: 245px;
+  background-color: var(--container-colors);
+  border-radius: var(--border-radius);
+}
+
+div#column-chart {
+  width: 100%;
+  height: 245px;
+  background-color: var(--container-colors);
+  border-radius: var(--border-radius);
+}
+
+.column-chart-y-axis, .column-chart-x-axis {
+  fill: var(--font-color);
+  stroke: var(--font-color);
+}
