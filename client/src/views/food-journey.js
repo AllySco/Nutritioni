@@ -28,13 +28,14 @@ render: function() {
   var proteinJourneyButton = this.createProteinJourneyButton();
   var carbsJourneyButton = this.createCarbsJourneyButton();
   var fatsJourneyButton = this.createFatsJourneyButton();
-
+  var textBox = this.createTextBox();
 
   infoHeader.appendChild(h2)
   infoContainer.appendChild(infoHeader)
   opacityWrapper.appendChild(canvasWrapper)
   infoContainer.appendChild(opacityWrapper)
 
+  textContainer.appendChild(textBox)
 
   buttonContainer.appendChild(proteinJourneyButton)
   buttonContainer.appendChild(carbsJourneyButton)
@@ -130,6 +131,14 @@ createFatsJourneyButton: function () {
   return fatsButton
 },
 
+createTextBox: function() {
+  var textBox = document.createElement('p')
+  textBox.id = 'pTag'
+  textBox.innerText = "Fuckbags"
+  return textBox
+
+},
+
 // Event Listener methods
 setEventListeners: function() {
 
@@ -139,8 +148,8 @@ setEventListeners: function() {
 // EVENT DRIVEN ACTIONS
 
 populateTextBoxProtein: function() {
-console.log("hi protein")
-
+  // var Text = "Protein is a combination of many different molecules called aminoacides, joined together to make proteins. Protein can be used in the body as a fuel source but also to build tissue in a similar way to fat."
+  // this.addTextBox(Text)
 },
 
 populateTextBoxFat: function() {
