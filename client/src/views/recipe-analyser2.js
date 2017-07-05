@@ -244,11 +244,18 @@ RecipeAnalyser.prototype = {
   createChartContainers: function() {
     var container = this.createDiv('chart-containers');
 
+
+    var listAndPieContainer = this.createDiv('list-and-pie-container')
+
+    var ingredientsListContainer = this.createDiv('ingredients-list-container');
     var pieChartContainer = this.createDiv('pie-chart');
 
     var columnChartContainer = this.createDiv('column-chart');
 
-    container.appendChild(pieChartContainer);
+
+    container.appendChild(listAndPieContainer)
+    listAndPieContainer.appendChild(ingredientsListContainer);
+    listAndPieContainer.appendChild(pieChartContainer);
     container.appendChild(columnChartContainer);
 
     return container;
@@ -359,8 +366,13 @@ RecipeAnalyser.prototype = {
 
   clearAllInputBoxes: function() {
     var inputs = document.querySelectorAll('#ingredient-inputs input');
+
+    var title = document.querySelectorAll('#form-input-lines input');
     for (var i = 0; i < inputs.length; i++) {
       inputs[i].value = "";
+    }
+    for (var i = 0; i < title.length; i++) {
+      title[i].value = "";
     }
   },
 

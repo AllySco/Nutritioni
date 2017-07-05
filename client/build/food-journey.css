@@ -7,16 +7,44 @@
 
 main#food-journey {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 100vh;
   background-image: url("./images/image1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+#button {
+      background-color: #676768;
+      border: none;
+      color: white;
+      width: 100px;
+      padding: 15px 15px;
+      color: #C9C9C9;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 18px;
 
 }
  
+
+div#button-and-text-containers {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 200px;
+  height: 500px;
+  border-radius: 18px;
+}
+
 div#info-container {
   display: flex;
   flex-flow: column;
@@ -29,6 +57,30 @@ div#info-container {
   border-radius: 18px;
 }
 
+div#button-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 175px;
+  height: 35%;
+  background-color: rgba(41, 40, 40, 0.9);
+  border-radius: 18px;
+}
+
+div#text-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 200px;
+  height: 60%;
+  background-color: rgba(41, 40, 40, 0.9);
+  border-radius: 18px;
+}
+
 div#canvas-wrapper {
   width: 400px;
   height: 400px;
@@ -36,10 +88,18 @@ div#canvas-wrapper {
   background-size: 400px;
 }
 
-div#info-header {
+
+div#opacity-wrapper {
+  width: 400px;
+  height: 400px;
+  background-color: black;
+}
+
+div#infoheader {
   width: 400px;
   height: 100px;
 }
+
 
 h2 {
   color: white;

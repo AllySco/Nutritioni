@@ -4,10 +4,24 @@ var PieChart = function(title, dataLabel, data) {
 		chart: {
 			type: 'pie',
 			renderTo: container,
-			animation: false
+			animation: false,
+			backgroundColor:'transparent'
+		},
+		plotOptions: {
+		    pie: {
+		        cursor: 'pointer',
+		        dataLabels: {
+		            enabled: true,
+		            color: '#fff5ee',
+		            style: { fontFamily: '\'Spinnaker\'', lineHeight: '1.3em', fontSize: '1.3em' }
+		        }
+		    }
 		},
 		title: {
-			text: title
+			text: title,
+			style: {
+			  color: '#fff5ee'
+			}
 		},
 		series: [
 			{
