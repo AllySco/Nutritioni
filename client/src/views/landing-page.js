@@ -1,5 +1,11 @@
+var RecipeAnalyser = require('./recipe-analyser2');
+var FoodJourney = require('./food-journey');
+var StoreLocator = require('./store-locator');
+
+
 var LandingPage = function() { 
 	this.render();
+	this.addNavigationLinks();
 }
 
 LandingPage.prototype = {
@@ -91,7 +97,33 @@ LandingPage.prototype = {
 		bodyBackground.classList.add('background-image');
 
 		return bodyBackground;
+	},
+
+	addNavigationLinks: function() {
+		var foodJourneyLink = document.querySelector('#body-and-food .description-snippet');
+		var recipeAnalyserLink = document.querySelector('#recipe-analyser .description-snippet');
+		var storeLocatorLink = document.querySelector('#store-locator .description-snippet');
+
+		foodJourneyLink.addEventListener('click', this.navigateToFoodJourney);
+		recipeAnalyserLink.addEventListener('click', this.navigateToRecipeAnalyser);
+		storeLocatorLink.addEventListener('click', this.navigateToStoreLocator);
+	},
+
+	navigateToStoreLocator: function() {
+		document.querySelector('main').remove();
+		new StoreLocator();
+	},
+
+	navigateToFoodJourney: function() {
+		document.querySelector('main').remove();
+		new FoodJourney();
+	},
+
+	navigateToRecipeAnalyser: function() {
+		document.querySelector('main').remove();
+		new RecipeAnalyser();
 	}
+
 }
 
 module.exports = LandingPage;
