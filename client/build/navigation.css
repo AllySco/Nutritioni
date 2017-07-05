@@ -1,0 +1,42 @@
+header {
+	position: absolute;
+	top: -100px;
+	left: 0;
+	height: 100px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background-color: rgba(41, 40, 40, 0.9);
+	align-items: center;
+	padding: 0 20px;
+	transition: top 0.2s;
+	z-index: 2;
+}
+
+header.visible {
+	top: 0;
+}
+
+header h1#banner {
+	background-color: transparent;
+}
+
+header h1#banner:hover {
+	cursor: pointer;
+}
+
+header ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-around;
+	width: 500px;
+}
+
+header li {
+	list-style: none;
+}
+
+header li:hover {
+	background-color: red;
+	cursor: pointer;
+}
