@@ -11,6 +11,7 @@ SavedRecipesRequest.prototype = {
     }) 
     request.send();
   },
+
   findByTitle: function(title, callback) {
     var request = new XMLHttpRequest();
     request.open("GET", this.url + "title/" + title);
@@ -28,6 +29,7 @@ SavedRecipesRequest.prototype = {
       callback(request.responseText);
     });
     request.send(jsonString);
+
   },
   delete: function(title, callback) {
     var jsonString = JSON.stringify(recipeData);

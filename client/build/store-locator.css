@@ -1,4 +1,48 @@
-#map {
-  height: 300px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+main#store-locator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("./images/image3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+ 
+div#map-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  width: 500px;
+  height: 530px;
+  background-color: rgba(41, 40, 40, 0.9);
+  border-radius: 18px;
+}
+
+div#opacity-wrapper {
   width: 400px;
+  height: 400px;
+  background-color: white;
+}
+
+div#mapheader {
+  width: 400px;
+  height: 100px;
+}
+
+h2 {
+  color: white;
+  font-family: helvetica;
+  text-align: center;
+  font-size: 
 }

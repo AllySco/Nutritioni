@@ -1,61 +1,132 @@
-var LandingPage = function() {
-  
-	var main = document.createElement('main');
 
-	var bgImg1 = document.createElement('div');
-	bgImg1.classList.add('bgimg-1');
-	var flexMainHeader = document.createElement('div');
-	flexMainHeader.classList.add('flex-container-main-header');
-	var h1 = document.createElement('h1');
-	h1.classList.add('top-border');
-	h1.innerText = 'NUTRITIONi';
-	var burger = document.createElement('i');
-	burger.classList.add('burger');
-	flexMainHeader.appendChild(h1);
-	flexMainHeader.appendChild(burger);
-	bgImg1.appendChild(flexMainHeader);
-	var flexBodyMap = document.createElement('div');
-	flexBodyMap.classList.add('flex-container-body-map');
-	var flexHeader = document.createElement('div');
-	flexHeader.classList.add('flex-box-header');
-	flexHeader.innerText = 'YOUR BODY AND FOOD';
-	var bodyP = document.createElement('p');
-	bodyP.innerText = 'click to know more!';
-	flexBodyMap.appendChild(flexHeader);
-	flexBodyMap.appendChild(bodyP);
-	var bgImg2 = document.createElement('div');
-	bgImg2.classList.add('bgimg-2');
-
-	var flexBodyMap2 = document.createElement('div');
-	flexBodyMap2.classList.add('flex-container-body-map');
-	var flexHeader2 = document.createElement('div');
-	flexHeader2.classList.add('flex-box-header');
-	flexHeader2.innerText = 'WHATS IN YOUR FOOD';
-	var bodyP2 = document.createElement('p');
-	bodyP2.innerText = 'click here to find out!';
-	flexBodyMap2.appendChild(flexHeader2);
-	flexBodyMap2.appendChild(bodyP2);
-
-	var bgImg3 = document.createElement('div');
-	bgImg3.classList.add('bgimg-3');
-
-	main.appendChild(bgImg1);
-	main.appendChild(flexBodyMap);
-	main.appendChild(bgImg2);
-	main.appendChild(flexBodyMap2);
-	main.appendChild(bgImg3);
-
-	// document.body.appendChild(bgImg1);
-	// document.body.appendChild(flexBodyMap);
-	// document.body.appendChild(bgImg2);
-	// document.body.appendChild(flexBodyMap2);
-	// document.body.appendChild(bgImg3);
+var RecipeAnalyser = require('./recipe-analyser2');
+var FoodJourney = require('./food-journey');
+var StoreLocator = require('./store-locator');
 
 
-	document.body.appendChild(main);
+var LandingPage = function() { 
+	this.render();
+	this.addNavigationLinks();
+
 }
 
 LandingPage.prototype = {
+	render: function() {
+		var main = document.createElement('main');
+		main.id = 'landing-page';
+
+
+		var jumbotron = this.createJumbotron();
+
+		var bodyAndFood = this.createPageInfo('body-and-food', 'YOUR BODY AND FOOD', 'Click to know more!');
+		var bodyBackground = this.createBackground('body-background');
+
+		var recipeAnalyser = this.createPageInfo('recipe-analyser', 'WHAT\'S IN YOUR FOOD', 'Click here to find out!');
+		var analyserBackground = this.createBackground('analyser-background');
+
+		var storeLocator = this.createPageInfo('store-locator', 'ORGANIC FOOD STORE LOCATOR', 'Find great food near you!');	
+		var storeBackground = this.createBackground('store-background');
+
+		main.appendChild(jumbotron);
+		main.appendChild(bodyAndFood);
+		main.appendChild(bodyBackground);
+		main.appendChild(recipeAnalyser);
+		main.appendChild(analyserBackground);
+		main.appendChild(storeLocator);
+		main.appendChild(storeBackground);
+
+		document.body.appendChild(main);
+	},
+
+	createJumbotron: function() {
+		var jumbotron = document.createElement('div');
+		jumbotron.id = 'jumbotron';
+		jumbotron.classList.add('background-image');
+
+		var jumbotronHeader = this.createJumbotronHeader();
+
+		jumbotron.appendChild(jumbotronHeader);
+
+		return jumbotron;
+	},
+
+	createJumbotronHeader: function() {
+		var jumbotronHeader = document.createElement('div');
+		jumbotronHeader.id = 'jumbotron-header';
+
+		var h1 = document.createElement('h1');
+		h1.innerText = 'NUTRITIONi';
+
+		var burgerIcon = document.createElement('i');
+		burgerIcon.id = 'burger';
+
+		jumbotronHeader.appendChild(h1);
+		jumbotronHeader.appendChild(burgerIcon);
+
+		return jumbotronHeader;
+	},
+
+	createPageInfo: function(id, h2Text, pText) {
+		var container = document.createElement('div');
+		container.id = id;
+		container.classList.add('page-info');
+
+		var descriptionSnippet = this.createDescriptionSnippet(h2Text, pText);
+
+		container.appendChild(descriptionSnippet);
+
+		return container;
+	},
+
+	createDescriptionSnippet: function(h2Text, pText) {
+		var descriptionSnippet = document.createElement('div');
+		descriptionSnippet.classList.add('description-snippet');
+
+		var h1 = document.createElement('h1');
+		h1.innerText = h2Text;
+
+		var p = document.createElement('p');
+		p.innerText = pText;
+
+		descriptionSnippet.appendChild(h1);
+		descriptionSnippet.appendChild(p);
+
+		return descriptionSnippet;
+	},
+
+	createBackground: function(id) {
+		var bodyBackground = document.createElement('div');
+		bodyBackground.id = 'body-background';
+		bodyBackground.classList.add('background-image');
+
+		return bodyBackground;
+	},
+
+	addNavigationLinks: function() {
+		var foodJourneyLink = document.querySelector('#body-and-food .description-snippet');
+		var recipeAnalyserLink = document.querySelector('#recipe-analyser .description-snippet');
+		var storeLocatorLink = document.querySelector('#store-locator .description-snippet');
+
+		foodJourneyLink.addEventListener('click', this.navigateToFoodJourney);
+		recipeAnalyserLink.addEventListener('click', this.navigateToRecipeAnalyser);
+		storeLocatorLink.addEventListener('click', this.navigateToStoreLocator);
+	},
+
+	navigateToStoreLocator: function() {
+		document.querySelector('main').remove();
+		new StoreLocator();
+	},
+
+	navigateToFoodJourney: function() {
+		document.querySelector('main').remove();
+		new FoodJourney();
+	},
+
+	navigateToRecipeAnalyser: function() {
+		document.querySelector('main').remove();
+		new RecipeAnalyser();
+	}
+
 
 }
 

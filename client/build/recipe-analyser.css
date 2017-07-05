@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Spinnaker|Hind+Gunter');
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Spinnaker|Hind+Guntur');
 
 :root {
   --container-colors: rgba(41, 40, 40, 0.9);
@@ -221,11 +221,13 @@ div#ingredients-list-container {
   background-color: var(--container-colors);
   color: var(--font-color);
   border-radius: var(--border-radius);
+  font-family: 'Hind Guntur';
 }
 
 
 #list-title {
   font-size: 2em;
+  line-height: 1em; 
 }
 
 ul {

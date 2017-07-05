@@ -1,0 +1,91 @@
+main#landing-page {
+  width: 100%;
+  height: 100vh;
+}
+
+div.background-image {
+  width: 100%;
+  height: 100vh;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  font-family: Helvetica, arial, sans-serif;
+  color: rgb(41, 40, 40);
+  text-align: center;
+}
+
+div.background-image h2 {
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+
+div.background-image p {
+  
+}
+
+div#jumbotron {
+  background-image: url('./images/image1.jpg');
+}
+
+div.page-info {
+  width: 100%;
+  height: 250px;
+  background-color: rgb(41, 40, 40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Helvetica, arial, sans-serif;
+  text-align: center;
+  color: #fff5ee;
+}
+
+div.page-info h2 {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+div.page-info .description-snippet:hover {
+  cursor: pointer;
+}
+
+div#body-background {
+  background-image: url('./images/image2.jpg');
+}
+
+div#analyser-background {
+  background-image: url('./images/image3.jpg');
+}
+
+div#store-background {
+  background-image: url('./images/image4.jpg');
+}
+
+div#jumbotron-header {
+  display: flex;
+  justify-content: space-around;
+  width: 700px;
+}
+
+div#jumbotron-header h1 {
+  font-family: Helvetica, arial, sans-serif;
+  height: 1.75em;
+  line-height: 1.75em;
+  font-size: 4em;
+  padding: 0 10px;
+  background-color: #292828;
+  letter-spacing: 10px;
+  border-radius: 18px;
+  color: white;
+}
+
+div#jumbotron-header i#burger {
+  content: url('./images/black burger icon.png');
+  height: 110px;
+
+  border-radius: 18px;
+}
+
