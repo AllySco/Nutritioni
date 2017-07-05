@@ -5,9 +5,8 @@
 
 ### Table of Contents
 **[Setting up Nutritioni](#setting-up-nutritioni)**<br>
+**[Code Commentary](#code-commentary)**<br>
 **[Contributors](#contributors)**<br>
-
-
 
 
 ### Setting up Nutritioni
@@ -48,6 +47,23 @@ npm run seeds
 ```
 http://localhost:3001/
 ```
+
+### Code Commentary
+
+The project follows WebPack structure with some notable additions.
+
+| Directory           |  Responsibility               |
+|-------------------- |------------------------------ |
+|  **build/**         |   The *build* directory handles all element that build pages of app like index.html, images and CSS files.   |
+|  **src/apis**       |  The *API* directory handles request to the edaman API and our home-made location API.                             |
+|  **src/charts**     |  The *charts* directory utilises  [highcharts](https://www.highcharts.com/demo/) to analyse our recipe data. |
+|  **src/components** |  The *components* directory incorporates our added functionality like navigation and handling Google Maps|
+|  **src/models**     |  The *models* directory models the data structure that we are using in our databases.                        |
+|   **views/**        |  The *views* directory is responsible for displaying different views on the app.                           |
+|  **controllers/**   |  The *controllers* directory looks after the routing in this app.                                             |
+|  **db**/            |  The *db* directory is responsible for providing seed data and making queries to the database.              |
+
+
 
 ### Contributors
 
