@@ -28,6 +28,7 @@ render: function() {
   var proteinJourneyButton = this.createProteinJourneyButton();
   var carbsJourneyButton = this.createCarbsJourneyButton();
   var fatsJourneyButton = this.createFatsJourneyButton();
+  var textBoxTitle = this.createTextBoxTitle('Title')
   var textBox = this.createTextBox();
 
   infoHeader.appendChild(h2)
@@ -36,6 +37,7 @@ render: function() {
   infoContainer.appendChild(opacityWrapper)
 
   textContainer.appendChild(textBox)
+  textContainer.appendChild(textBoxTitle)
 
   buttonContainer.appendChild(proteinJourneyButton)
   buttonContainer.appendChild(carbsJourneyButton)
@@ -48,6 +50,10 @@ render: function() {
   document.body.appendChild(main)
 
   // var addImageToCanvas = this.addImageToCanvas();
+},
+
+populate: function() {
+
 },
 
 // Page creation Methods 
@@ -106,7 +112,7 @@ createProteinJourneyButton: function() {
   proteinButton.id = "button"
   proteinButton.innerText = "PROTEIN"
   proteinButton.onclick = function () {
-    this.populateTextBoxProtein()
+    this.populateTextBoxProtein("text")
   }.bind(this)
   return proteinButton
 },
@@ -131,12 +137,22 @@ createFatsJourneyButton: function () {
   return fatsButton
 },
 
-createTextBox: function() {
+createTextBoxTitle: function(text) {
+  console.log("createTextBox", this)
+  console.log(text)
+  var textBox = document.createElement('p')
+  textBox.id = 'TextTitle'
+  textBox.innerText = text
+  return textBoxTitle
+},
+
+createTextBox: function(text) {
+  console.log("createTextBox", this)
+  console.log(text)
   var textBox = document.createElement('p')
   textBox.id = 'pTag'
-  textBox.innerText = "Fuckbags"
+  textBox.innerText = text
   return textBox
-
 },
 
 // Event Listener methods
@@ -148,8 +164,10 @@ setEventListeners: function() {
 // EVENT DRIVEN ACTIONS
 
 populateTextBoxProtein: function() {
-  // var Text = "Protein is a combination of many different molecules called aminoacides, joined together to make proteins. Protein can be used in the body as a fuel source but also to build tissue in a similar way to fat."
-  // this.addTextBox(Text)
+  var text = "Protein is a combination of many different molecules called aminoacides, joined together to make proteins. Protein can be used in the body as a fuel source but also to build tissue in a similar way to fat."
+  textBox = document.getElementById('pTag')
+  console.log("this is in my pop method", textBox)
+  textBox.innerText = text
 },
 
 populateTextBoxFat: function() {
