@@ -43,9 +43,9 @@ Draggable.prototype = {
       'translate(' + newCoords.x + 'px, ' + newCoords.y + 'px)';
   },
   setMouseOffset: function(event, boxCoords) {
-    this.mouseOffset.x = event.x - boxCoords.x;
-    this.mouseOffset.y = event.y - boxCoords.y;
-    console.log(this.mouseOffset);
+    this.mouseOffset.x = event.x - boxCoords.x + 70;
+    this.mouseOffset.y = event.y - boxCoords.y + 500;
+    console.log("this is setMouseOffSet", this.mouseOffset);
   },
   correctCoords: function(coords) {
     if (coords.x < this.edges.left) coords.x = this.edges.left;
