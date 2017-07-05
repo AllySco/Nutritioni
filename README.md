@@ -5,12 +5,14 @@
 
 ### Table of Contents
 **[Setting up Nutritioni](#setting-up-nutritioni)**<br>
+**[Contributors](#contributors)**<br>
+
 
 
 
 ### Setting up Nutritioni
 
-Run all the following in your terminal and in the top directory of the project. 
+Run all the following in your terminal and in the top directory of the project.
 
 1. Get all the node modules you need to run the project:
 ```bash
@@ -42,7 +44,16 @@ mongod
 npm run seeds
 ```
 
-7. Open localhost to view the project in your favourite browser. 
+7. Open localhost to view the project in your favourite browser.
 ```
 http://localhost:3001/
 ```
+
+### Contributors
+
+| The crew  |
+|-------------------------------------------------------|
+|  [Ally Gerrie](https://github.com/AllySco)            |
+|  [Eoghan Crowley](https://github.com/eoghanscrowley) |
+|  [Charlie Wood](https://github.com/charliemowood)     |
+|  [Chris Woodall](https://github.com/ChrisPy-RuBy)    |
