@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Spinnaker|Hind+Gunter');
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Spinnaker|Hind+Guntur');
 
 :root {
   --container-colors: rgba(41, 40, 40, 0.9);
@@ -16,9 +16,9 @@ main#recipe-analyser {
   display: flex;
   flex-flow: column;
   justify-content: space-around;
-  background-image: url('./images/image1.jpg');
+  background-image: url('./images/image2.jpg');
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
 }
 
 
@@ -218,9 +218,38 @@ div#list-and-pie-container {
 div#ingredients-list-container {
   width: 48%;
   height: 245px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--container-colors);
+  color: var(--font-color);
   border-radius: var(--border-radius);
+  font-family: 'Hind Guntur';
+  padding: 20px;
+  
 }
+
+div#recipe-wrapper {
+  display: flex;
+  flex-flow: column;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+#list-title {
+  font-size: 1.5em;
+  line-height: 1em; 
+}
+
+ul {
+  list-style: none;
+}
+
+ul li#list-items { 
+  font-size: 0.8em;
+}
+
 
 div#pie-chart {
   width: 48%;
