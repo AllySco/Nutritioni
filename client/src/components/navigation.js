@@ -52,8 +52,8 @@ Navigation.prototype = {
 		this.storeLocatorLink = this.createNavItem('Store Locator');
 		
 		
-		ul.appendChild(this.recipeAnalyserLink);
 		ul.appendChild(this.foodJourneyLink);
+		ul.appendChild(this.recipeAnalyserLink);
 		ul.appendChild(this.storeLocatorLink);
 		nav.appendChild(ul);
 
