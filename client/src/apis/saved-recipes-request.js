@@ -19,7 +19,8 @@ SavedRecipesRequest.prototype = {
     }) 
     request.send();
   },
-  new:  function(recipeData, callback) {
+  new: function(recipeData, callback) {
+    console.log(callback);
     var jsonString = JSON.stringify(recipeData);
     var request = new XMLHttpRequest();
     request.open('POST', this.url);
