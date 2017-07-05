@@ -244,21 +244,32 @@ RecipeAnalyser.prototype = {
   createChartContainers: function() {
     var container = this.createDiv('chart-containers');
 
+    var listAndPieContainer = this.createDiv('list-and-pie-container');
 
-    var listAndPieContainer = this.createDiv('list-and-pie-container')
+    var list = this.createIngredientList();
 
-    var ingredientsListContainer = this.createDiv('ingredients-list-container');
     var pieChartContainer = this.createDiv('pie-chart');
 
     var columnChartContainer = this.createDiv('column-chart');
 
 
     container.appendChild(listAndPieContainer)
-    listAndPieContainer.appendChild(ingredientsListContainer);
+    listAndPieContainer.appendChild(list);
     listAndPieContainer.appendChild(pieChartContainer);
     container.appendChild(columnChartContainer);
 
     return container;
+  },
+
+  createIngredientList: function() {
+    var ingredientsListContainer = this.createDiv('ingredients-list-container');
+
+    var recipeWrapper = document.createElement('div');
+    recipeWrapper.id = 'recipe-wrapper';
+
+    ingredientsListContainer.appendChild(recipeWrapper);
+
+    return ingredientsListContainer;
   },
 
   createDiv: function(id) {
@@ -285,11 +296,11 @@ RecipeAnalyser.prototype = {
 
     this.addExtraIngredientButton.addEventListener('click', this.handleAddExtraIngredientInputClick);
 
-    this.saveRecipeButton.addEventListener('click', this.handleSaveClick);
+    this.saveRecipeButton.addEventListener('click', this.handleSaveClick.bind(this));
 
     this.clearFormButton.addEventListener('click', this.handleClearDataClick.bind(this));
 
-    this.savedRecipesSelect.addEventListener('change', this.handleDropdown)
+    this.savedRecipesSelect.addEventListener('change', this.handleDropdown.bind(this));
   },
 
   handleSubmit: function(event) {
@@ -315,14 +326,10 @@ RecipeAnalyser.prototype = {
     container.insertBefore(input, container.children[container.children.length -1]);
   },
 
-  handleSaveClick: function() {
-    var url = "http://localhost:3001/api/recipes";
-    var request = new XMLHttpRequest();
-    request.open("POST", url);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.addEventListener('load', this.saveCallback);
-    var jsonString = JSON.stringify(this.newRecipeData);
-    request.send(jsonString);
+  handleSaveClick: function(recipeData) {
+    var recipeData = this.newRecipeData;
+    var request = new SavedRecipesRequest();
+    request.new(recipeData, this.saveClickCallback.bind(this));
   },
 
   handleClearDataClick: function() {
@@ -336,14 +343,19 @@ RecipeAnalyser.prototype = {
     this.clearRecipeInformation();   
   },
 
-  handleDropdown: function() {
-
+  handleDropdown: function(event) {
+    this.findRecipeByTitle(event.target.selectedOptions[0].value);
   },
 
 
 
 
   // HELPER FUNCTIONS
+
+  findRecipeByTitle: function(title) {
+    var request = new SavedRecipesRequest();
+    request.findByTitle(title, this.findRecipeByTitleCallback.bind(this));
+  },
 
   getIngredientsFromInputs: function() {
     var ingredientInputs = document.querySelectorAll('#ingredient-inputs input');
@@ -362,6 +374,13 @@ RecipeAnalyser.prototype = {
 
     var columnChart = document.getElementById('column-chart');
     columnChart.innerText = "";
+  },
+
+  clearDropdown: function() {
+    var options = document.querySelectorAll('option');
+    for (var i = 0; i < options.length; i++) {
+      options[i].remove();
+    }
   },
 
   clearAllInputBoxes: function() {
@@ -405,7 +424,7 @@ RecipeAnalyser.prototype = {
 
   retrieveSavedRecipes: function() {
     var request = new SavedRecipesRequest();
-    this.currentRequest = request.makeGetRequest(this.savedRecipesCallback.bind(this));
+    request.all(this.savedRecipesCallback.bind(this));
   },
 
   
@@ -413,11 +432,41 @@ RecipeAnalyser.prototype = {
   
 
 
-
   // CALLBACKS
-  savedRecipesCallback: function() {
-    var recipesData = JSON.parse(this.currentRequest.responseText);
+  savedRecipesCallback: function(responseText) {
+    var recipesData = JSON.parse(responseText);
     this.populateRecipeDropdown(recipesData);
+  },
+
+  saveClickCallback: function(recipeData) {
+
+    this.clearDropdown();
+    this.savedRecipesCallback(recipeData);
+  },
+
+  findRecipeByTitleCallback: function(jsonString) {
+    var recipeData = JSON.parse(jsonString)[0];
+    console.log(recipeData);
+
+    var listTitle = document.querySelector('#list-title');
+    if (listTitle) listTitle.remove();
+    var listTitle = document.createElement('h3');
+    listTitle.id = 'list-title';
+    listTitle.innerText = recipeData.title;
+
+    var ul = document.querySelector('#unordered-list');
+    if (ul) ul.remove();
+    var ul = document.createElement('ul');
+    ul.id = 'unordered-list'
+    var listContainer = document.querySelector('#recipe-wrapper');
+    listContainer.appendChild(listTitle);
+    listContainer.appendChild(ul);
+    for (var ingredient of recipeData.ingredients) {
+      var li = document.createElement('li');
+      li.innerText = ingredient;
+      li.id = 'list-items'
+      ul.appendChild(li);
+    }
   },
 
   analyseRecipeCallback: function(jsonResponse) {
@@ -457,14 +506,10 @@ RecipeAnalyser.prototype = {
       }
     ];
 
-
     new PieChart('Nutrition Info', 'Nutrients', pieChartData);
     new ColumnChart('Vitamin Info', NutrientData, NutrientLabels);
 
-    
   }
-
-  
 
 }
 
