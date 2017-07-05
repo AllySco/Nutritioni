@@ -22,6 +22,7 @@ var RecipeAnalyser = function() {
   this.saveRecipeButton = null;
   this.clearFormButton = null;
   this.savedRecipesSelect = null;
+  this.deleteButton = null;
 
   // create ui
   this.render();
@@ -195,6 +196,7 @@ RecipeAnalyser.prototype = {
     var input = document.createElement('input');
     input.id = 'ingredients';
     input.classList.add('input-textbox');
+    input.classList.add('ingredient-input');
     input.type = 'text';
 
     return input;
@@ -264,11 +266,6 @@ RecipeAnalyser.prototype = {
   createIngredientList: function() {
     var ingredientsListContainer = this.createDiv('ingredients-list-container');
 
-    var recipeWrapper = document.createElement('div');
-    recipeWrapper.id = 'recipe-wrapper';
-
-    ingredientsListContainer.appendChild(recipeWrapper);
-
     return ingredientsListContainer;
   },
 
@@ -286,6 +283,52 @@ RecipeAnalyser.prototype = {
     option.selected = true;
 
     return option;
+  },
+
+  createDeleteButton: function() {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.id = 'delete-button';
+    button.innerText = 'Delete Recipe';
+
+    return button;
+  },
+
+  createSavedRecipeInfo: function(recipeData) {
+    var recipeWrapper = document.createElement('div');
+    recipeWrapper.id = 'recipe-wrapper';
+
+    var listTitle = document.createElement('h3');
+    listTitle.id = 'list-title';
+    listTitle.innerText = recipeData.title;
+
+    var ul = this.createSavedRecipeIngredientsList(recipeData);
+
+    
+
+    var deleteButton = this.createDeleteButton();
+    deleteButton.addEventListener('click', this.handleDelete.bind(this));
+
+    recipeWrapper.appendChild(listTitle);
+    recipeWrapper.appendChild(ul);
+    recipeWrapper.appendChild(deleteButton);
+
+    return recipeWrapper;
+
+  },
+
+  createSavedRecipeIngredientsList: function(recipeData) {
+    var ul = document.createElement('ul');
+    ul.id = 'unordered-list';
+
+    for (var ingredient of recipeData.ingredients) {
+      var li = document.createElement('li');
+      li.innerText = ingredient;
+      li.id = 'list-items';
+      ul.appendChild(li);
+    }
+
+    return ul;
   },
 
 
@@ -322,14 +365,28 @@ RecipeAnalyser.prototype = {
     input.type = "text";
     input.classList.add("input-textbox");
     input.classList.add("extra-ingredient");
+    input.classList.add("ingredient-input");
     var container = document.querySelector('#ingredient-inputs');
     container.insertBefore(input, container.children[container.children.length -1]);
   },
 
-  handleSaveClick: function(recipeData) {
-    var recipeData = this.newRecipeData;
+  handleSaveClick: function() {
+    var title = document.querySelector('#title').value;
+    var ingredientInputs = document.querySelectorAll('.ingredient-input');
+
+    var ingredients = []
+    for (var i = 0; i < ingredientInputs.length; i++) {
+      ingredients.push(ingredientInputs[i].value);
+    }
+
+    var newRecipe = {
+      title: title,
+      ingredients: ingredients
+    }
+    console.log(newRecipe);
+
     var request = new SavedRecipesRequest();
-    request.new(recipeData, this.saveClickCallback.bind(this));
+    request.new(newRecipe, this.saveClickCallback.bind(this));
   },
 
   handleClearDataClick: function() {
@@ -344,7 +401,14 @@ RecipeAnalyser.prototype = {
   },
 
   handleDropdown: function(event) {
+    this.selectedRecipe = event.target.selectedOptions[0].value;
     this.findRecipeByTitle(event.target.selectedOptions[0].value);
+  },
+
+  handleDelete: function() {
+    var request = new SavedRecipesRequest();
+    console.log(this.selectedRecipe);
+    request.delete(this.selectedRecipe, this.deleteCallback.bind(this));
   },
 
 
@@ -402,11 +466,18 @@ RecipeAnalyser.prototype = {
     }
   },
 
-  clearRecipeInformation: function() {
+  resetSelect: function() {
     var select = document.querySelector('select');
     select.value = 'Recipes';
-    var ul = document.querySelector('ul');
-    ul.innerText = "";  
+  },
+
+  clearRecipeInformation: function() {   
+    var listTitle = document.querySelector('#list-title');
+    if (listTitle) listTitle.remove();
+    var deleteButton = document.querySelector('#delete-button');
+    if (deleteButton) deleteButton.remove();
+    var ul = document.querySelector('#ingredients-list-container ul');
+    if (ul) ul.remove();
   },
 
   populateRecipeDropdown: function(recipesData) {
@@ -433,40 +504,31 @@ RecipeAnalyser.prototype = {
 
 
   // CALLBACKS
-  savedRecipesCallback: function(responseText) {
-    var recipesData = JSON.parse(responseText);
+  savedRecipesCallback: function(jsonString) {
+    var recipesData = JSON.parse(jsonString);
     this.populateRecipeDropdown(recipesData);
   },
 
-  saveClickCallback: function(recipeData) {
-
+  saveClickCallback: function(jsonString) {
     this.clearDropdown();
-    this.savedRecipesCallback(recipeData);
+    this.savedRecipesCallback(jsonString);
   },
 
   findRecipeByTitleCallback: function(jsonString) {
     var recipeData = JSON.parse(jsonString)[0];
     console.log(recipeData);
 
-    var listTitle = document.querySelector('#list-title');
-    if (listTitle) listTitle.remove();
-    var listTitle = document.createElement('h3');
-    listTitle.id = 'list-title';
-    listTitle.innerText = recipeData.title;
+    var listContainer = this.createSavedRecipeInfo(recipeData);
+    
+    document.querySelector('#ingredients-list-container').append(listContainer);
+    
+  },
 
-    var ul = document.querySelector('#unordered-list');
-    if (ul) ul.remove();
-    var ul = document.createElement('ul');
-    ul.id = 'unordered-list'
-    var listContainer = document.querySelector('#recipe-wrapper');
-    listContainer.appendChild(listTitle);
-    listContainer.appendChild(ul);
-    for (var ingredient of recipeData.ingredients) {
-      var li = document.createElement('li');
-      li.innerText = ingredient;
-      li.id = 'list-items'
-      ul.appendChild(li);
-    }
+  deleteCallback: function(jsonString) {
+    var recipeData = JSON.parse(jsonString);
+    this.clearDropdown();
+    this.populateRecipeDropdown(recipeData);
+    document.querySelector('#recipe-wrapper').remove();
   },
 
   analyseRecipeCallback: function(jsonResponse) {

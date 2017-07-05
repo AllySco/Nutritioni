@@ -32,7 +32,6 @@ SavedRecipesRequest.prototype = {
 
   },
   delete: function(title, callback) {
-    var jsonString = JSON.stringify(recipeData);
     var request = new XMLHttpRequest();
     request.open("DELETE", this.url + "title/" + title + "/delete"  ) 
     request.setRequestHeader('Content-Type', 'application/json');

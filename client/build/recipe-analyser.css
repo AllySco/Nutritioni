@@ -94,8 +94,9 @@ main#recipe-analyser form {
 div#form-input-lines {
   display: flex;
   flex-flow: column;
-  justify-content: space-around;
   padding: 0px;
+  height: 400px;
+  overflow-y: scroll;
 }
 
 div#buttons-container {
