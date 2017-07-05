@@ -243,7 +243,7 @@ RecipeAnalyser.prototype = {
   createChartContainers: function() {
     var container = this.createDiv('chart-containers');
 
-    var listAndPieContainer = this.createDiv('list-and-pie-container')
+    var listAndPieContainer = this.createDiv('list-and-pie-container');
 
     var list = this.createIngredientList();
 
@@ -447,19 +447,24 @@ RecipeAnalyser.prototype = {
   findRecipeByTitleCallback: function(jsonString) {
     var recipeData = JSON.parse(jsonString)[0];
     console.log(recipeData);
+
+    var listTitle = document.querySelector('#list-title');
+    if (listTitle) listTitle.remove();
     var listTitle = document.createElement('h3');
     listTitle.id = 'list-title';
     listTitle.innerText = recipeData.title;
 
-    var ul = document.querySelector('ul');
+    var ul = document.querySelector('#unordered-list');
     if (ul) ul.remove();
     var ul = document.createElement('ul');
+    ul.id = 'unordered-list'
     var listContainer = document.querySelector('#ingredients-list-container');
     listContainer.appendChild(listTitle);
-    listTitle.appendChild(ul);
+    listContainer.appendChild(ul);
     for (var ingredient of recipeData.ingredients) {
       var li = document.createElement('li');
       li.innerText = ingredient;
+      li.id = 'list-items'
       ul.appendChild(li);
     }
   },

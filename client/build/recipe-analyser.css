@@ -223,9 +223,19 @@ div#ingredients-list-container {
   border-radius: var(--border-radius);
 }
 
-#list-title {
 
+#list-title {
+  font-size: 2em;
 }
+
+ul {
+  list-style: none;
+}
+
+ul li#list-items { 
+  font-size: 1em;
+}
+
 
 div#pie-chart {
   width: 48%;
