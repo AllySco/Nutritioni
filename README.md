@@ -75,4 +75,4 @@ The project follows WebPack structure with some notable additions.
 |  [Chris Woodall](https://github.com/ChrisPy-RuBy)    |
 
 
-If you want to contribute to this project see [CONTRIBUTE.md](https://github.com/eoghanscrowley/Nutritioni/CONTRIBUTE.md)
+If you want to contribute to this project see [CONTRIBUTE.md](https://github.com/eoghanscrowley/Nutritioni/blob/master/CONTRIBUTE.md)
