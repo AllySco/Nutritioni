@@ -283,7 +283,7 @@ RecipeAnalyser.prototype = {
 
     this.addExtraIngredientButton.addEventListener('click', this.handleAddExtraIngredientInputClick);
 
-    this.saveRecipeButton.addEventListener('click', this.handleSaveClick);
+    this.saveRecipeButton.addEventListener('click', this.handleSaveClick.bind(this));
 
     this.clearFormButton.addEventListener('click', this.handleClearDataClick.bind(this));
 
@@ -313,14 +313,10 @@ RecipeAnalyser.prototype = {
     container.insertBefore(input, container.children[container.children.length -1]);
   },
 
-  handleSaveClick: function() {
-    var url = "http://localhost:3001/api/recipes";
-    var request = new XMLHttpRequest();
-    request.open("POST", url);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.addEventListener('load', this.saveCallback);
-    var jsonString = JSON.stringify(this.newRecipeData);
-    request.send(jsonString);
+  handleSaveClick: function(recipeData) {
+    var recipeData = this.newRecipeData;
+    var request = new SavedRecipesRequest();
+    request.new(recipeData, this.saveClickCallback.bind(this));
   },
 
   handleClearDataClick: function() {
@@ -360,6 +356,13 @@ RecipeAnalyser.prototype = {
 
     var columnChart = document.getElementById('column-chart');
     columnChart.innerText = "";
+  },
+
+  clearDropdown: function() {
+    var options = document.querySelectorAll('option');
+    for (var i = 0; i < options.length; i++) {
+      options[i].remove();
+    }
   },
 
   clearAllInputBoxes: function() {
@@ -402,7 +405,7 @@ RecipeAnalyser.prototype = {
 
   retrieveSavedRecipes: function() {
     var request = new SavedRecipesRequest();
-    this.currentRequest = request.makeGetRequest(this.savedRecipesCallback.bind(this));
+    request.all(this.savedRecipesCallback.bind(this));
   },
 
   
@@ -410,11 +413,16 @@ RecipeAnalyser.prototype = {
   
 
 
-
   // CALLBACKS
-  savedRecipesCallback: function() {
-    var recipesData = JSON.parse(this.currentRequest.responseText);
+  savedRecipesCallback: function(responseText) {
+    var recipesData = JSON.parse(responseText);
     this.populateRecipeDropdown(recipesData);
+  },
+
+  saveClickCallback: function(recipeData) {
+
+    this.clearDropdown();
+    this.savedRecipesCallback(recipeData);
   },
 
   analyseRecipeCallback: function(jsonResponse) {
