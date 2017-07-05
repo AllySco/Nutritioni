@@ -2,7 +2,6 @@ var FoodJourney = function() {
 	
   this.render();
 
-  document.getElementById('#button').addEventLister("click", console.log("clicked") )
 }
 
 FoodJourney.prototype = {
@@ -105,6 +104,7 @@ createProteinJourneyButton: function() {
   var proteinButton = document.createElement('button')
   proteinButton.id = "button"
   proteinButton.innerText = "PROTEIN"
+  addEventListener('click', this.populateTextBoxProtein.bind(this)) 
   return proteinButton
 },
 
@@ -125,7 +125,7 @@ createFatsJourneyButton: function () {
 // Event Listener methods
 
 populateTextBoxProtein: function() {
-
+console.log("hi")
 
 }
 }
