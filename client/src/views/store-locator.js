@@ -17,26 +17,48 @@ var StoreLocator = function() {
 StoreLocator.prototype = {
 
     render: function() {
-        console.log("made it to render")
         var main = document.createElement('main');
-        var createMapContainer = this.createMapContainer()
-        main.appendChild(createMapContainer);
-        
+        main.id = "store-locator";
+
+        var mapContainer = this.createMapContainer();
+
+        var mapHeader = this.createMapHeader();
+
+
+        var h2 = document.createElement('h2');
+        h2.innerText = "GOOD FOOD NEAR YOU";
+
+        var opacityWrapper = document.createElement('div');
+        opacityWrapper.id = "opacity-wrapper";
+
+        mapHeader.appendChild(h2);
+        mapContainer.appendChild(mapHeader);
+        mapContainer.appendChild(opacityWrapper);
+        main.appendChild(mapContainer);
         document.body.appendChild(main);
+        
+        var map = this.createMap();
     },
 
     createMapContainer: function() {
-        console.log("made it to createMapContainer")
         var mapContainer = document.createElement('div');
-        mapContainer.id = "map";
-        mapContainer.width = 1000;
-        mapContainer.height = 1000;
+        mapContainer.id = "map-container";
+        return mapContainer;
+    },
+
+    createMapHeader: function() {
+        var mapHeader = document.createElement('div');
+        mapHeader.id = "map-header";
+        return mapHeader
+    },
+    
+
+    createMap: function() {
+        var opacityWrapper = document.getElementById('opacity-wrapper');
         var coords = { lat: 55.954276, lng: -3.197960};
         var zoom = 15;      
-        this.map = new MapWrapper(mapContainer, coords, zoom);
+        this.map = new MapWrapper(opacityWrapper, coords, zoom);
         this.map.geolocate();
-        return mapContainer
-
     },
 
     populateMap: function(){
