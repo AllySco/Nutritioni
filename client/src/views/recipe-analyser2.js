@@ -243,11 +243,17 @@ RecipeAnalyser.prototype = {
   createChartContainers: function() {
     var container = this.createDiv('chart-containers');
 
+    var listAndPieContainer = this.createDiv('list-and-pie-container')
+
+    var ingredientsListContainer = this.createDiv('ingredients-list-container');
+
     var pieChartContainer = this.createDiv('pie-chart');
 
     var columnChartContainer = this.createDiv('column-chart');
 
-    container.appendChild(pieChartContainer);
+    container.appendChild(listAndPieContainer)
+    listAndPieContainer.appendChild(ingredientsListContainer);
+    listAndPieContainer.appendChild(pieChartContainer);
     container.appendChild(columnChartContainer);
 
     return container;
@@ -358,8 +364,12 @@ RecipeAnalyser.prototype = {
 
   clearAllInputBoxes: function() {
     var inputs = document.querySelectorAll('#ingredient-inputs input');
+    var title = document.querySelectorAll('#form-input-lines input');
     for (var i = 0; i < inputs.length; i++) {
       inputs[i].value = "";
+    }
+    for (var i = 0; i < title.length; i++) {
+      title[i].value = "";
     }
   },
 
@@ -414,34 +424,34 @@ RecipeAnalyser.prototype = {
     var NutrientData = [{ 
       name: "vitamins",
       data: [
-        { y: nutrients.CA.quantity , color: 'red' },
-        { y: nutrients.FE.quantity, color: 'blue' },
-        { y: nutrients.K.quantity, color: 'orange' },
-        { y: nutrients.MG.quantity, color: 'purple' },
-        { y: nutrients.P.quantity, color: 'brown' },
-        { y: nutrients.TOCPHA.quantity, color: 'yellow' },
-        { y: nutrients.ZN.quantity, color: 'black' },
+      { y: nutrients.CA.quantity , color: 'red' },
+      { y: nutrients.FE.quantity, color: 'blue' },
+      { y: nutrients.K.quantity, color: 'orange' },
+      { y: nutrients.MG.quantity, color: 'purple' },
+      { y: nutrients.P.quantity, color: 'brown' },
+      { y: nutrients.TOCPHA.quantity, color: 'yellow' },
+      { y: nutrients.ZN.quantity, color: 'black' },
       ]
     }];
 
     var NutrientLabels = [ "Calcium", "Iron", "Potassium", "Magnesium", "Phosphorous", "Vitamin E", "Zinc"];
 
     var pieChartData = [
-      { 
-        name: nutrients.CHOCDF.label,
-        y: nutrients.CHOCDF.quantity,
-        color: 'red'
-      },
-      { 
-        name: nutrients.FAT.label,
-        y: nutrients.FAT.quantity,
-        color: 'green'
-      },
-      { 
-        name: nutrients.PROCNT.label,
-        y: nutrients.PROCNT.quantity,
-        color: 'blue'
-      }
+    { 
+      name: nutrients.CHOCDF.label,
+      y: nutrients.CHOCDF.quantity,
+      color: 'red'
+    },
+    { 
+      name: nutrients.FAT.label,
+      y: nutrients.FAT.quantity,
+      color: 'green'
+    },
+    { 
+      name: nutrients.PROCNT.label,
+      y: nutrients.PROCNT.quantity,
+      color: 'blue'
+    }
     ];
 
 
