@@ -114,7 +114,7 @@ createProteinJourneyButton: function() {
   proteinButton.id = "button"
   proteinButton.innerText = "PROTEIN"
   proteinButton.onclick = function () {
-    this.populateTextBoxProtein("text")
+    this.populateTextBoxProtein()
   }.bind(this)
   return proteinButton
 },
@@ -124,9 +124,9 @@ createCarbsJourneyButton: function () {
   carbsButton.id = "button"
   carbsButton.innerText = "CARBS"
   carbsButton.onclick = function () {
-   console.log("carbs clicked") 
- }
- return carbsButton
+    this.populateTextBoxCarbs() 
+  }.bind(this)
+  return carbsButton
 },
 
 createFatsJourneyButton: function () {
@@ -134,14 +134,12 @@ createFatsJourneyButton: function () {
   fatsButton.id = "button"
   fatsButton.innerText = "FATS"
   fatsButton.onclick = function () {
-   console.log("fats clicked") 
- }
+   this.populateTextBoxFat()  
+ }.bind(this)
  return fatsButton
 },
 
 createTextBoxTitle: function(text) {
-  console.log("createTextBox", this)
-  console.log(text)
   var textBoxTitle = document.createElement('p')
   textBoxTitle.id = 'text-title'
   textBoxTitle.innerText = text
@@ -166,31 +164,74 @@ setEventListeners: function() {
 // EVENT DRIVEN ACTIONS
 
 populateTextBoxProtein: function() {
-  var text = "Protein is a combination of many different molecules called aminoacides, joined together to make proteins. Protein can be used in the body as a fuel source but also to build tissue in a similar way to fat.";
-  var textBox = document.getElementById('pTag');
-  console.log("this is in my pop method", textBox);
-  textBox.innerText = text
+  var text = "Protein is a combination of many different molecules called aminoacids. These join together to make proteins. Protein can be used in the body as a fuel source but also to build tissue in a similar way to fat.";
   var textBoxContainer = document.getElementById('text-container')
+  textBoxContainer.innerHTML = ""
+  var textTitle = document.createElement('p')
+  var textBox = document.createElement('pTag');
+  textBox.id = 'pTag'
+  textTitle.id = 'text-title'
+  textBoxContainer.appendChild(textTitle)
+  textBoxContainer.appendChild(textBox)
+  textTitle.innerText = "INFO"
+  textBox.innerText = text
+  this.textBoxContainer = document.createElement('text-container')
   this.img = document.createElement('img')
   this.img.src = "../images/drumstick.png"
-  this.img.width = 70;
-  this.img.height = 50;
+  this.img.width = 80;
+  this.img.height = 60;
   this.img.id = 'drumstick';
   textBoxContainer.appendChild(this.img);
   var canvas = document.querySelector('#canvas-wrapper')
   new Draggable(this.img, canvas, [{ top: 50, left: 100 }]);
 },
 
-populateTextBoxFat: function() {
-  console.log("hi fat")
-},
-
 populateTextBoxCarbs: function() {
-  console.log("hi carbs")
+  var text = "A carbohydrate is form of sugar. Sugar or glucose is one of the simplest forms of carbohydrate. Starch, like in a potatoe or pasta is one of most complex froms of carbohydrate, made from long chains of glucose molecules"
+  var textBoxContainer = document.getElementById('text-container')
+  textBoxContainer.innerHTML = ""
+  var textTitle = document.createElement('p')
+  var textBox = document.createElement('pTag');
+  textBox.id = 'pTag'
+  textTitle.id = 'text-title'
+  textBoxContainer.appendChild(textTitle)
+  textBoxContainer.appendChild(textBox)
+  textTitle.innerText = "INFO"
+  textBox.innerText = text
+  this.textBoxContainer = document.createElement('text-container')
+  this.img = document.createElement('img')
+  this.img.src = "../images/frenchfried1.png"
+  this.img.width = 80;
+  this.img.height = 80;
+  this.img.id = 'frenchfried';
+  textBoxContainer.appendChild(this.img);
+  var canvas = document.querySelector('#canvas-wrapper')
+  new Draggable(this.img, canvas, [{ top: 50, left: 100 }]);
 },
 
+populateTextBoxFat: function() {
 
-
+  var text = "Fat is the combinatation of two types of molecules, a type of alcohol called glycerol and fatty acids. These join together to make a molecule called triacylglycerol. It is the only macronutrient that is essential to life"
+  var textBoxContainer = document.getElementById('text-container')
+  textBoxContainer.innerHTML = ""
+  var textTitle = document.createElement('p')
+  var textBox = document.createElement('pTag');
+  textBox.id = 'pTag'
+  textTitle.id = 'text-title'
+  textBoxContainer.appendChild(textTitle)
+  textBoxContainer.appendChild(textBox)
+  textTitle.innerText = "INFO"
+  textBox.innerText = text
+  this.textBoxContainer = document.createElement('text-container')
+  this.img = document.createElement('img')
+  this.img.src = "../images/cheese1.png"
+  this.img.width = 80;
+  this.img.height = 60;
+  this.img.id = 'cheese';
+  textBoxContainer.appendChild(this.img);
+  var canvas = document.querySelector('#canvas-wrapper')
+  new Draggable(this.img, canvas, [{ top: 50, left: 100 }]);
+},
 
 }
 

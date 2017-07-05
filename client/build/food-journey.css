@@ -126,8 +126,8 @@ h3 {
 }
 
 #text-title {
-  color: grey;
-  font-family: helvetica;
+  color: #cfcfd1;
+  font-family: Spinnaker;
   text-align: center;
   padding-bottom: 5px;
   font-size:
@@ -138,6 +138,18 @@ h3 {
   font-family: helvetica;
   text-align: center;
   font-size:
+}
+
+#drumstick {
+  margin: 15px;
+}
+
+#frenchfried {
+  margin: 15px;
+}
+
+#cheese {
+  margin: 15px;
 }
 
 .draggable {
