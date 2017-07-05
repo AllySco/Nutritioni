@@ -218,15 +218,27 @@ div#list-and-pie-container {
 div#ingredients-list-container {
   width: 48%;
   height: 245px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--container-colors);
   color: var(--font-color);
   border-radius: var(--border-radius);
   font-family: 'Hind Guntur';
+  padding: 20px;
+  
 }
 
+div#recipe-wrapper {
+  display: flex;
+  flex-flow: column;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
 
 #list-title {
-  font-size: 2em;
+  font-size: 1.5em;
   line-height: 1em; 
 }
 
@@ -235,7 +247,7 @@ ul {
 }
 
 ul li#list-items { 
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 

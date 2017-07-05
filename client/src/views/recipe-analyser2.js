@@ -264,9 +264,10 @@ RecipeAnalyser.prototype = {
   createIngredientList: function() {
     var ingredientsListContainer = this.createDiv('ingredients-list-container');
 
-    var ul = document.createElement('ul');
+    var recipeWrapper = document.createElement('div');
+    recipeWrapper.id = 'recipe-wrapper';
 
-    ingredientsListContainer.appendChild(ul);
+    ingredientsListContainer.appendChild(recipeWrapper);
 
     return ingredientsListContainer;
   },
@@ -343,7 +344,6 @@ RecipeAnalyser.prototype = {
   },
 
   handleDropdown: function(event) {
-    console.log("HANDLING DROPDOWN", event.target.selectedOptions[0].value)
     this.findRecipeByTitle(event.target.selectedOptions[0].value);
   },
 
@@ -354,10 +354,7 @@ RecipeAnalyser.prototype = {
 
   findRecipeByTitle: function(title) {
     var request = new SavedRecipesRequest();
-    console.log('title', title)
     request.findByTitle(title, this.findRecipeByTitleCallback.bind(this));
-    console.log("Got recipe");
-
   },
 
   getIngredientsFromInputs: function() {
@@ -461,7 +458,7 @@ RecipeAnalyser.prototype = {
     if (ul) ul.remove();
     var ul = document.createElement('ul');
     ul.id = 'unordered-list'
-    var listContainer = document.querySelector('#ingredients-list-container');
+    var listContainer = document.querySelector('#recipe-wrapper');
     listContainer.appendChild(listTitle);
     listContainer.appendChild(ul);
     for (var ingredient of recipeData.ingredients) {
