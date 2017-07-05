@@ -17,14 +17,16 @@ render: function() {
 
   var h2 = this.createTitle();
 
-  var opacityWrapper = this.createOpacityWrapper();
+  var canvasWrapper = this.createCanvasWrapper();
+
 
   infoHeader.appendChild(h2)
   infoContainer.appendChild(infoHeader)
-  infoContainer.appendChild(opacityWrapper)
+  infoContainer.appendChild(canvasWrapper)
   main.appendChild(infoContainer)
   document.body.appendChild(main)
 
+  // var addImageToCanvas = this.addImageToCanvas();
 },
 
 createInfoContainer: function() {
@@ -46,11 +48,17 @@ createTitle: function() {
   return h2;
 },
 
-createOpacityWrapper: function() {
-  var opacityWrapper = document.createElement('div');
-  opacityWrapper.id = 'opacity-wrapper'
-  return opacityWrapper
+createCanvasWrapper: function() {
+  var canvasWrapper = document.createElement('div');
+  canvasWrapper.id = 'canvas-wrapper'
+  return canvasWrapper
 },
+
+// addImageToCanvas: function() {
+//   var canvas = document.querySelector("#canvas-wrapper")
+//   console.log(canvas)
+//   canvas.style.backgroundImage = 'url(\'./images/body_pic.png\')'
+// }
 
 }
 

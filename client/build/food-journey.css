@@ -29,10 +29,11 @@ div#info-container {
   border-radius: 18px;
 }
 
-div#opacity-wrapper {
+div#canvas-wrapper {
   width: 400px;
   height: 400px;
-  background-color: white;
+  background-image: url("./images/body_pic.png");
+  background-size: 400px;
 }
 
 div#info-header {
