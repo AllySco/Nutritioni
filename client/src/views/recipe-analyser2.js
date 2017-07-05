@@ -403,11 +403,11 @@ RecipeAnalyser.prototype = {
   handleDropdown: function(event) {
     this.selectedRecipe = event.target.selectedOptions[0].value;
     this.findRecipeByTitle(event.target.selectedOptions[0].value);
+    this.clearRecipeInformation();
   },
 
   handleDelete: function() {
     var request = new SavedRecipesRequest();
-    console.log(this.selectedRecipe);
     request.delete(this.selectedRecipe, this.deleteCallback.bind(this));
   },
 
@@ -478,6 +478,8 @@ RecipeAnalyser.prototype = {
     if (deleteButton) deleteButton.remove();
     var ul = document.querySelector('#ingredients-list-container ul');
     if (ul) ul.remove();
+    var wrapper = document.querySelector('#recipe-wrapper');
+    if (wrapper) wrapper.remove();
   },
 
   populateRecipeDropdown: function(recipesData) {
