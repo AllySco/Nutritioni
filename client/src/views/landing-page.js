@@ -5,57 +5,92 @@ var LandingPage = function() {
 LandingPage.prototype = {
 	render: function() {
 		var main = document.createElement('main');
+		main.id = 'landing-page';
 
 		var jumbotron = this.createJumbotron();
 
-		var flexBodyMap = document.createElement('div');
-		flexBodyMap.classList.add('flex-container-body-map');
-		var flexHeader = document.createElement('div');
-		flexHeader.classList.add('flex-box-header');
-		flexHeader.innerText = 'YOUR BODY AND FOOD';
-		var bodyP = document.createElement('p');
-		bodyP.innerText = 'click to know more!';
-		flexBodyMap.appendChild(flexHeader);
-		flexBodyMap.appendChild(bodyP);
-		var background2 = document.createElement('div');
-		background2.classList.add('background-2');
+		var bodyAndFood = this.createPageInfo('body-and-food', 'YOUR BODY AND FOOD', 'Click to know more!');
+		var bodyBackground = this.createBackground('body-background');
 
-		var flexBodyMap2 = document.createElement('div');
-		flexBodyMap2.classList.add('flex-container-body-map');
-		var flexHeader2 = document.createElement('div');
-		flexHeader2.classList.add('flex-box-header');
-		flexHeader2.innerText = 'WHATS IN YOUR FOOD';
-		var bodyP2 = document.createElement('p');
-		bodyP2.innerText = 'click here to find out!';
-		flexBodyMap2.appendChild(flexHeader2);
-		flexBodyMap2.appendChild(bodyP2);
+		var recipeAnalyser = this.createPageInfo('recipe-analyser', 'WHAT\'S IN YOUR FOOD', 'Click here to find out!');
+		var analyserBackground = this.createBackground('analyser-background');
 
-		var background3 = document.createElement('div');
-		background3.classList.add('background-3');
+		var storeLocator = this.createPageInfo('store-locator', 'ORGANIC FOOD STORE LOCATOR', 'Find great food near you!');	
+		var storeBackground = this.createBackground('store-background');
 
 		main.appendChild(jumbotron);
-		main.appendChild(flexBodyMap);
-		main.appendChild(background2);
-		main.appendChild(flexBodyMap2);
-		main.appendChild(background3);
+		main.appendChild(bodyAndFood);
+		main.appendChild(bodyBackground);
+		main.appendChild(recipeAnalyser);
+		main.appendChild(analyserBackground);
+		main.appendChild(storeLocator);
+		main.appendChild(storeBackground);
 
 		document.body.appendChild(main);
 	},
 
 	createJumbotron: function() {
 		var jumbotron = document.createElement('div');
-		jumbotron.classList.add('background-1');
-		var flexMainHeader = document.createElement('div');
-		flexMainHeader.classList.add('flex-container-main-header');
-		var h1 = document.createElement('h1');
-		h1.classList.add('top-border');
-		h1.innerText = 'NUTRITIONi';
-		var burger = document.createElement('i');
-		burger.classList.add('burger');
-		flexMainHeader.appendChild(h1);
-		flexMainHeader.appendChild(burger);
-		jumbotron.appendChild(flexMainHeader);
+		jumbotron.id = 'jumbotron';
+		jumbotron.classList.add('background-image');
+
+		var jumbotronHeader = this.createJumbotronHeader();
+
+		jumbotron.appendChild(jumbotronHeader);
+
 		return jumbotron;
+	},
+
+	createJumbotronHeader: function() {
+		var jumbotronHeader = document.createElement('div');
+		jumbotronHeader.id = 'jumbotron-header';
+
+		var h1 = document.createElement('h1');
+		h1.innerText = 'NUTRITIONi';
+
+		var burgerIcon = document.createElement('i');
+		burgerIcon.id = 'burger';
+
+		jumbotronHeader.appendChild(h1);
+		jumbotronHeader.appendChild(burgerIcon);
+
+		return jumbotronHeader;
+	},
+
+	createPageInfo: function(id, h2Text, pText) {
+		var container = document.createElement('div');
+		container.id = id;
+		container.classList.add('page-info');
+
+		var descriptionSnippet = this.createDescriptionSnippet(h2Text, pText);
+
+		container.appendChild(descriptionSnippet);
+
+		return container;
+	},
+
+	createDescriptionSnippet: function(h2Text, pText) {
+		var descriptionSnippet = document.createElement('div');
+		descriptionSnippet.classList.add('description-snippet');
+
+		var h1 = document.createElement('h1');
+		h1.innerText = h2Text;
+
+		var p = document.createElement('p');
+		p.innerText = pText;
+
+		descriptionSnippet.appendChild(h1);
+		descriptionSnippet.appendChild(p);
+
+		return descriptionSnippet;
+	},
+
+	createBackground: function(id) {
+		var bodyBackground = document.createElement('div');
+		bodyBackground.id = 'body-background';
+		bodyBackground.classList.add('background-image');
+
+		return bodyBackground;
 	}
 }
 

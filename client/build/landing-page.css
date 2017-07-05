@@ -1,116 +1,89 @@
-
-
 main#landing-page {
+  width: 100%;
   height: 100vh;
 }
 
-
-
-li {
-  color: white;
-}
-
-
-.background-1, .background-2, .background-3 {
-  position: relative;
+div.background-image {
+  width: 100%;
   height: 100vh;
-  /*opacity: 0.65;*/
   background-attachment: fixed;
-  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  display: flex;
 
+  justify-content: center;
+  align-items: center;
+  font-family: Helvetica, arial, sans-serif;
+  color: rgb(41, 40, 40);
+  text-align: center;
 }
 
-.bgimg-1 {
+div.background-image h2 {
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+
+div.background-image p {
+  
+}
+
+div#jumbotron {
   background-image: url('./images/image1.jpg');
-  min-height: 100%;
+}
+
+div.page-info {
+  width: 100%;
+  height: 250px;
+  background-color: rgb(41, 40, 40);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Helvetica, arial, sans-serif;
+  text-align: center;
+  color: #fff5ee;
 }
 
-.bgimg-2 {
+div.page-info h2 {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+div.page-info .description-snippet:hover {
+  cursor: pointer;
+}
+
+div#body-background {
   background-image: url('./images/image2.jpg');
-  min-height: 100%;
 }
 
-.bgimg-3 {
+div#analyser-background {
   background-image: url('./images/image3.jpg');
-  min-height: 100%;
 }
 
-h1 {
+div#store-background {
+  background-image: url('./images/image4.jpg');
+}
+
+div#jumbotron-header {
+  display: flex;
+  justify-content: space-around;
+  width: 700px;
+}
+
+div#jumbotron-header h1 {
+  font-family: Helvetica, arial, sans-serif;
   height: 1.75em;
   line-height: 1.75em;
   font-size: 4em;
   padding: 0 10px;
   background-color: #292828;
   letter-spacing: 10px;
-  font-family: Helvetica, sans-serif;
   border-radius: 18px;
   color: white;
 }
 
-.text-box-body-map {
-  height:100px;
-  background-color:#292828;
-  font-size:36px;
-}
-
-.flex-container-main-header{
-  display: flex;
-  justify-content: space-around;
-  width: 80%;
-}
-
-
-.flex-container-body-map {
-  display: -webkit-flex;
-  display: flex;
-  width: 100%;
-  height: 250px;
-  background-color: #292828;
-}
-
-.flex-box-header {
-  background-color: #292828 ;
-  width: 100%;
-  height: 100px;
-  margin: 10px;
-}
-
-.flex-container-main-header i.burger {
-  content:url('./images/black burger icon.png');
+div#jumbotron-header i#burger {
+  content: url('./images/black burger icon.png');
   height: 110px;
 }
 
-
-
-.flex-box-header {
-  display: inline-block;
-  background-color: #292828;
-  border-radius: 18px;
-  font-size: 25px;
-  letter-spacing: 10px;
-  font-family: Helvetica, sans-serif;
-  color: white;
-}
-
-i {
-  height: 6em;
-}
-
-
-.parallax {
-  /* The image used */
-  background-image: url('./images/image1.jpg');
-  /* Full height */
-  height: 100%; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
