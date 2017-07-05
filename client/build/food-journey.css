@@ -141,17 +141,15 @@ h3 {
 }
 
 #drumstick {
-  margin: 15px;
 }
 
 #frenchfried {
-  margin: 15px;
 }
 
 #cheese {
-  margin: 15px;
 }
 
 .draggable {
-  transform: translate( 0, 0);
+  transform: translate( 0px, 0px);
+  margin: 0;
 }

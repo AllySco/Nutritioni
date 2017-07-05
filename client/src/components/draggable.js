@@ -20,17 +20,17 @@ Draggable.prototype = {
     this.draggableItem.classList.add('draggable');
     this.draggableItem.style.transform = 'translate(0px, 0px)';
   },
-  getBoxCoords: function() {
-    var boxCoords = {};
+  getTranslationOnGrab: function() {
     var translation = this.draggableItem.style.transform;
+    this.translationOnGrab = {}
+    this.translationOnGrab.x = Number(translation.split('(')[1].split(',')[0].replace('px', ''));
+    this.translationOnGrab.y = Number(translation.split('(')[1].split(',')[1].replace('px)', ''));
+  },
+  getBoxCoordsOnGrab: function() {
     var box = this.draggableItem.getBoundingClientRect();
-    boxCoords.x = box.left;
-    boxCoords.y = box.top;
-    this.startPoint = boxCoords;
-    // boxCoords.x = translation.split('(')[1].split(',')[0].replace('px', '');
-    // boxCoords.y = translation.split('(')[1].split(',')[1].replace('px)', '');
-    console.log(boxCoords);
-    return boxCoords;
+    this.boxCoordsOnGrab = {};
+    this.boxCoordsOnGrab.x = box.left;
+    this.boxCoordsOnGrab.y = box.top;
   },
   getNewCoords: function(event) {
     var newPosition = {};
@@ -39,12 +39,16 @@ Draggable.prototype = {
     return this.correctCoords(newPosition);
   },
   setBoxCoords: function(newCoords) {
+    var translation = {
+      x: newCoords.x - this.boxCoordsOnGrab.x + this.translationOnGrab.x,
+      y: newCoords.y - this.boxCoordsOnGrab.y + this.translationOnGrab.y
+    }
     this.draggableItem.style.transform = 
-      'translate(' + newCoords.x + 'px, ' + newCoords.y + 'px)';
+      'translate(' + translation.x + 'px, ' + translation.y + 'px)';
   },
-  setMouseOffset: function(event, boxCoords) {
-    this.mouseOffset.x = event.x - boxCoords.x + 70;
-    this.mouseOffset.y = event.y - boxCoords.y + 500;
+  setMouseOffset: function(event) {
+    this.mouseOffset.x = event.x - this.boxCoordsOnGrab.x;
+    this.mouseOffset.y = event.y - this.boxCoordsOnGrab.y;
     console.log("this is setMouseOffSet", this.mouseOffset);
   },
   correctCoords: function(coords) {
@@ -58,10 +62,11 @@ Draggable.prototype = {
     event.preventDefault();
     this.draggableItem.style.transition = '';
     this.dragging = true;
-    this.setMouseOffset(event, this.getBoxCoords());
+    this.getBoxCoordsOnGrab();
+    this.getTranslationOnGrab();
+    this.setMouseOffset(event);
   },
   handleMousemove: function(event) {
-    console.log(this.dragging);
     var newCoords = this.getNewCoords(event);
     if (this.dragging) this.setBoxCoords(newCoords);
   },
@@ -79,7 +84,7 @@ Draggable.prototype = {
   moveToLandSpot: function(landSpots, boxBounds) {
     for (var i = 0; i < landSpots.length; i++) {
       var distance = this.getDistance(landSpots[i], boxBounds);
-      if (distance.x < 100 && distance.y < 100) {
+      if (distance.x < 150 && distance.y < 150) {
         this.draggableItem.style.transition = 'transform 0.2s ease-out';
         this.setBoxCoords({ x: landSpots[i].left, y: landSpots[i].top });
       }

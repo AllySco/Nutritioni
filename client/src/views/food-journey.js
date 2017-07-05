@@ -206,7 +206,7 @@ populateTextBoxCarbs: function() {
   this.img.id = 'frenchfried';
   textBoxContainer.appendChild(this.img);
   var canvas = document.querySelector('#canvas-wrapper')
-  new Draggable(this.img, canvas, [{ top: 50, left: 100 }]);
+  new Draggable(this.img, canvas, [{ top: 70, left: 180 }]);
 },
 
 populateTextBoxFat: function() {
@@ -230,7 +230,7 @@ populateTextBoxFat: function() {
   this.img.id = 'cheese';
   textBoxContainer.appendChild(this.img);
   var canvas = document.querySelector('#canvas-wrapper')
-  new Draggable(this.img, canvas, [{ top: 50, left: 100 }]);
+  new Draggable(this.img, canvas, [{ top: 90, left: 260 }]);
 },
 
 }
