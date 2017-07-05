@@ -150,6 +150,27 @@ main#recipe-analyser form button[type=button]:hover {
   cursor: pointer;
 }
 
+div#recipe-wrapper button#delete-button {
+  font-family: Spinnaker;
+  width: 50%;
+  height: 50px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 0;
+  font-size: 0.9em;
+  background-color: var(--font-color);
+}
+
+div#recipe-wrapper button#delete-button:focus {
+  outline: none;
+}
+
+div#recipe-wrapper button#delete-button:hover {
+  cursor: pointer;
+}
+
+
+
 
 
 main#recipe-analyser form input[type=submit] {
@@ -227,13 +248,13 @@ div#ingredients-list-container {
   border-radius: var(--border-radius);
   font-family: 'Hind Guntur';
   padding: 20px;
-  
+
 }
 
 div#recipe-wrapper {
   display: flex;
   flex-flow: column;
-  overflow-y: scroll;
+  overflow-y: scroll; padding-bottom: 35px;
   height: 100%;
   width: 100%;
 }

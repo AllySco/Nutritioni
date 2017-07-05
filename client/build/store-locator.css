@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Spinnaker|Hind+Guntur');
+
+:root {
+  --container-colors: rgba(41, 40, 40, 0.9);
+  --border-radius: 18px;
+  --saved-recipe-container-height: 90px;
+  --font-color: #fff5ee;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,30 +32,26 @@ div#map-container {
   justify-content: space-between;
   align-items: center;
   padding: 40px;
-  width: 500px;
-  height: 530px;
+  width: 800px;
+  height: 830px;
   background-color: rgba(41, 40, 40, 0.9);
   border-radius: 18px;
 }
 
 div#opacity-wrapper {
-  width: 400px;
-  height: 400px;
+  width: 700px;
+  height: 700px;
   background-color: white;
 }
 
 div#mapheader {
-  width: 400px;
-  height: 100px;
+  width: 630px;
+  height: 200px;
 }
 
 h2 {
-  color: white;
-  font-family: helvetica;
+  color: var(--font-color);
+  font-family: Spinnaker;
   text-align: center;
-  font-size: 
-}
-
-.draggable {
-  transform: translate(0, 0);
+  font-size: 2.5em;
 }
