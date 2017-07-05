@@ -85,6 +85,7 @@ div#jumbotron-header h1 {
 div#jumbotron-header i#burger {
   content: url('./images/black burger icon.png');
   height: 110px;
+
   border-radius: 18px;
 }
 
