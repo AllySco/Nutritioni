@@ -73,7 +73,7 @@ div#button-container {
 div#text-container {
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0px;
   width: 200px;
@@ -114,4 +114,8 @@ h2 {
   font-family: helvetica;
   text-align: center;
   font-size:
+}
+
+.draggable {
+  transform: translate( 0, 0);
 }
