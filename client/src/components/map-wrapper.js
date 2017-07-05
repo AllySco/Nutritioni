@@ -32,6 +32,7 @@ MapWrapper.prototype = {
       this.center = {lat: position.coords.latitude, lng: position.coords.longitude};
       console.log("our current location", this.center)
       this.googleMap.setCenter(this.center);
+      this.googleMap.setZoom(15);
       this.addMarker(this.center, 'purple.png');
     }.bind(this));
   },

@@ -65,7 +65,7 @@ StoreLocator.prototype = {
     createMap: function() {
         var opacityWrapper = document.getElementById('opacity-wrapper');
         var coords = { lat: 55.954276, lng: -3.197960};
-        var zoom = 15;      
+        var zoom = 5;      
         this.map = new MapWrapper(opacityWrapper, coords, zoom);
         this.map.geolocate();
     },
