@@ -24,12 +24,10 @@ StoreLocator.prototype = {
 
         var mapHeader = this.createMapHeader();
 
+        var h2 = this.createTitle();
 
-        var h2 = document.createElement('h2');
-        h2.innerText = "GOOD FOOD NEAR YOU";
+        var opacityWrapper = this.createOpacityWrapper();
 
-        var opacityWrapper = document.createElement('div');
-        opacityWrapper.id = "opacity-wrapper";
 
         mapHeader.appendChild(h2);
         mapContainer.appendChild(mapHeader);
@@ -51,7 +49,18 @@ StoreLocator.prototype = {
         mapHeader.id = "map-header";
         return mapHeader
     },
-    
+
+    createTitle: function () {
+        var h2 = document.createElement('h2');
+        h2.innerText = "GOOD FOOD NEAR YOU";
+        return h2;     
+    },
+
+    createOpacityWrapper: function () {
+        var opacityWrapper = document.createElement('div');
+        opacityWrapper.id = "opacity-wrapper";
+        return opacityWrapper;  
+    },
 
     createMap: function() {
         var opacityWrapper = document.getElementById('opacity-wrapper');
