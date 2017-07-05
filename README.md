@@ -55,7 +55,7 @@ The project follows WebPack structure with some notable additions.
 | Directory           |  Responsibility               |
 |-------------------- |------------------------------ |
 |  **build/**         |   The *build* directory handles all element that build pages of app like index.html, images and CSS files.   |
-|  **src/apis**       |  The *API* directory handles request to the edaman API and our home-made location API.                             |
+|  **src/apis**       |  The *API* directory handles request to the [Edamam API](https://developer.edamam.com/) and our home-made location API.                             |
 |  **src/charts**     |  The *charts* directory utilises  [highcharts](https://www.highcharts.com/demo/) to analyse our recipe data. |
 |  **src/components** |  The *components* directory incorporates our added functionality like navigation and handling Google Maps|
 |  **src/models**     |  The *models* directory models the data structure that we are using in our databases.                        |
@@ -73,3 +73,6 @@ The project follows WebPack structure with some notable additions.
 |  [Eoghan Crowley](https://github.com/eoghanscrowley) |
 |  [Charlie Wood](https://github.com/charliemowood)     |
 |  [Chris Woodall](https://github.com/ChrisPy-RuBy)    |
+
+
+If you want to contribute to this project see [CONTRIBUTE.md](https://github.com/eoghanscrowley/Nutritioni/CONTRIBUTE.md)
