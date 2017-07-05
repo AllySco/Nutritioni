@@ -1,6 +1,8 @@
 var FoodJourney = function() {
 	
   this.render();
+
+  document.getElementById('button').addEventLister("click", console.log("clicked") )
 }
 
 FoodJourney.prototype = {
@@ -47,6 +49,8 @@ render: function() {
 
   // var addImageToCanvas = this.addImageToCanvas();
 },
+
+// Page creation Methods 
 
 createButtonAndTextContainers: function() {
   var buttonAndTextContainers = document.createElement('div')
@@ -116,24 +120,14 @@ createFatsJourneyButton: function () {
   fatsButton.id = "button"
   fatsButton.innerText = "FATS"
   return fatsButton
+},
+
+// Event Listener methods
+
+populateTextBoxProtein: function() {
+
+
 }
-
-
-//   var carbsButton = document.createElement('button')
-//   carbsButton.id = "button"
-//   carbsButton.innerText = "CARBS"
-//   var fatsButton = document.createElement('button')
-//   fatsButton.id = "button"
-//   fatsButton.innerText = "FATS" 
-//   return proteinButton, carbsButton, fatsButton
-// },
-
-// addImageToCanvas: function() {
-//   var canvas = document.querySelector("#canvas-wrapper")
-//   console.log(canvas)
-//   canvas.style.backgroundImage = 'url(\'./images/body_pic.png\')'
-// }
-
 }
 
 module.exports = FoodJourney;
