@@ -1,4 +1,4 @@
-var RecipeAnalyser = require('../views/recipe-analyser');
+var RecipeAnalyser = require('../views/recipe-analyser2');
 var LandingPage = require('../views/landing-page');
 var FoodJourney = require('../views/food-journey');
 var StoreLocator = require('../views/store-locator');
@@ -23,6 +23,7 @@ Navigation.prototype = {
 
 	render: function() {
 		this.container = document.createElement('header');
+		console.log(this.container);
 
 		this.banner = this.createBanner();
 
@@ -70,10 +71,22 @@ Navigation.prototype = {
 
 	// EVENT HANDLERS
 	setEventListeners: function() {
+		window.addEventListener('mousemove', this.showNavigation.bind(this));
+		this.container.addEventListener('mouseleave', this.hideNavigation.bind(this));
 		this.banner.addEventListener('click', this.navigateToLandingPage);
 		this.recipeAnalyserLink.addEventListener('click', this.navigateToRecipeAnalyser);
 		this.foodJourneyLink.addEventListener('click', this.navigateToFoodJourney);
 		this.storeLocatorLink.addEventListener('click', this.navigateToStoreLocator);
+	},
+
+	showNavigation: function(event) {
+		if (event.y < 40 ) {
+			this.container.classList.add('visible');
+		}
+	},
+
+	hideNavigation: function(event) {
+		this.container.classList.remove('visible');
 	},
 
 	navigateToLandingPage: function() {
