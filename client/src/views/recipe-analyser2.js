@@ -245,18 +245,28 @@ RecipeAnalyser.prototype = {
 
     var listAndPieContainer = this.createDiv('list-and-pie-container')
 
-    var ingredientsListContainer = this.createDiv('ingredients-list-container');
+    var list = this.createIngredientList();
 
     var pieChartContainer = this.createDiv('pie-chart');
 
     var columnChartContainer = this.createDiv('column-chart');
 
     container.appendChild(listAndPieContainer)
-    listAndPieContainer.appendChild(ingredientsListContainer);
+    listAndPieContainer.appendChild(list);
     listAndPieContainer.appendChild(pieChartContainer);
     container.appendChild(columnChartContainer);
 
     return container;
+  },
+
+  createIngredientList: function() {
+    var ingredientsListContainer = this.createDiv('ingredients-list-container');
+
+    var ul = document.createElement('ul');
+
+    ingredientsListContainer.appendChild(ul);
+
+    return ingredientsListContainer;
   },
 
   createDiv: function(id) {
@@ -287,7 +297,7 @@ RecipeAnalyser.prototype = {
 
     this.clearFormButton.addEventListener('click', this.handleClearDataClick.bind(this));
 
-    this.savedRecipesSelect.addEventListener('change', this.handleDropdown)
+    this.savedRecipesSelect.addEventListener('change', this.handleDropdown.bind(this));
   },
 
   handleSubmit: function(event) {
@@ -330,14 +340,23 @@ RecipeAnalyser.prototype = {
     this.clearRecipeInformation();   
   },
 
-  handleDropdown: function() {
-
+  handleDropdown: function(event) {
+    console.log("HANDLING DROPDOWN", event.target.selectedOptions[0].value)
+    this.findRecipeByTitle(event.target.selectedOptions[0].value);
   },
 
 
 
 
   // HELPER FUNCTIONS
+
+  findRecipeByTitle: function(title) {
+    var request = new SavedRecipesRequest();
+    console.log('title', title)
+    request.findByTitle(title, this.findRecipeByTitleCallback.bind(this));
+    console.log("Got recipe");
+
+  },
 
   getIngredientsFromInputs: function() {
     var ingredientInputs = document.querySelectorAll('#ingredient-inputs input');
@@ -425,6 +444,26 @@ RecipeAnalyser.prototype = {
     this.savedRecipesCallback(recipeData);
   },
 
+  findRecipeByTitleCallback: function(jsonString) {
+    var recipeData = JSON.parse(jsonString)[0];
+    console.log(recipeData);
+    var listTitle = document.createElement('h3');
+    listTitle.id = 'list-title';
+    listTitle.innerText = recipeData.title;
+
+    var ul = document.querySelector('ul');
+    if (ul) ul.remove();
+    var ul = document.createElement('ul');
+    var listContainer = document.querySelector('#ingredients-list-container');
+    listContainer.appendChild(listTitle);
+    listTitle.appendChild(ul);
+    for (var ingredient of recipeData.ingredients) {
+      var li = document.createElement('li');
+      li.innerText = ingredient;
+      ul.appendChild(li);
+    }
+  },
+
   analyseRecipeCallback: function(jsonResponse) {
     var responseData = JSON.parse(jsonResponse);
 
@@ -462,14 +501,10 @@ RecipeAnalyser.prototype = {
     }
     ];
 
-
     new PieChart('Nutrition Info', 'Nutrients', pieChartData);
     new ColumnChart('Vitamin Info', NutrientData, NutrientLabels);
 
-    
   }
-
-  
 
 }
 

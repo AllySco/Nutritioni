@@ -16,9 +16,9 @@ main#recipe-analyser {
   display: flex;
   flex-flow: column;
   justify-content: space-around;
-  background-image: url('./images/image1.jpg');
+  background-image: url('./images/image2.jpg');
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
 }
 
 
@@ -219,7 +219,12 @@ div#ingredients-list-container {
   width: 48%;
   height: 245px;
   background-color: var(--container-colors);
+  color: var(--font-color);
   border-radius: var(--border-radius);
+}
+
+#list-title {
+
 }
 
 div#pie-chart {

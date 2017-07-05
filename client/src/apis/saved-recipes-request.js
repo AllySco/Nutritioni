@@ -13,14 +13,13 @@ SavedRecipesRequest.prototype = {
   },
   findByTitle: function(title, callback) {
     var request = new XMLHttpRequest();
-    request.open("GET", this.url + title);
+    request.open("GET", this.url + "title/" + title);
     request.addEventListener('load', function() {
       callback(request.responseText);
     }) 
     request.send();
   },
   new: function(recipeData, callback) {
-    console.log(callback);
     var jsonString = JSON.stringify(recipeData);
     var request = new XMLHttpRequest();
     request.open('POST', this.url);
@@ -33,7 +32,7 @@ SavedRecipesRequest.prototype = {
   delete: function(title, callback) {
     var jsonString = JSON.stringify(recipeData);
     var request = new XMLHttpRequest();
-    request.open("DELETE", this.url + "/title/" + title + "/delete"  ) 
+    request.open("DELETE", this.url + "title/" + title + "/delete"  ) 
     request.setRequestHeader('Content-Type', 'application/json');
     request.addEventListener('load', function() {
       callback(request.responseText);
