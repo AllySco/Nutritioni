@@ -2,7 +2,7 @@ var FoodJourney = function() {
 	
   this.render();
 
-  document.getElementById('button').addEventLister("click", console.log("clicked") )
+  document.getElementById('#button').addEventLister("click", console.log("clicked") )
 }
 
 FoodJourney.prototype = {
