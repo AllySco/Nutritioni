@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Bree+Serif|Spinnaker|Hind+Guntur');
 
-:root {
-  --container-colors: rgba(41, 40, 40, 0.9);
-  --border-radius: 18px;
-  --saved-recipe-container-height: 90px;
-  --font-color: #fff5ee;
-}
+
 
 * {
   margin: 0;
@@ -78,7 +73,7 @@ div#button-container {
   border-radius: 6px;
   border: 0;
   font-size: 0.9em;
-  background-color: var(--font-color); 
+  background-color: rgba(41, 40, 40, 0.9); 
 }
 
 div#button-container:focus {
@@ -111,10 +106,10 @@ div#canvas-wrapper {
 }
 
 
-div#opacity-wrapper {
+div#backing-wrapper {
   width: 400px;
   height: 400px;
-  background-color: black;
+  background-color: rgba(41, 40, 40, 0.9);
 }
 
 div#infoheader {
@@ -123,11 +118,19 @@ div#infoheader {
 }
 
 
-h2 {
+h3 {
   color: var(--font-color);
   font-family: Spinnaker;
   text-align: center;
-  font-size: 
+  font-size: 2.0em;
+}
+
+#text-title {
+  color: grey;
+  font-family: helvetica;
+  text-align: center;
+  padding-bottom: 5px;
+  font-size:
 }
 
 #pTag {

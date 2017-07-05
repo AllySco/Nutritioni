@@ -22,9 +22,9 @@ FoodJourney.prototype = {
 
     var infoHeader = this.createInfoHeader();
 
-    var h2 = this.createTitle();
+    var h3 = this.createTitle();
 
-    var opacityWrapper = this.createOpacityWrapper();
+    var backingWrapper = this.createBackingWrapper();
 
     var canvasWrapper = this.createCanvasWrapper();
     var proteinJourneyButton = this.createProteinJourneyButton();
@@ -33,10 +33,10 @@ FoodJourney.prototype = {
     var textBoxTitle = this.createTextBoxTitle("TITLE")
     var textBox = this.createTextBox("");
 
-    infoHeader.appendChild(h2)
+    infoHeader.appendChild(h3)
     infoContainer.appendChild(infoHeader)
-    opacityWrapper.appendChild(canvasWrapper)
-    infoContainer.appendChild(opacityWrapper)
+    backingWrapper.appendChild(canvasWrapper)
+    infoContainer.appendChild(backingWrapper)
 
     textContainer.appendChild(textBoxTitle)
     textContainer.appendChild(textBox)
@@ -92,15 +92,15 @@ createInfoHeader: function() {
 },
 
 createTitle: function() {
-  var h2 = document.createElement('h2');
-  h2.innerText = "YOUR BODY AND FOOD";
-  return h2;
+  var h3 = document.createElement('h3');
+  h3.innerText = "YOUR BODY AND FOOD";
+  return h3;
 },
 
-createOpacityWrapper: function() {
-  var opacityWrapper = document.createElement('div')
-  opacityWrapper.id = 'opacity-wrapper'
-  return opacityWrapper
+createBackingWrapper: function() {
+  var backingWrapper = document.createElement('div')
+  backingWrapper.id = 'backing-wrapper'
+  return backingWrapper
 },
 
 createCanvasWrapper: function() {
@@ -143,7 +143,7 @@ createTextBoxTitle: function(text) {
   console.log("createTextBox", this)
   console.log(text)
   var textBoxTitle = document.createElement('p')
-  textBoxTitle.id = 'TextTitle'
+  textBoxTitle.id = 'text-title'
   textBoxTitle.innerText = text
   return textBoxTitle
 },
@@ -188,7 +188,7 @@ populateTextBoxFat: function() {
 populateTextBoxCarbs: function() {
   console.log("hi carbs")
 },
-  
+
 
 
 
