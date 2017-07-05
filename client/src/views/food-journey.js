@@ -1,7 +1,6 @@
 var FoodJourney = function() {
 	
   this.render();
-
 }
 
 FoodJourney.prototype = {
