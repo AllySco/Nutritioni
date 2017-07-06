@@ -32,20 +32,20 @@ div#map-container {
   justify-content: space-between;
   align-items: center;
   padding: 40px;
-  width: 800px;
-  height: 830px;
+  width: 600px;
+  height: 610px;
   background-color: rgba(41, 40, 40, 0.9);
   border-radius: 18px;
 }
 
 div#opacity-wrapper {
-  width: 700px;
-  height: 700px;
+  width: 500px;
+  height: 490px;
   background-color: white;
 }
 
 div#mapheader {
-  width: 630px;
+  width: 430px;
   height: 200px;
 }
 

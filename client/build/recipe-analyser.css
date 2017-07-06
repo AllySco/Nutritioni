@@ -103,7 +103,7 @@ div#buttons-container {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  padding: 0px;
+  padding: 5px;
 }
 
 div.form-section {
@@ -154,8 +154,8 @@ div#recipe-wrapper button#delete-button {
   font-family: Spinnaker;
   width: 50%;
   height: 50px;
-  padding: 0 10px;
   border-radius: 6px;
+  padding: 0 10px;
   border: 0;
   font-size: 0.9em;
   background-color: var(--font-color);
