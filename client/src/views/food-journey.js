@@ -200,7 +200,7 @@ populateTextBoxCarbs: function() {
   textBox.innerText = text
   this.textBoxContainer = document.createElement('text-container')
   this.img = document.createElement('img')
-  this.img.src = "../images/frenchfried1.png"
+  this.img.src = "../images/french-fries.png"
   this.img.width = 80;
   this.img.height = 80;
   this.img.id = 'frenchfried';
@@ -224,7 +224,7 @@ populateTextBoxFat: function() {
   textBox.innerText = text
   this.textBoxContainer = document.createElement('text-container')
   this.img = document.createElement('img')
-  this.img.src = "../images/cheese1.png"
+  this.img.src = "../images/cheese.png"
   this.img.width = 80;
   this.img.height = 60;
   this.img.id = 'cheese';
