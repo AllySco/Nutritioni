@@ -6,6 +6,7 @@ var RecipeRequest = function() {
 }
 
 RecipeRequest.prototype = {
+
 	makePostRequest: function(recipeData, callback) {
 		var jsonString = JSON.stringify(recipeData);
 		var request = new XMLHttpRequest();
@@ -16,6 +17,7 @@ RecipeRequest.prototype = {
 		});
 		request.send(jsonString);
 	}
+	
 }
 
 module.exports = RecipeRequest;
