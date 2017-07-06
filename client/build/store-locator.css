@@ -55,3 +55,7 @@ h2 {
   text-align: center;
   font-size: 2.5em;
 }
+
+main#store-locator div#map-container p {
+  color: black;
+}
