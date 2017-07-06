@@ -12,10 +12,10 @@ var UI = function() {
 UI.prototype = {
 	render: function() {
 		new Navigation();
-// 		 new RecipeAnalyser();
-		// new LandingPage();
-		// new StoreLocator();
-    new FoodJourney();
+		new LandingPage();
+		// new RecipeAnalyser();
+	 //  new StoreLocator();
+    // new FoodJourney();
 	}
 }
 

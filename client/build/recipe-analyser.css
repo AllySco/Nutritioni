@@ -26,7 +26,7 @@ main#recipe-analyser {
 /*saved-recipe select styling*/
 main#recipe-analyser div#saved-recipes {
   width: 100%;
-  height: var(--saved-recipe-container-height);
+  height: 15%;
   display: flex;
   justify-content: space-around;
   background-color: var(--container-colors);
@@ -75,6 +75,7 @@ main#recipe-analyser div#main-content {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  height: 70%;
 }
 
 
@@ -87,22 +88,23 @@ main#recipe-analyser form {
   justify-content: space-between;
   padding: 20px;
   width: 35%;
-  height: 500px;
+  height: 100%;
   background-color: var(--container-colors);
 }
 
 div#form-input-lines {
   display: flex;
   flex-flow: column;
-  justify-content: space-around;
   padding: 0px;
+  height: 400px;
+  overflow-y: scroll;
 }
 
 div#buttons-container {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  padding: 0px;
+  padding: 5px;
 }
 
 div.form-section {
@@ -148,6 +150,27 @@ main#recipe-analyser form input[type=submit]:hover,
 main#recipe-analyser form button[type=button]:hover {
   cursor: pointer;
 }
+
+div#recipe-wrapper button#delete-button {
+  font-family: Spinnaker;
+  width: 50%;
+  border-radius: 6px;
+  min-height: 50px;
+  padding: 5px 10px;
+  border: 0;
+  font-size: 0.9em;
+  background-color: var(--font-color);
+}
+
+div#recipe-wrapper button#delete-button:focus {
+  outline: none;
+}
+
+div#recipe-wrapper button#delete-button:hover {
+  cursor: pointer;
+}
+
+
 
 
 
@@ -201,6 +224,7 @@ main#recipe-analyser div.ingredients input#ingredients {
 /*styling for charts*/
 div#chart-containers {
   width: 60%;
+  height: 100%;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -209,15 +233,16 @@ div#chart-containers {
 
 div#list-and-pie-container {
   width: 100%;
+  height: 48%;
   display: flex;
   flex-wrap: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: center;
 }
 
 div#ingredients-list-container {
   width: 48%;
-  height: 245px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -226,13 +251,13 @@ div#ingredients-list-container {
   border-radius: var(--border-radius);
   font-family: 'Hind Guntur';
   padding: 20px;
-  
+
 }
 
 div#recipe-wrapper {
   display: flex;
   flex-flow: column;
-  overflow-y: scroll;
+  overflow-y: scroll; padding-bottom: 35px;
   height: 100%;
   width: 100%;
 }
@@ -253,14 +278,14 @@ ul li#list-items {
 
 div#pie-chart {
   width: 48%;
-  height: 245px;
+  height: 100%;
   background-color: var(--container-colors);
   border-radius: var(--border-radius);
 }
 
 div#column-chart {
   width: 100%;
-  height: 245px;
+  height: 50%;
   background-color: var(--container-colors);
   border-radius: var(--border-radius);
 }
