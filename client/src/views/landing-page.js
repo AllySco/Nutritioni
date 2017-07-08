@@ -1,5 +1,5 @@
 
-var RecipeAnalyser = require('./recipe-analyser2');
+var RecipeAnalyser = require('./recipe-analyser');
 var FoodJourney = require('./food-journey');
 var StoreLocator = require('./store-locator');
 
